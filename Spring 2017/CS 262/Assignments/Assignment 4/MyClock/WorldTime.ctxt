@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.params=
+comment0.target=WorldTime()
+comment1.params=timeZone
+comment1.target=WorldTime(int)
+comment10.params=totalSeconds
+comment10.target=void\ setTotalSeconds(long)
+comment11.params=
+comment11.target=long\ getTotalSeconds()
+comment2.params=timeZone
+comment2.target=void\ setTimeZone(int)
+comment3.params=
+comment3.target=int\ getTimeZone()
+comment4.params=
+comment4.target=long\ getLocalTime()
+comment5.params=
+comment5.target=int\ getHours()
+comment6.params=
+comment6.target=int\ getMinutes()
+comment7.params=
+comment7.target=int\ getSeconds()
+comment8.params=
+comment8.target=java.lang.String\ toString()
+comment9.params=
+comment9.target=void\ tick()
+numComments=12

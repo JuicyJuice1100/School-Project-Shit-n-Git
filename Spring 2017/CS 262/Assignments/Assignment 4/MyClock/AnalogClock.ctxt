@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=worldTime
+comment0.target=AnalogClock(WorldTime)
+comment1.params=g
+comment1.target=void\ paintComponent(java.awt.Graphics)
+numComments=2
