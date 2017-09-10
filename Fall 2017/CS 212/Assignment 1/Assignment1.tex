@@ -1,0 +1,58 @@
+\title{Assignment 1}
+\documentclass[letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{wasysym}
+\usepackage[a4paper, margin=1in]{geometry}
+\begin{document}
+	\section {\bf Definition of $and$, $or$, and $not$}
+		\begin{itemize}
+          \item $p \wedge q$ is true when both $p$ is true and $q$ is true, and in no other case.
+          \item $p \vee q$ is true when either $p$ is true, or $q$ is true, or both $p$ and $q$ are true, and in no other case.
+          \item $\neg p$ is true when $p$ is false, and in no other case.
+		\end{itemize}
+    \section{\bf Definition of implication, bi-implication and exclusive or}
+    	For any propositions $p$ and $q$, we define the propositions $p \rightarrow q$, $p \leftrightarrow q$, and $p \oplus q$ according to the truth table:
+    	\begin{center}
+        	\begin{tabular}{|c|c||c|c|c|}
+            	\hline
+                	$p$ & $q$ & $p \rightarrow q$ & $p \leftrightarrow q$ & $p \oplus q$\\
+                \hline
+                	false & false & true & true & false \\
+                \hline
+                	false & true & true & false & true \\
+                \hline
+                	true & false & false & false & true \\
+                \hline
+                	true & true & true & true & false \\
+                \hline
+       		\end{tabular}
+    	\end{center}
+    \section{\bf Here's a nice proof, with a reason given for each step}
+    	\begin{displaymath}
+    		\begin{array}{lll}
+    			p \wedge (p\rightarrow q) & \equiv p \wedge (\neg p \vee q) &  $definition of $p \rightarrow q \\
+    			& \equiv (p \wedge \neg p) \vee (p \wedge q) & $Distributive Law$ \\
+    			& \equiv {\bf F} \vee (p \wedge q) & $Law of Contradiction$ \\
+    			& \equiv (p \wedge q) & $Identity Law$ \\
+    		\end{array}
+    	\end{displaymath}
+	\section{\bf Some examples of set operations}
+    	Suppose that $A = \{a,b,c\}$, that $B = \{b,d\}$, and that $C = \{d,e,f\}$. Then:
+   		\begin{displaymath}
+    		\begin{array}{llllll}
+    			A \cup B & =\{a,b,c,d\} & \hspace{.3in} A \cap B & =\{b\} & \hspace{.3in} A-B & = \{a,c\} \\
+                A \cup C & =\{a,b,c,d,e,f\} & \hspace{.3in} A \cap C & =\emptyset & \hspace{.3in} A-C & = \{a,b,c\} \\
+    		\end{array}
+   		\end{displaymath}
+    \section{\bf A proof in set theory}
+    	To show that $\forall x \big( (x \in A \cup B) \leftrightarrow (x \in B \cup A) \big)$: \\
+        \\
+        For any $x$,
+        \begin{displaymath}
+        	\begin{array}{lll}
+        		x \in A \cup B & \leftrightarrow x \in A \vee x \in B & $(by the definition of $\cup$ )$ \\
+                & \leftrightarrow x \in B \vee x \in A & $(by commutativity of $\vee$ )$ \\
+                & \leftrightarrow x \in B \cup A & $(by the definition of $\cup$ )$\\
+            \end{array}
+        \end{displaymath}
+\end{document}
