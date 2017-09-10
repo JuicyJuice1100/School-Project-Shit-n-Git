@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Assumptions:  Must enter valid date in following format: mm-dd-yyyy
  */
 package lab1;
 
