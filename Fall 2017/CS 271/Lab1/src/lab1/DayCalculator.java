@@ -106,6 +106,10 @@ public class DayCalculator extends UserCalendarInput{
         int gregorianCalendarDayCalculation = test.get(Calendar.DAY_OF_WEEK);
         boolean isEqual = false;
         
+        if (gregorianCalendarDayCalculation == 7){
+            gregorianCalendarDayCalculation = 0;
+        }
+        
         if(gregorianCalendarDayCalculation == calculation){
             isEqual = true;
         }
