@@ -9,6 +9,8 @@ package lab1;
  */
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
         
 public class UserCalendarInput{
     private String userInput;
@@ -33,8 +35,13 @@ public class UserCalendarInput{
     public int UserInputMonth(){
         int month;
         month = Integer.parseInt(this.userInputSplit[0]);
-        if(month > 12 && month < 1){
-            month = -1;
+        if(month > 12 || month < 1){
+            try {
+                throw new InvalidInputException();
+            } catch (InvalidInputException ex) {
+                Logger.getLogger(UserCalendarInput.class.getName()).log(Level.SEVERE, null, ex);
+                System.exit(0);
+            }
         }
         return month;
     }
@@ -43,8 +50,13 @@ public class UserCalendarInput{
     public int UserInputDay() {
         int day;
         day = Integer.parseInt(this.userInputSplit[1]);
-        if(day > 31 && day < 1){
-            day = -1;
+        if(day > 31 || day < 1){
+            try {
+                throw new InvalidInputException();
+            } catch (InvalidInputException ex) {
+                Logger.getLogger(UserCalendarInput.class.getName()).log(Level.SEVERE, null, ex);
+                System.exit(0);
+            }
         }
         return day;
     }
@@ -54,8 +66,19 @@ public class UserCalendarInput{
         int year;
         year = Integer.parseInt(this.userInputSplit[2]);
         if(year < 1900 || year > 2099){
-            year = -1;
+            try {
+                throw new InvalidInputException();
+            } catch (InvalidInputException ex) {
+                Logger.getLogger(UserCalendarInput.class.getName()).log(Level.SEVERE, null, ex);
+                System.exit(0);
+            }
         }
         return year;
+    }
+}
+
+class InvalidInputException extends Exception{
+    public InvalidInputException() {
+
     }
 }
