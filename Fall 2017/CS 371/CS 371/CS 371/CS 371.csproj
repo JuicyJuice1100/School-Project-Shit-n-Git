@@ -5,8 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Labs\Lab1\Views\" />
-    <Folder Include="Labs\Lab1\Scripts\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

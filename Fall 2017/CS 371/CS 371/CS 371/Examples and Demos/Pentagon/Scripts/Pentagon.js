@@ -29,20 +29,20 @@ window.onload = function init() {
 
     var sweepAngle = 72.0; // Use radians function from Angel's MV library to convert
     vertices = [
-        vec3(0.5, 0.0, 0.0),
-        vec3(0.5 * Math.cos(radians(sweepAngle)), 0.5 * Math.sin(radians(sweepAngle)), 0.0),
-        vec3(0.5 * Math.cos(2.0 * radians(sweepAngle)), 0.5 * Math.sin(2.0 * radians(sweepAngle)), 0.0),
-        vec3(0.5 * Math.cos(3.0 * radians(sweepAngle)), 0.5 * Math.sin(3.0 * radians(sweepAngle)), 0.0),
-        vec3(0.5 * Math.cos(4.0 * radians(sweepAngle)), 0.5 * Math.sin(4.0 * radians(sweepAngle)), 0.0)
+        vec2(0.5, 0.0),
+        vec2(0.5 * Math.cos(radians(sweepAngle)), 0.5 * Math.sin(radians(sweepAngle))),
+        vec2(0.5 * Math.cos(2.0 * radians(sweepAngle)), 0.5 * Math.sin(2.0 * radians(sweepAngle))),
+        vec2(0.5 * Math.cos(3.0 * radians(sweepAngle)), 0.5 * Math.sin(3.0 * radians(sweepAngle))),
+        vec2(0.5 * Math.cos(4.0 * radians(sweepAngle)), 0.5 * Math.sin(4.0 * radians(sweepAngle)))
     ];
 
     // Associate a RGBA color with each vertex
     var colors = [
-        vec4(vertices[0][0] + 0.5, 0.0, vertices[0][2] + 0.5, 1.0),
-        vec4(vertices[1][0] + 0.5, 0.0, vertices[1][2] + 0.5, 1.0),
-        vec4(vertices[2][0] + 0.5, 0.0, vertices[2][2] + 0.5, 1.0),
-        vec4(vertices[3][0] + 0.5, 0.0, vertices[3][2] + 0.5, 1.0),
-        vec4(vertices[4][0] + 0.5, 0.0, vertices[4][2] + 0.5, 1.0)
+        vec4(vertices[0][0] + 0.5, 0.0, vertices[0][1] + 0.5, 1.0),
+        vec4(vertices[1][0] + 0.5, 0.0, vertices[1][1] + 0.5, 1.0),
+        vec4(vertices[2][0] + 0.5, 0.0, vertices[2][1] + 0.5, 1.0),
+        vec4(vertices[3][0] + 0.5, 0.0, vertices[3][1] + 0.5, 1.0),
+        vec4(vertices[4][0] + 0.5, 0.0, vertices[4][1] + 0.5, 1.0)
     ];
 
 
@@ -65,7 +65,7 @@ window.onload = function init() {
     // Associate our shader variables with our data buffer
 
     var vPosition = gl.getAttribLocation(program, "vPosition");
-    gl.vertexAttribPointer(vPosition, 3, gl.FLOAT, false, 0, 0);
+    gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(vPosition);
 
     // Load the RGBA color data into the GPU
@@ -75,6 +75,7 @@ window.onload = function init() {
     gl.bufferData(gl.ARRAY_BUFFER, flatten(colors), gl.STATIC_DRAW);
 
     var vColor = gl.getAttribLocation(program, "vColor");
+    // Why the 4 in the next line?
     gl.vertexAttribPointer(vColor, 4, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(vColor);
 
