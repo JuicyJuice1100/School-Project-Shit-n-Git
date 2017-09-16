@@ -1,29 +1,28 @@
 ﻿// square.js -- a graphics "Hello World"
 var gl;
 var points;
-
+var vertices = [];
+var canvas;
 
 window.onload = function init(){
-    var canvas = document.getElementById( "gl-canvas" );
+    canvas = document.getElementById( "gl-canvas" );
     
     //    gl = WebGLUtils.setupWebGL( canvas );  // More efficient
     gl = WebGLDebugUtils.makeDebugContext( canvas.getContext("webgl") ); // For debugging
     if ( !gl ) { alert( "WebGL isn't available" );
                }
 
-    var vertices = [];
-
+    
     for (var i = 0; i < 8; i++) {
-        debugger;
-        var x = (0.5 * Math.cos((2 * Math.PI / 8) * (i + .5)));
-        var y = (0.5 * Math.sin((2 * Math.PI / 8) * (i + .5)));
+        var x = 1.08 * Math.cos((2 * Math.PI / 8) * (i + .5));
+        var y = 1.08 * Math.sin((2 * Math.PI / 8) * (i + .5));
         vertices.push(vec2(x, y));
     };
     
     
     //  Configure WebGL
     
-    gl.viewport( 0, 0, canvas.width, canvas.height );
+    //gl.viewport( 0, 0, canvas.width/6, canvas.height/4 );
     gl.clearColor( 0.0, 0.0, 0.0, 1.0 );
 
     //  Load shaders and initialize attribute buffers using A/S utility initShaders
@@ -61,6 +60,13 @@ window.onload = function init(){
 };
 
 function render() {
+    var sectionWidth = canvas.width / 6;
+    var sectionHeight = canvas.height / 4;
     gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.drawArrays( gl.LINE_LOOP, 0, 8);
+    for (var i = 4; i > 0; i--) {
+        for (var j = 0; j < 6; j++) {
+            gl.viewport(j * sectionWidth, i * sectionHeight, sectionWidth, sectionHeight);
+            gl.drawArrays(gl.LINE_LOOP, 0, 8);
+        }
+    }  
 }
