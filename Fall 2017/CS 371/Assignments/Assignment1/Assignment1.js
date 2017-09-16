@@ -1,14 +1,17 @@
-﻿// square.js -- a graphics "Hello World"
+﻿/* assignement1.js
+
+*/
 var gl;
 var points;
 var vertices = [];
 var canvas;
+var program;
 
 window.onload = function init(){
     canvas = document.getElementById( "gl-canvas" );
     
-    //    gl = WebGLUtils.setupWebGL( canvas );  // More efficient
-    gl = WebGLDebugUtils.makeDebugContext( canvas.getContext("webgl") ); // For debugging
+    gl = WebGLUtils.setupWebGL( canvas );  // More efficient
+    //gl = WebGLDebugUtils.makeDebugContext( canvas.getContext("webgl") ); // For debugging
     if ( !gl ) { alert( "WebGL isn't available" );
                }
 
@@ -27,7 +30,7 @@ window.onload = function init(){
 
     //  Load shaders and initialize attribute buffers using A/S utility initShaders
 
-    var program = initShaders( gl, "vertex-shader", "fragment-shader" ); 
+    program = initShaders( gl, "vertex-shader", "fragment-shader" ); 
     gl.useProgram( program );
 
     // Load the data into the GPU using A/S flatten function
@@ -53,7 +56,8 @@ window.onload = function init(){
             // to be tightly packed in the array.
         0          // Specifies a pointer to the first component 
             // of the first generic vertex attribute in the array.
-                          );
+    );
+
     gl.enableVertexAttribArray( vPosition );    
     
     render();

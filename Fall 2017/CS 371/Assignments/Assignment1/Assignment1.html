@@ -1,4 +1,4 @@
-﻿<!--square.html-->
+﻿<!--assignment1.html-->
 <!DOCTYPE html>
 <html>
 
@@ -9,7 +9,7 @@
 
     void main()
     {
-    gl_Position = vPosition;
+        gl_Position = vPosition;
     }
 </script>
 
@@ -17,18 +17,19 @@
     // GLSL fragment shader code
     precision mediump float;
 
+
     void main()
     {
-    gl_FragColor = vec4( 1.0, 1.0, 1.0, 1.0 );
+        gl_FragColor = vec4(1.0,1.0,1.0,1.0);
     }
 </script>
 
 <!--Include A/S WebGL support libraries-->
-<script type="text/javascript" src="../../../Common/webgl-utils.js"></script>
-<script type="text/javascript" src="../../../Common/initShaders.js"></script>
-<script type="text/javascript" src="../../../Common/MV.js"></script>
-<script type="text/javascript" src="../../../Common/webgl-debug.js"></script>
-<script type="text/javascript" src="../Scripts/Square.js"></script>
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="../Common/webgl-debug.js"></script>
+<script type="text/javascript" src="Assignment1.js"></script>
 
 <body>
     <canvas id="gl-canvas" width="512" height="512">
