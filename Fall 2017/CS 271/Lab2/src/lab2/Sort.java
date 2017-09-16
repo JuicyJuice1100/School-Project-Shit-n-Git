@@ -20,6 +20,7 @@ public class Sort{
     public Sort(){
         numberArrayOne = RandomArray();
         numberArrayTwo = numberArrayOne.clone();
+        SelectionSort(numberArrayOne);
         if(!Verify(numberArrayOne)){
             try {
                 throw new InvalidSort();
