@@ -36,7 +36,7 @@ public class Sort{
         long startArraySort = System.currentTimeMillis();
         Arrays.sort(numberArrayClone);
         long endArraySort = System.currentTimeMillis();
-    System.out.printf("%-10d %-20d %-20d \n", size, endSelectionSort, endArraySort);
+    System.out.printf("%-10d %-20d %-20d \n", size, endSelectionSort - startSelectionSort, endArraySort - startArraySort);
         }
     
     public static void SelectionSort(int[] arr) {
