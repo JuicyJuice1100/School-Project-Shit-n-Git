@@ -1,21 +1,25 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+    Guesses
  */
 package lab2;
 
 /**
  *
- * @author ThatA
+ * @author Justin Espiritu
  */
 public class Lab2 {
 
     /**
      * @param args the command line arguments
      */
+    
+    private static int testSize = 10;
     public static void main(String[] args) {
-        Sort sort = new Sort();
-    }
+        System.out.printf("%-10s %-20s %-20s \n", "n", "SelectionSort", "ArraySort");
+        for(int i = 0; i < 6; i++, testSize = testSize * 10){
+            Sort sort = new Sort(testSize);
+        }
+    }   
+    
     
 }

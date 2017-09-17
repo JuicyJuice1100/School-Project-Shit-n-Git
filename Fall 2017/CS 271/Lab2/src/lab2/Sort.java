@@ -7,7 +7,7 @@ package lab2;
 
 /**
  *
- * @author ThatA
+ * @author Justin Espiritu
  */
 import java.util.Arrays;
 import java.util.Random;
@@ -15,12 +15,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Sort{
-    int[] numberArrayOne, numberArrayTwo;
+    int[] numberArrayOne, numberArrayClone;
+    int size;
     
-    public Sort(){
+    public Sort(int size){
+        this.size = size;
         numberArrayOne = RandomArray();
-        numberArrayTwo = numberArrayOne.clone();
+        numberArrayClone = numberArrayOne.clone();
+        long startSelectionSort = System.currentTimeMillis();
         SelectionSort(numberArrayOne);
+        long endSelectionSort = System.currentTimeMillis();
         if(!Verify(numberArrayOne)){
             try {
                 throw new InvalidSort();
@@ -29,7 +33,11 @@ public class Sort{
                 System.exit(0);
             }
         }
-    }
+        long startArraySort = System.currentTimeMillis();
+        Arrays.sort(numberArrayClone);
+        long endArraySort = System.currentTimeMillis();
+    System.out.printf("%-10d %-20d %-20d \n", size, endSelectionSort, endArraySort);
+        }
     
     public static void SelectionSort(int[] arr) {
         int i, j;
@@ -59,7 +67,7 @@ public class Sort{
     
     public int[] RandomArray () {
         Random random = new Random(542);
-        int[] array = new int[10];
+        int[] array = new int[size];
         for(int i=0; i<10; i++){
             array[i] = random.nextInt();
         }
