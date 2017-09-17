@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.1": {
       "Libuv/1.9.1": {
@@ -8702,27 +8702,15 @@
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
-      "projectUniqueName": "C:\\Users\\ThatA\\Desktop\\School-Project-Shit-n-Git\\Fall 2017\\CS 371\\CS 371\\CS 371\\CS 371.csproj",
+      "projectUniqueName": "C:\\Users\\ThatA\\Desktop\\School\\All School Shit'n Git\\School-Project-Shit-n-Git\\Fall 2017\\CS 371\\CS 371\\CS 371\\CS 371.csproj",
       "projectName": "CS 371",
-      "projectPath": "C:\\Users\\ThatA\\Desktop\\School-Project-Shit-n-Git\\Fall 2017\\CS 371\\CS 371\\CS 371\\CS 371.csproj",
-      "packagesPath": "C:\\Users\\ThatA\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ThatA\\Desktop\\School-Project-Shit-n-Git\\Fall 2017\\CS 371\\CS 371\\CS 371\\obj\\",
+      "projectPath": "C:\\Users\\ThatA\\Desktop\\School\\All School Shit'n Git\\School-Project-Shit-n-Git\\Fall 2017\\CS 371\\CS 371\\CS 371\\CS 371.csproj",
+      "outputPath": "C:\\Users\\ThatA\\Desktop\\School\\All School Shit'n Git\\School-Project-Shit-n-Git\\Fall 2017\\CS 371\\CS 371\\CS 371\\obj\\",
       "projectStyle": "PackageReference",
-      "configFilePaths": [
-        "C:\\Users\\ThatA\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-      ],
       "originalTargetFrameworks": [
         "netcoreapp1.1"
       ],
-      "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
-      },
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {}
