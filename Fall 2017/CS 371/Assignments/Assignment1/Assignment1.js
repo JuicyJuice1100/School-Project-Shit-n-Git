@@ -1,7 +1,9 @@
 ﻿/*
 * @authors:  Justin Espiritu, Tyler Bates
 * GGW points are labels with GGW comments
-*
+*   In general tried to add shaded color to the octagons and rotate each polygon before they drawn
+* 4.8.8 pattern
+* Sources were taken from class and the pentagon example on d2l
 */
 var gl;
 var points;
