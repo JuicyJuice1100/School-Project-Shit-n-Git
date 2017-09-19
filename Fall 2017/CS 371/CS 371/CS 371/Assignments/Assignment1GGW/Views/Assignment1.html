@@ -1,8 +1,15 @@
-﻿
+﻿<!--
+ @authors:  Justin Espiritu, Tyler Bates
+ GGW points are labels with GGW comments
+   In general tried to add shaded color to the octagons and rotate each polygon before they drawn
+ 4.8.8 pattern
+ Sources were taken from class and the pentagon example on d2l
+-->
+
 <!DOCTYPE html>
 <html>
 
-
+<!-- GGW we make the gl_Postion = a vec4 that is based off of theta so that we can rotate using theta -->
 <script id="vertex-shader" type="x-shader/x-vertex">
 
     attribute vec4 vPosition;
@@ -12,10 +19,10 @@
 
     void main()
     {
-    fColor = vColor;
-    gl_Position = vec4(cos(theta) * vPosition.x - sin(theta) * vPosition.y ,
-    sin(theta) * vPosition.x + cos(theta) * vPosition.y ,
-    0.0, 1.0);
+        fColor = vColor;
+        gl_Position = vec4(cos(theta) * vPosition.x - sin(theta) * vPosition.y ,
+        sin(theta) * vPosition.x + cos(theta) * vPosition.y ,
+        0.0, 1.0);
     }
 </script>
 
@@ -24,33 +31,23 @@
     precision mediump float;
     varying vec4 fColor;
     uniform int smooth_flag;
-
     void main()
     {
-    if (smooth_flag == 1) {
-    gl_FragColor = fColor;
-    } else {
-    gl_FragColor = vec4(1.0,1.0,1.0,1.0);
-    }
+        gl_FragColor = fColor;
     }
 </script>
 
-<!--Ed Angel's WebGL support libraries-->
+<!--Include A/S WebGL support libraries-->
 <script type="text/javascript" src="../../../Common/webgl-utils.js"></script>
 <script type="text/javascript" src="../../../Common/initShaders.js"></script>
 <script type="text/javascript" src="../../../Common/MV.js"></script>
 <script type="text/javascript" src="../../../Common/webgl-debug.js"></script>
-<script type="text/javascript" src="../Scripts/Pentagon.js"></script>
+<script type="text/javascript" src="../Scripts/Assignment1.js"></script>
 
 <body>
     <canvas id="gl-canvas" width="512" height="512">
         >
         Oops ... your browser doesn't support the HTML5 canvas element
     </canvas>
-
-    <!--Our JS code has event listeners for these buttons-->
-    <button id="CCButton">Rotate Counter-Clockwise</button>
-    <button id="CLButton">Rotate Clockwise</button>
-
 </body>
 </html>
