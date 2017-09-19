@@ -1,7 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+n          SelectionSort(ms)    ArraySort (ms)       
+10         0                    0                    
+100        0                    0                    
+1000       3                    1                    
+10000      79                   1                    
+100000     3906                 7                    
+1000000    405259               16                   
+10000000   46910461             121   
  */
 package lab2;
 
