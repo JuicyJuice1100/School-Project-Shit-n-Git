@@ -1,0 +1,184 @@
+\title{Assignment 2}
+\documentclass[letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage[a4paper, margin=1in]{geometry}
+\renewcommand\subsection{}
+\begin{document}
+	\pagenumbering {gobble}
+    \section{}
+    	\subsection{\bf Assumptions\sf}
+   		\begin{displaymath}
+          \begin{array}{lllllll}
+                  x &=& $Oliver$ &=& f(x) &=& $Oliver is a CS Major$ \\
+                  &&&& m(x) &=& $Oliver is a Math Major$ \\
+                  &&&& t(x) &=& $Oliver is required to take Math 333$ \\
+              \end{array}
+          \end{displaymath}
+        \subsection{\bf Argument\sf} 
+          \begin{displaymath}
+              \begin{array}{ll}
+                  f(x) \vee m(x) & Proposition 1 \\
+                  m(x) \rightarrow t(x) & Proposition 2 \\
+                  \hline
+                  \therefore f(x) \vee \neg t(x) &\\
+              \end{array}
+          \end{displaymath}
+        \subsection{\bf Proof\sf}
+          \begin{displaymath}
+              \begin{array}{lll}
+                  $Conclusion 1$ & \neg f(x) \rightarrow m(x) & $Conditional Identity, Proposition 1$ \\
+                  $Conclusion 2$ & \neg f(x) \rightarrow t(x) & $Hypothetical Syllogism, Proposition 2, Conclusion 1$ \\
+                  $Conclusion 3$ & \neg \neg f(x) \vee t(x) & $Conditional Identity, Conclusion 2$ \\
+                  $Conclusion 4$ & f(x) \vee t(x) & $Double Negation Law, Conclusion 3$ \\
+                  \hline
+                  \because f(x) \vee t(x) & \neq f(x) \vee \neg t(x) & \therefore Invalid 
+              \end{array}
+          \end{displaymath}
+        \subsection{\bf Truth Table\sf}
+          \begin{center}
+              \begin{tabular}{|c|c|c||c|c|c|}
+              \hline
+              $f(x)$ & $m(x)$ & $t(x)$ & $f(x) \vee m(x)$ & $m(x) \rightarrow t(x)$ & $f(x) \vee \neg t(x)$ \\
+              \hline
+              0 & 0 & 0 & 0 & 1 & 1 \\
+              \hline
+              1 & 0 & 0 & 1 & 1 & 1 \\
+              \hline
+              1 & 1 & 0 & 1 & 0 & 1 \\
+              \hline
+              1 & 1 & 1 & 1 & 1 & 1 \\
+              \hline
+              0 & 1 & 1 & 1 & 1 & 0 \\
+              \hline
+              0 & 0 & 1 & 0 & 1 & 0 \\
+              \hline
+              1 & 0 & 1 & 1 & 1 & 1 \\
+              \hline
+              \end{tabular}
+          \end{center}
+        \subsection{\bf Conclusion\sf} \\
+                The truth table above shows that this is an invalid argument.  Specifically rows 1, 3, and 5 show that it is invalid because: 
+        		1. the conclusion is false when the hypothesis is true 2. the conclusion is true when the hypothesis is false.
+	\section{}
+    	\subsection{\bf a)\sf}
+        	\begin{center}
+        		$\exists y \forall x Triangle(y) \wedge \big (Square(x) \rightarrow \neg ToTheRightOf(y, x)\big)$
+        	\end{center}
+        \subsection{\bf b)\sf} \\
+			\begin{displaymath}
+				\begin{array}{ll}
+					\neg \exists y \forall x \Big (Triangle(y) \wedge \big (Square(x) \rightarrow \neg ToTheRightOf(y, x)\big)\Big ) 
+                    	& $Premise$ \\
+                    \forall y \neg \forall x \Big (Triangle(y) \wedge \big (Square(x) \rightarrow \neg ToTheRightOf(y, x)\big)\Big ) 
+                    	& $De Morgan's$ \\
+                    \forall y \exists x \neg \Big(Triangle(y) \wedge \big (Square(x) \rightarrow \neg ToTheRightOf(y, x)\big)\Big ) 
+                    	& $De Morgan's$ \\
+                    \forall y \exists x \Big(\neg Triangle(y) \vee \neg \big (Square(x) \rightarrow \neg ToTheRightOf(y, x)\big)\Big ) 
+                    	& $De Morgan's$ \\
+                    \forall y \exists x \Big(\neg Triangle(y) \vee \neg \big (\neg Square(x) \vee \neg ToTheRightOf(y, x)\big)\Big ) 
+                    	& $Conditional Identity$ \\
+                    \forall y \exists x \Big(\neg Triangle(y) \vee \big (\neg \neg Square(x) \vee \neg \neg ToTheRightOf(y, x)\big)\Big ) 
+                    	& $De Morgan's$ \\
+                    \forall y \exists x \Big(\neg Triangle(y) \vee \big (Square(x) \vee ToTheRightOf(y, x)\big)\Big ) 
+                    	& $Double Negation$ \\
+				\end{array}
+			\end{displaymath}
+       \subsection{\bf c)\sf} \\
+			All polygons are not triangles or there exists a square or all polygons are to the right of a polygon.
+	\section{}
+    	\subsection{\bf a) \sf}
+        	\begin{displaymath}
+        		\begin{array}{llllll}
+        			t(x) &=& $trust $ x & a(x) &=& x $ is admitted to study$ \\
+                    o(x) &=& $own $ x & b(x) &=& x $ begs$ \\
+                    d(x) &=& x $ is a dog$ & y(x) &=& x $ is in the yard$ \\
+                    g(x) &=& x $ gnaws bones$ & c(x) &=& x $ is told to beg$ \\
+        		\end{array}
+        	\end{displaymath}
+		\subsection{\bf b)\sf}
+        	\begin{center}
+        		$\forall x \big (g(x) \wedge y(x)\big )$
+        	\end{center}
+        \subsection{\bf c)\sf} \\
+        \subsection{\bf Hypothesis \sf}
+        	\begin{displaymath}
+        		\begin{array}{ll}
+        			\forall x \big(o(x) \rightarrow t(x) \big ) & $Proposition 1$\\
+                    \forall x \big(d(x) \rightarrow g(x) \big ) & $Proposition 2$\\
+                    \forall x \Big(a(x) \rightarrow \big (c(x) \wedge b(x) \big ) \Big ) & $Proposition 3$ \\
+                    \forall x \big (y(x) \rightarrow o(x) \big ) & $Proposition 4$ \\
+                    \forall x \big (t(x) \rightarrow a(x) & $Proposition 5$ \\
+                    \forall x \Big ( \big (c(x) \wedge b(x) \big ) \rightarrow d(x) \Big ) & $Proposition 6$ \\
+                    \hline
+                    \therefore \forall x \big (y(x) \rightarrow g(x) \big ) & \\
+        		\end{array}
+        	\end{displaymath}
+        \subsection{\bf Proof \sf}
+        	\begin{displaymath}
+        		\begin{array}{lll}
+        			$Conclusion 1$ & x $ is an arbitrary element, all animals$ & $Assumption$\\
+                    $Conclusion 2$ & o(x) \rightarrow t(x) & $Universal Instansiation, Con 1, Prop 1$\\
+                    $Conclusion 3$ & d(x) \rightarrow g(x) & $Universal Instansiation, Con 1, Prop 2$\\
+                    $Conclusion 4$ & a(x) \rightarrow \big (c(x) \wedge b(x) \big ) 
+                    	& $Universal Instansiation, Con 1, Prop 3$ \\
+                    $Conclusion 5$ & y(x) \rightarrow o(x) & $Universal Instansiation, Con 1, Prop 4$ \\
+                    $Conlcusion 6$ & t(x) \rightarrow a(x) & $Universal Instansiation, Con 1, Prop 5$ \\
+                    $Conclusion 7$ & \big (c(x) \wedge b(x) \big ) \rightarrow d(x) 
+                    	& $Universal Instansiation, Conc 1, Prop 6$ \\
+          			$Conclusion 8$ & y(x) \rightarrow t(x) & $Hypothetical Syllogism, Con 5, Con 2$ \\
+                    $Conclusion 9$ & y(x) \rightarrow a(x) & $Hypothetical Syllogism, Con 8, Con 6$ \\
+                    $Conclusion 10$ & y(x) \rightarrow \big (c(x) \wedge b(x) \big ) & $Hypothetical Syllogism, Con 9, Con 4$ \\
+                    $Conclusion 11$ & y(x) \rightarrow d(x) & $Hypothetical Syllogism, Con 10, Con 7$ \\
+                    $Conclusion 12$ & y(x) \rightarrow g(x) & $Hypothetical Syllogism, Con 11, Con 3$ \\
+                    \hline
+                    \because y(x) \rightarrow g(x) = {y(x) \rightarrow g(x)} & \therefore Valid & \\
+        		\end{array}
+        	\end{displaymath}
+	\section{}
+    	\subsection{\bf a) \sf} \\
+        No deductive errors \\
+        \subsection{\bf b) \sf}
+        	\begin{center}
+        		\begin{tabular}{|c|c||c|c|c|}
+                	\hline
+        			$P$ & $Q$ & $P \rightarrow Q$ & $Q$ & $P$ \\
+                    \hline
+                    0 & 0 & 1 & 0 & 0\\
+                    \hline
+                    1 & 0 & 0 & 0 & 1\\
+                    \hline
+                    1 & 1 & 1 & 1 & 1\\
+                    \hline
+                    0 & 1 & 1 & 1 & 0\\
+                    \hline
+        		\end{tabular}
+        	\end{center}
+            It is invalid because: 1. there is a Hypothesis where all of the Proposition are false but the Conclusion is true 
+            2. there is a hypothesis where all the Propositions are true but the Conclusion is false.\\
+       \subsection{\bf c) \sf}
+       		\begin{center}
+       			\begin{tabular}{|c|c|c||c|c|c|}
+       				\hline
+                    $P$ & $Q$ & $R$ & $P \rightarrow R$ & $Q \rightarrow R$ & $P \rightarrow Q$ \\
+                    \hline
+                    0 & 0 & 0 & 1 & 1 & 1 \\
+                    \hline
+                    1 & 0 & 0 & 0 & 1 & 0 \\
+                    \hline
+                    1 & 1 & 0 & 0 & 0 & 1 \\
+                    \hline
+                    1 & 1 & 1 & 1 & 1 & 1 \\
+                    \hline
+                    0 & 1 & 1 & 1 & 1 & 1 \\
+                    \hline
+                    0 & 0 & 1 & 1 & 1 & 1 \\
+                    \hline
+                    1 & 0 & 1 & 1 & 1 & 0 \\
+                    \hline
+       			\end{tabular}
+       		\end{center}
+            It is invalid because: 1. there is a Hypothesis where all of the Proposition are false but the Conclusion is true 
+            2. there is a hypothesis where all the Propositions are true but the Conclusion is false.
+\end{document}
