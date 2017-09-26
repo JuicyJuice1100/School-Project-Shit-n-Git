@@ -1,0 +1,25 @@
+/* Here are the only colors that you are allowed to use in this style sheet:
+
+  #5555aa
+  #5555cc
+  #aaaadd;
+  #aaaaff
+  #ddddff
+
+  black, white, maroon, goldenrod
+  
+*/
+body{
+  text-align: center;
+  font-family: sans-serif;
+  /* background-color: #aaaadd; */
+}
+
+h2{
+  background-color: #aaaadd;
+}
+
+a{
+  background-color: maroon;
+  /* text-decoration-color: white; */
+}
