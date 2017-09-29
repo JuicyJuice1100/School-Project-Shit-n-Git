@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+attribute vec4 tPosition;
+attribute vec4 dPosition;
+uniform float tween;
+uniform mat4 projection;
+
+void main()
+{
+  gl_Position = (1.0 - tween) * tPosition + tween * dPosition;
+  gl_PointSize = 1.0;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+precision mediump float;
+
+void main()
+{
+    gl_FragColor = vec4( 1.0, 1.0, 1.0, 1.0 );
+}
+</script>
+
+<!-- The A/S WebGL support libraries-->
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="../Common/webgl-debug.js"></script>
+<script type="text/javascript" src="IFS/tri.js"></script>
+<script type="text/javascript" src="IFS/dragon.js"></script>
+<script type="text/javascript" src="assignment2.js"></script>
+
+<body>
+<canvas id="gl-canvas" style="float:left; margin-right: 5px;" width="500" height="500">
+</canvas>
+<div id="captionForTheGoal">Triangle To Dragon</div>
+</body>
+</html>
