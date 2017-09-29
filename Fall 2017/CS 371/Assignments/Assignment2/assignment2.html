@@ -6,11 +6,14 @@
 
 attribute vec4 tPosition;
 attribute vec4 dPosition;
+attribute vec4 vColor;
+varying vec4 fColor;
 uniform float tween;
 uniform mat4 projection;
 
 void main()
 {
+  fColor = vColor;
   gl_Position = projection * ((1.0 - tween) * tPosition + tween * dPosition);
   gl_PointSize = 1.0;
 }
@@ -18,12 +21,13 @@ void main()
 
 <script id="fragment-shader" type="x-shader/x-fragment">
 
-precision mediump float;
-
-void main()
-{
-    gl_FragColor = vec4( 1.0, 1.0, 1.0, 1.0 );
-}
+    precision mediump float;
+    varying vec4 fColor;
+    uniform int smooth_flag;
+    void main()
+    {
+        gl_FragColor = fColor;
+    }
 </script>
 
 <!-- The A/S WebGL support libraries-->

@@ -12,7 +12,7 @@ var canvas;
 var projectionMatrix;
 var projection;
 
-
+var colors = [];
 var vertices = [];
 
 
@@ -27,7 +27,7 @@ var dragonBottom = 0.0;
 var dragonTop = 10.0;
 
 
-var numberOfPoints = 50000;
+var numberOfPoints = 100000;
 
 window.onload = function init(){
     canvas = document.getElementById( "gl-canvas" );
@@ -37,13 +37,10 @@ window.onload = function init(){
     if ( !gl ) { alert( "WebGL isn't available" );
 	       }
 
-
     generateFractalPoints();
 
     gl.viewport( 0, 0, canvas.width, canvas.height );
     gl.clearColor( 0.0, 0.0, 0.0, 1.0 );
-
-
 
     var program = initShaders( gl, "vertex-shader", "fragment-shader" );
     gl.useProgram( program );
@@ -62,6 +59,10 @@ window.onload = function init(){
     var dPosition = gl.getAttribLocation( program, "dPosition")
     gl.vertexAttribPointer(dPosition, 2, gl.FLOAT, false, 16, 8);
     gl.enableVertexAttribArray( dPosition );    
+
+    var vColor = gl.getAttribLocation(program, "vColor");
+    gl.vertexAttribPointer(vColor, 4, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(vColor);
     
     projection = gl.getUniformLocation (program, "projection");
     tweenLoc = gl.getUniformLocation(program, "tween");
@@ -124,9 +125,10 @@ function generateFractalPoints () {
             + dragon.transformations[dragonPoint].trans_y;
 
         if(iterations > 20){
-            
             vertices.push(vec2(newTriangleX, newTriangleY ));
+            colors.push(vec4(newTriangleX, newDragonX, newTriangleY, newDragonY));
             vertices.push(vec2(newDragonX, newDragonY ));
+            colors.push(vec4(newDragonX, newTriangleX, newDragonY, newTriangleY));
         }
 
 
