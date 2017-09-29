@@ -146,7 +146,7 @@ function render() {
 
     
     if(goingToDragon){
-        tweenFactor = Math.min(tweenFactor + 0.001, 1.0);
+        tweenFactor = Math.min(tweenFactor + 0.005, 1.0);
         projectionMatrix = ortho((1.0 - tweenFactor) * triangleLeft + dragonLeft * tweenFactor, (1.0 - tweenFactor) * triangleRight + dragonRight * tweenFactor, 
             (1.0 - tweenFactor) * triangleBottom + dragonBottom * tweenFactor, (1.0 - tweenFactor) * triangleTop + dragonTop * tweenFactor, -1.0, 1.0);
         if (tweenFactor >= 1.0) {
@@ -156,7 +156,7 @@ function render() {
     }
 
     else {
-        tweenFactor = Math.max(tweenFactor - 0.001, 0.0);
+        tweenFactor = Math.max(tweenFactor - 0.005, 0.0);
         projectionMatrix = ortho((1.0 - tweenFactor) * triangleLeft + dragonLeft * tweenFactor, (1.0 - tweenFactor) * triangleRight + dragonRight * tweenFactor, 
             (1.0 - tweenFactor) * triangleBottom + dragonBottom * tweenFactor, (1.0 - tweenFactor) * triangleTop + dragonTop * tweenFactor, -1.0, 1.0);
         
