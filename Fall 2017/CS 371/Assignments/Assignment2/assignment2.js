@@ -4,10 +4,10 @@
 
 var gl;
 var goingToDragon = true;
+var toggle = true;
 var tweenLoc;
 var tweenFactor = 0.0;
 var canvas;
-
 
 var projectionMatrix;
 var projection;
@@ -27,7 +27,7 @@ var dragonBottom = 0.0;
 var dragonTop = 10.0;
 
 
-var numberOfPoints = 100000;
+var numberOfPoints = Math.random(1000000) + 500000;
 
 window.onload = function init(){
     canvas = document.getElementById( "gl-canvas" );
@@ -144,28 +144,29 @@ function generateFractalPoints () {
 function render() {
     gl.clear( gl.COLOR_BUFFER_BIT );
 
-    
+
+    window.onkeypress = function(event){
+        var code = event.keyCode;
+        if (event.keyCode == 114){
+            goingToDragon = !goingToDragon;
+        }
+    }
+
     if(goingToDragon){
-        tweenFactor = Math.min(tweenFactor + 0.005, 1.0);
+        document.getElementById('captionForTheGoal').innerHTML="Triangle to Dragon";
+        tweenFactor = Math.min(tweenFactor + 0.01, 1.0);
         projectionMatrix = ortho((1.0 - tweenFactor) * triangleLeft + dragonLeft * tweenFactor, (1.0 - tweenFactor) * triangleRight + dragonRight * tweenFactor, 
             (1.0 - tweenFactor) * triangleBottom + dragonBottom * tweenFactor, (1.0 - tweenFactor) * triangleTop + dragonTop * tweenFactor, -1.0, 1.0);
-        if (tweenFactor >= 1.0) {
-            goingToDragon = false;
-            document.getElementById('captionForTheGoal').innerHTML="Dragon to Triangle";
-        }
+
     }
 
-    else {
-        tweenFactor = Math.max(tweenFactor - 0.005, 0.0);
+    if (!goingToDragon && toggle) {
+        document.getElementById('captionForTheGoal').innerHTML="Dragon to Triangle";
+        tweenFactor = Math.max(tweenFactor - 0.01, 0.0);
         projectionMatrix = ortho((1.0 - tweenFactor) * triangleLeft + dragonLeft * tweenFactor, (1.0 - tweenFactor) * triangleRight + dragonRight * tweenFactor, 
             (1.0 - tweenFactor) * triangleBottom + dragonBottom * tweenFactor, (1.0 - tweenFactor) * triangleTop + dragonTop * tweenFactor, -1.0, 1.0);
-        
-
-        if (tweenFactor <= 0.0){
-            goingToDragon = true;
-            document.getElementById('captionForTheGoal').innerHTML="Triangle to Dragon";
-        }
     }
+    
     gl.uniformMatrix4fv(projection, false, flatten(projectionMatrix));
     gl.uniform1f(tweenLoc, tweenFactor);
     gl.drawArrays( gl.POINTS, 0, vertices.length/2 );

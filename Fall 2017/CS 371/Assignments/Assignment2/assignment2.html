@@ -13,7 +13,8 @@ uniform mat4 projection;
 
 void main()
 {
-  fColor = vColor;
+  
+  fColor = (.5 - tween) * vColor;
   gl_Position = projection * ((1.0 - tween) * tPosition + tween * dPosition);
   gl_PointSize = 1.0;
 }
@@ -23,7 +24,6 @@ void main()
 
     precision mediump float;
     varying vec4 fColor;
-    uniform int smooth_flag;
     void main()
     {
         gl_FragColor = fColor;
@@ -40,7 +40,7 @@ void main()
 <script type="text/javascript" src="assignment2.js"></script>
 
 <body>
-<canvas id="gl-canvas" style="float:left; margin-right: 5px;" width="1000" height="1000">
+<canvas id="gl-canvas" style="float:left; margin-right: 5px;" width="900" height="600">
 </canvas>
 <div id="captionForTheGoal">Triangle To Dragon</div>
 </body>
