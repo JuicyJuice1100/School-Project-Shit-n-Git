@@ -1,18 +1,17 @@
+
 <!DOCTYPE html>
 <html>
 
 
 <script id="vertex-shader" type="x-shader/x-vertex">
 
-attribute vec4 tPosition;
-attribute vec4 dPosition;
+attribute vec4 sPosition;  
+attribute vec4 gPosition;  
 uniform float tween;
-uniform mat4 projection;
-
 void main()
 {
-  gl_Position = projection * ((1.0 - tween) * tPosition + tween * dPosition);
-  gl_PointSize = 1.0;
+   gl_Position = (1.0 - tween) * sPosition + tween * gPosition;
+    
 }
 </script>
 
@@ -26,18 +25,18 @@ void main()
 }
 </script>
 
-<!-- The A/S WebGL support libraries-->
+<!--Ed Angel's WebGL support libraries-->
 <script type="text/javascript" src="../Common/webgl-utils.js"></script>
 <script type="text/javascript" src="../Common/initShaders.js"></script>
 <script type="text/javascript" src="../Common/MV.js"></script>
 <script type="text/javascript" src="../Common/webgl-debug.js"></script>
-<script type="text/javascript" src="IFS/tri.js"></script>
-<script type="text/javascript" src="IFS/dragon.js"></script>
-<script type="text/javascript" src="assignment2.js"></script>
+<script type="text/javascript" src="test.js"></script>
 
 <body>
-<canvas id="gl-canvas" style="float:left; margin-right: 5px;" width="500" height="500">
+<!--The style for the canvas should make the text in the caption appear to its right  -->
+<canvas id="gl-canvas" style="float:left; margin-right: 5px;" width="500" height="700">>
 </canvas>
-<div id="captionForTheGoal">Triangle To Dragon</div>
+<div id="caption-for-the-goal">Genie-to-circle</div>
+
 </body>
 </html>
