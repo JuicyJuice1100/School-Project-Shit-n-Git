@@ -7,7 +7,7 @@
   #ddddff
 
   black, white, maroon, goldenrod
-  
+  @Author Justin Espiritu
 */
 body{
   font-family: sans-serif;
@@ -56,9 +56,13 @@ table {
   margin: 0 auto;
   width: 70%;
 }
+
 table *{
+  text-align: center;
   margin: 0;
   border: 2px solid black;
+  font-weight: bold;
+  
 }
 tr:nth-child(odd){
   background-color: #aaaaff;
@@ -69,6 +73,10 @@ tr:first-child{
   font-weight: bold;
   color: white;
   text-align: center;
+}
+
+th:nth-child(3), td:nth-child(3){
+  border-left: 3px solid black;
 }
 
 body>h2, h1{

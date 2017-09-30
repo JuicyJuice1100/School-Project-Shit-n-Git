@@ -8,5 +8,118 @@
   rgb(242,177,56)
 
   black, white, maroon
-
+@author Justin Espiritu
 */
+body > div{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background-color: #a63b32;
+}
+
+section{
+  width: 50%;
+  height: 250px;
+  margin: 10px;
+  overflow: auto;
+  background-color: rgb(242,177,56);
+  align-self: center;
+}
+
+nav > div{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+}
+
+div{
+  width: 100%;
+}
+
+a{
+  width: 30px;
+  height: 250px;
+  margin: 10px;
+  align-self: center;
+  text-align: center;
+  font-weight: bold;
+  background-color: rgb(242,177,56);
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-size: 20px;
+  color: maroon;
+  text-decoration: none;
+  margin-right: 55%;
+}
+
+dt{
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  width: 70%;
+}
+
+table *{
+  text-align: center;
+  margin: 0;
+  border: 2px solid black;
+  font-weight: bold;
+  
+}
+tr:nth-child(odd){
+  background-color: rgb(242,147,0);
+}
+
+tr:first-child{
+  background-color: maroon;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
+
+th:nth-child(3), td:nth-child(3){
+  border-left: 3px solid black;
+}
+
+body{
+  border: 40px solid #591616;
+  background: #a63b32;
+}
+
+h1{
+  color: white;
+  position: absolute;
+  text-align: center;
+  margin-top: 10px;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+}
+
+h1+h2, h2+h3{
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  width: 30px;
+}
+
+h1+h2{
+  color: white;
+  position: absolute;
+  left: 0px;
+  font-size: xx-large;
+  margin-left: 10px;
+  height: 150%;
+}
+
+h2+h3{
+  color: white;
+  position: absolute;
+  right: 0px;
+  margin-right: 5px;
+  font-size: xx-large;
+}
+
