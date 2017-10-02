@@ -1,0 +1,144 @@
+\title{Assignment 3}
+\author{Justin Espiritu}
+\documentclass[letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{commath}
+\usepackage{fancyhdr}
+\usepackage[a4paper, margin=1in]{geometry}
+\pagenumbering{gobble}
+\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand{\thesubsection}{\alph{subsection})}
+\renewcommand{\thesubsubsection}{Case \arabic{subsubsection}.}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Justin Espiritu}
+\rhead{Assignment 3}
+\begin{document}
+	\section{}
+    	\subsection{}
+        	\begin{displaymath}
+        		\begin{array}{ll}
+        			\exists \neg n P(2n^2 + 3n + 1) & $Prove the negation$\\
+                    \neg \exists n P(2n^2 + 3n + 1) & \\
+                  	\forall n \neg P(2n^2 + 3n + 1) & $De Morgan's$\\
+                    x = $ an arbitrary integer$ & $Assumption$\\
+                    \neg P((x)^2 + 3(x) + 1 & $Universal instantiation$\\
+                    \neg P((2x + 1)(x + 1) & $Distribution$\\
+					\therefore \forall \neg P(2n^2 + 3n + 1) & $Is not prime (valid)$\\
+                    \hline
+                    \therefore \exists P(2n^2 + 3n + 1) & $Invalid (Proof by negation)$\\
+        		\end{array}
+        	\end{displaymath}
+            Because the negation is proved to be true the hypothesis is invalid.
+		\subsection{}
+        	\begin{displaymath}
+            	\begin{array}{ll}
+            		x = 0 & $assumption$\\
+                    P(2(0)^2 + 3(0) + 2) &\\
+                    P(2) &\\
+                    2 is prime & \\
+                    \hline
+                    \therefore \exists P(2n^2 + 3n + 1) & $Valid (Definition of $\exists$)$\\
+            	\end{array}
+        	\end{displaymath}
+	\section{}
+    	\begin{displaymath}
+    		\begin{array}{rcl}
+    			\frac{a}{b} = $some rational number where a and b are integers$ && 
+                	$assumption/definition of a rational number$\\
+                \frac{n}{m} = $some rational number where a and b are integers$ && 
+                	$assumption/definition of a rational number$\\
+                x = some irrational number && $assumption$\\
+                \frac{a}{b} - x &=& \frac{n}{m}\\
+                -x &=& \frac{n}{m} - \frac{a}{b}\\
+                x &=& \frac{a}{b} - \frac{n}{m}\\
+                x &=& \frac{am - nb}{bm}\\
+                \frac{am - nb}{bm} && $by definition is a rational number$\\
+                \hline
+                \therefore \frac{a}{b} - x && $cannot be irrational via contradiction above$\\ 
+    		\end{array}
+    	\end{displaymath}
+	\section{}
+    	\begin{displaymath}
+    		\begin{array}{lll}
+            	\abs{x} + \abs{y} \geq \abs{x + y} && $assumption$\\
+    			\abs{n} &=& \binom{n \geq 0 \rightarrow n}{n < 0 \rightarrow (-n)} 
+    		\end{array}
+    	\end{displaymath}
+        \subsubsection{}
+        	\begin{displaymath}
+        		\begin{array}{ll}
+        			x, y \geq 0 \rightarrow \abs{x} + \abs{y}: x + y &\\
+                    x, y \geq 0 \rightarrow x + y \geq 0 &\\
+                    \hline
+                    \therefore x + y = \abs{x + y} & $definition of absolute value$
+        		\end{array}
+        	\end{displaymath}
+        \subsubsection{}
+        	\begin{displaymath}
+        		\begin{array}{ll}
+        			x, y < 0 \rightarrow \abs{x} + \abs{y}: x + y &\\
+                    x, y < 0 \rightarrow x + y < 0 &\\
+                    \hline
+                    \therefore x + y = \abs{x + y} & $definition of absolute value$\\
+        		\end{array}
+        	\end{displaymath}
+        \subsubsection{}
+        	\begin{displaymath}
+        		\begin{array}{ll}
+                	x \geq 0, y < 0 \rightarrow \abs{x + y}: \abs{x - y} &\\
+                    \abs{x - y} \rightarrow x - y $ or $ -(x - y) & $definition of absolute value$\\
+                    x - y < -(x - y) &  $w/ assumption $ x \geq 0 $ or $ y < 0\\
+                    \abs{x} + \abs{y}: x - y &\\
+                    \hline
+                    \therefore \abs{x} + \abs{y} \geq \abs{x + y} & $w/ assumption $ x \geq 0 $ or $ y < 0\\ 
+                \end{array}
+        	\end{displaymath}
+        \subsubsection{}
+       		\begin{displaymath}
+       			\begin{array}{ll}
+       				y \geq 0, x < 0 \rightarrow \abs{x + y}: \abs{- (x) + y} &\\
+                    \abs{-(x) + y} \rightarrow (-x) + y $ or $ -(-(x) + y) & $definition of absolute value$\\
+                    (-x) + y < -((-x) + y) & $w\ assumption $ y \geq 0 $ or $ x < 0\\
+                    \abs{x} + \abs{y}: -(x) + y &\\
+                    \hline
+                    \therefore \abs{x} + \abs{y} \geq \abs{x + y} & $w/ assumption $ y \geq 0 $ or $ x < 0\\ 
+       			\end{array}
+       		\end{displaymath}
+	\section{}
+    	\begin{displaymath}
+    		\begin{array}{rll}
+    			E(x) &=& x $ is even$\\
+                O(x) &=& x $ is odd$\\
+                E(x) &=& \neg O(x)\\
+                O(x) &=& \neg E(x)\\
+                E(x^2 + x + 1) \rightarrow O(x) &&\\
+                \neg O(x) \rightarrow \neg E(x^2 + x + 1) && $start proof by contrapositive$\\
+                E(x) \rightarrow O(x^2 + x + 1) && $definition$\\
+                k = $ some arbitrary int$ && $assumption$\\
+                2k = $ even $ 2k + 1 = $ odd $ && $definition of odd and even$\\
+               	2k^2 + 2k + 1 = (2k^2 + 2k) + 1 &&\\
+                2k^2 + 2k = $ some integer $ + 1 = 2k + 1 && $definition of odd$\\
+                \hline
+                \therefore E(x^2 + x + 1) \rightarrow O(x) && $proof by contrapositive$\\
+    		\end{array}
+    	\end{displaymath}
+	\section{}
+    	\begin{displaymath}
+    		\begin{array}{ll}
+            	3a + 5b = 7k & 3c + 5d = 7k\\
+                3(a + c) + 5(b + d) = 7k & k = some integer\\
+                3a + 3c + 5b + 5d = 7k & $distribute$\\
+                3a + 3b + 3c + 5d = 7k & \\
+                7k + 7k = 7k & $definition$\\
+                7(k + k) = 7k & $distribution$\\
+                k + k = some integer & $definition$\\
+                \hline
+                \therefore 3(a + c) + 5(b+d) = 7k & $valid$\\
+    		\end{array}
+    	\end{displaymath}
+\end{document}

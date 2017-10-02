@@ -143,15 +143,6 @@ public class ArrayOrderedSet<T extends Comparable<T>> implements OrderedSet<T>{
     //O(n)including contains()
     public OrderedSet<T> diff(OrderedSet<T> set){
         OrderedSet<T> orderedSet = new ArrayOrderedSet();
-        /*
-        for(int i = 0; i < set.size(); i++){
-           if(!contains(set.get(i))){
-               if(!orderedSet.contains(set.get(i))){
-                   orderedSet.insert(set.get(i));
-               }
-           }
-        }
-        */
         
         for(int i = 0; i < size; i++){
             if(!set.contains(array[i])){
