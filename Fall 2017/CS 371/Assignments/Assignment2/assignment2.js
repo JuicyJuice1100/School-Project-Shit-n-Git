@@ -27,7 +27,7 @@ var dragonBottom = 0.0;
 var dragonTop = 10.0;
 
 
-var numberOfPoints = Math.random(1000000) + 500000;
+var numberOfPoints = 1000000;
 
 window.onload = function init(){
     canvas = document.getElementById( "gl-canvas" );
@@ -50,7 +50,7 @@ window.onload = function init(){
     var bufferId = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER, bufferId );
     gl.bufferData( gl.ARRAY_BUFFER, flatten(vertices), gl.STATIC_DRAW );
-
+    
 
     var tPosition = gl.getAttribLocation( program, "tPosition" );
     gl.vertexAttribPointer(tPosition, 2, gl.FLOAT, false, 16, 0);
@@ -60,10 +60,18 @@ window.onload = function init(){
     gl.vertexAttribPointer(dPosition, 2, gl.FLOAT, false, 16, 8);
     gl.enableVertexAttribArray( dPosition );    
 
+    var cBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, cBuffer);
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(colors), gl.STATIC_DRAW );
+
     var vColor = gl.getAttribLocation(program, "vColor");
-    gl.vertexAttribPointer(vColor, 4, gl.FLOAT, false, 0, 0);
+    gl.vertexAttribPointer(vColor, 4, gl.FLOAT, false, 32, 0);
     gl.enableVertexAttribArray(vColor);
     
+    var vColor1 = gl.getAttribLocation(program, "vColor1");
+    gl.vertexAttribPointer(vColor1, 4, gl.FLOAT, false, 32, 16);
+    gl.enableVertexAttribArray(vColor1);
+
     projection = gl.getUniformLocation (program, "projection");
     tweenLoc = gl.getUniformLocation(program, "tween");
 
@@ -126,9 +134,9 @@ function generateFractalPoints () {
 
         if(iterations > 20){
             vertices.push(vec2(newTriangleX, newTriangleY ));
-            colors.push(vec4(newTriangleX, newDragonX, newTriangleY, newDragonY));
+            colors.push(vec4(newTriangleX, newDragonX, newTriangleY, Math.random()));
             vertices.push(vec2(newDragonX, newDragonY ));
-            colors.push(vec4(newDragonX, newTriangleX, newDragonY, newTriangleY));
+            colors.push(vec4(newDragonX, newTriangleX, newDragonY, Math.random()));
         }
 
 
