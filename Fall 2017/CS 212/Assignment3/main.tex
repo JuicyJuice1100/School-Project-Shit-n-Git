@@ -40,7 +40,7 @@
             		x = 0 & $assumption$\\
                     P(2(0)^2 + 3(0) + 2) &\\
                     P(2) &\\
-                    2 is prime & \\
+                    2 $ is prime$ & \\
                     \hline
                     \therefore \exists P(2n^2 + 3n + 1) & $Valid (Definition of $\exists$)$\\
             	\end{array}
@@ -52,7 +52,7 @@
                 	$assumption/definition of a rational number$\\
                 \frac{n}{m} = $some rational number where a and b are integers$ && 
                 	$assumption/definition of a rational number$\\
-                x = some irrational number && $assumption$\\
+                x = $ some irrational number $ && $assumption$\\
                 \frac{a}{b} - x &=& \frac{n}{m}\\
                 -x &=& \frac{n}{m} - \frac{a}{b}\\
                 x &=& \frac{a}{b} - \frac{n}{m}\\
@@ -64,7 +64,7 @@
     	\end{displaymath}
 	\section{}
     	\begin{displaymath}
-    		\begin{array}{lll}
+    		\begin{array}{rll}
             	\abs{x} + \abs{y} \geq \abs{x + y} && $assumption$\\
     			\abs{n} &=& \binom{n \geq 0 \rightarrow n}{n < 0 \rightarrow (-n)} 
     		\end{array}
@@ -72,8 +72,8 @@
         \subsubsection{}
         	\begin{displaymath}
         		\begin{array}{ll}
-        			x, y \geq 0 \rightarrow \abs{x} + \abs{y}: x + y &\\
-                    x, y \geq 0 \rightarrow x + y \geq 0 &\\
+        			x, y \geq 0 \Rightarrow \abs{x} + \abs{y}: x + y & $definition of absolute value$\\
+                    x, y \geq 0 \Rightarrow x + y \geq 0 &\\
                     \hline
                     \therefore x + y = \abs{x + y} & $definition of absolute value$
         		\end{array}
@@ -81,34 +81,38 @@
         \subsubsection{}
         	\begin{displaymath}
         		\begin{array}{ll}
-        			x, y < 0 \rightarrow \abs{x} + \abs{y}: x + y &\\
-                    x, y < 0 \rightarrow x + y < 0 &\\
+        			x, y < 0 \Rightarrow \abs{x} + \abs{y}: (-x) + (-y) & $definition of absolute value$\\
+                    (-x) + (-y) = -(x + y) &\\
+                    x, y < 0 \Rightarrow -(x + y) < 0 &\\ 
                     \hline
-                    \therefore x + y = \abs{x + y} & $definition of absolute value$\\
+                    \therefore -(x + y) = \abs{x + y} & $definition of absolute value$\\
         		\end{array}
         	\end{displaymath}
         \subsubsection{}
         	\begin{displaymath}
         		\begin{array}{ll}
-                	x \geq 0, y < 0 \rightarrow \abs{x + y}: \abs{x - y} &\\
-                    \abs{x - y} \rightarrow x - y $ or $ -(x - y) & $definition of absolute value$\\
-                    x - y < -(x - y) &  $w/ assumption $ x \geq 0 $ or $ y < 0\\
-                    \abs{x} + \abs{y}: x - y &\\
+                	x \geq 0, y < 0 \Rightarrow x + (-y) & $definition of absolute value$\\
+                    y < 0 \Rightarrow x + -(-y) \Rightarrow x + y > 0 &\\
+                    x + y > 0 \Rightarrow \abs{x + y} & $definition of absolute value$\\
+                    \abs{x + y} \Rightarrow x + y \geq 0 $ or $ -(x + y) < 0 & $definition of absolute value$\\
+                    \because \abs{x + y} < 0 $ or $ \geq 0 $ and $ \abs{x} + \abs{y} = \abs{x + y} $ and $ \abs{x} + \abs{y} > 0&\\
                     \hline
-                    \therefore \abs{x} + \abs{y} \geq \abs{x + y} & $w/ assumption $ x \geq 0 $ or $ y < 0\\ 
-                \end{array}
+                    \therefore x + (-y) \geq \abs{x + y} &\\
+                \end{array} 
         	\end{displaymath}
-        \subsubsection{}
-       		\begin{displaymath}
-       			\begin{array}{ll}
-       				y \geq 0, x < 0 \rightarrow \abs{x + y}: \abs{- (x) + y} &\\
-                    \abs{-(x) + y} \rightarrow (-x) + y $ or $ -(-(x) + y) & $definition of absolute value$\\
-                    (-x) + y < -((-x) + y) & $w\ assumption $ y \geq 0 $ or $ x < 0\\
-                    \abs{x} + \abs{y}: -(x) + y &\\
+       \subsubsection{}
+        	\begin{displaymath}
+        		\begin{array}{ll}
+                	x < 0, y \geq 0 \Rightarrow (-x) + y & $definition of absolute value$\\
+                    x < 0 \Rightarrow -(-x) + y \Rightarrow x + y > 0 &\\
+                    x + y > 0 \Rightarrow \abs{x + y} & $definition of absolute value$\\
+                    \abs{x + y} \Rightarrow x + y \geq 0 $ or $ -(x + y) < 0 & $definition of absolute value$\\
+                    \because \abs{x + y} < 0 $ or $ \geq 0 $ and $ \abs{x} + \abs{y} = \abs{x + y} $ and $ \abs{x} + \abs{y} > 0&\\
                     \hline
-                    \therefore \abs{x} + \abs{y} \geq \abs{x + y} & $w/ assumption $ y \geq 0 $ or $ x < 0\\ 
-       			\end{array}
-       		\end{displaymath}
+                    \therefore (-x) + y \geq \abs{x + y} &\\
+                \end{array} 
+        	\end{displaymath}
+    Because all the cases of $\abs{x} + \abs{y}$ are either $\geq$ or $=$, $\abs{x} + \abs{y} \geq \abs{x + y}$\\
 	\section{}
     	\begin{displaymath}
     		\begin{array}{rll}
@@ -131,7 +135,7 @@
     	\begin{displaymath}
     		\begin{array}{ll}
             	3a + 5b = 7k & 3c + 5d = 7k\\
-                3(a + c) + 5(b + d) = 7k & k = some integer\\
+                3(a + c) + 5(b + d) = 7k & k = $some integer$\\
                 3a + 3c + 5b + 5d = 7k & $distribute$\\
                 3a + 3b + 3c + 5d = 7k & \\
                 7k + 7k = 7k & $definition$\\
