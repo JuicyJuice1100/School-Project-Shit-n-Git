@@ -1,6 +1,8 @@
 // fractal-by-ifs.js
 // Generate fractal by iterating tranformations taken from an IFS specification
 // The variable triangle is loaded from a JSON representation of the IFS specification
+//@authors: Justin Espiritu and Tyler Bates
+//ggw points are labeled w/ comments
 
 var gl;
 var goingToDragon = true;
@@ -59,11 +61,13 @@ window.onload = function init(){
     var dPosition = gl.getAttribLocation( program, "dPosition")
     gl.vertexAttribPointer(dPosition, 2, gl.FLOAT, false, 16, 8);
     gl.enableVertexAttribArray( dPosition );    
-
+    
+    //creating colors using a color buffer
     var cBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, cBuffer);
     gl.bufferData( gl.ARRAY_BUFFER, flatten(colors), gl.STATIC_DRAW );
-
+    
+    //like the vertices, create an array of colors that alternate color starting position for each fractal
     var vColor = gl.getAttribLocation(program, "vColor");
     gl.vertexAttribPointer(vColor, 4, gl.FLOAT, false, 32, 0);
     gl.enableVertexAttribArray(vColor);
@@ -134,6 +138,7 @@ function generateFractalPoints () {
 
         if(iterations > 20){
             vertices.push(vec2(newTriangleX, newTriangleY ));
+            //using the vertices created, use them to create some interesting colors then push them to a vec4 array which will then color each of the vertices differently
             colors.push(vec4(newTriangleX, newDragonX, newTriangleY, Math.random()));
             vertices.push(vec2(newDragonX, newDragonY ));
             colors.push(vec4(newDragonX, newTriangleX, newDragonY, Math.random()));
