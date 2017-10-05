@@ -28,9 +28,9 @@
                     x = $ an arbitrary integer$ & $Assumption$\\
                     \neg P((x)^2 + 3(x) + 1 & $Universal instantiation$\\
                     \neg P((2x + 1)(x + 1) & $Distribution$\\
-					\therefore \forall \neg P(2n^2 + 3n + 1) & $Is not prime (valid)$\\
+					\neg P((2x + 1)(x + 1) & $because the equation can be a factor of 2 numbers it is not prime$\\
                     \hline
-                    \therefore \exists P(2n^2 + 3n + 1) & $Invalid (Proof by negation)$\\
+                    \therefore \exists P(2n^2 + 3n + 1) & $Invalid (Proof by contradiction)$\\
         		\end{array}
         	\end{displaymath}
             Because the negation is proved to be true the hypothesis is invalid.
@@ -74,8 +74,9 @@
         		\begin{array}{ll}
         			x, y \geq 0 \Rightarrow \abs{x} + \abs{y}: x + y & $definition of absolute value$\\
                     x, y \geq 0 \Rightarrow x + y \geq 0 &\\
+                    x + y = \abs{x + y} & $definition of absolute value$\\
                     \hline
-                    \therefore x + y = \abs{x + y} & $definition of absolute value$
+                    \therefore \abs{x} + \abs{y} = \abs{x + y} & $when $ x $ and $ y \geq 0\\
         		\end{array}
         	\end{displaymath}
         \subsubsection{}
@@ -84,32 +85,43 @@
         			x, y < 0 \Rightarrow \abs{x} + \abs{y}: (-x) + (-y) & $definition of absolute value$\\
                     (-x) + (-y) = -(x + y) &\\
                     x, y < 0 \Rightarrow -(x + y) < 0 &\\ 
+                    -(x + y) = \abs{x + y} & $definition of absolute value$\\
                     \hline
-                    \therefore -(x + y) = \abs{x + y} & $definition of absolute value$\\
+                    \therefore \abs{x} + \abs{y} = \abs{x + y} & $when $ x $ and $ y < 0\\
         		\end{array}
         	\end{displaymath}
         \subsubsection{}
         	\begin{displaymath}
         		\begin{array}{ll}
-                	x \geq 0, y < 0 \Rightarrow x + (-y) & $definition of absolute value$\\
-                    y < 0 \Rightarrow x + -(-y) \Rightarrow x + y > 0 &\\
-                    x + y > 0 \Rightarrow \abs{x + y} & $definition of absolute value$\\
-                    \abs{x + y} \Rightarrow x + y \geq 0 $ or $ -(x + y) < 0 & $definition of absolute value$\\
-                    \because \abs{x + y} < 0 $ or $ \geq 0 $ and $ \abs{x} + \abs{y} = \abs{x + y} $ and $ \abs{x} + \abs{y} > 0&\\
+                	x \geq 0, y < 0 \Rightarrow \abs{x} + \abs{y}: x + (-y) & $definition of absolute value$\\
+                	y < 0 \Rightarrow x + (-y) > x & $because we are subtracting a negative number it makes x bigger$\\
                     \hline
-                    \therefore x + (-y) \geq \abs{x + y} &\\
+                	\abs{x + y} $ can either be $ x + y \geq 0 $ or $ -(x + y) < 0 & $can do this via definition of absolute value$\\
+                    x \geq 0, y < 0 \Rightarrow x + y < x & $because $y < 0, x + $a negative number will be less than x$\\
+                    x + (-y) > x\Rightarrow x +(-y) > x + y & $ because $x + y < x $ we can say $x +(-y) > x + y \\
+                    \hline
+                    -(x + y) = -x - y & $ distribution$\\
+                    x \geq 0 \Rightarrow x > -x & \\
+                    x + (-y) = x - y \Rightarrow x - y > -x - y & \\
+                    \hline
+                    \therefore \abs{x} + \abs{y} > \abs{x + y} & $ when $ x \geq 0, y < 0\\
                 \end{array} 
         	\end{displaymath}
        \subsubsection{}
         	\begin{displaymath}
         		\begin{array}{ll}
-                	x < 0, y \geq 0 \Rightarrow (-x) + y & $definition of absolute value$\\
-                    x < 0 \Rightarrow -(-x) + y \Rightarrow x + y > 0 &\\
-                    x + y > 0 \Rightarrow \abs{x + y} & $definition of absolute value$\\
-                    \abs{x + y} \Rightarrow x + y \geq 0 $ or $ -(x + y) < 0 & $definition of absolute value$\\
-                    \because \abs{x + y} < 0 $ or $ \geq 0 $ and $ \abs{x} + \abs{y} = \abs{x + y} $ and $ \abs{x} + \abs{y} > 0&\\
+                	x < 0, y \geq 0 \Rightarrow \abs{x} + \abs{y}: (-x) + y & $definition of absolute value$\\
+                	x < 0 \Rightarrow (-x) + y > y & $because we are adding a negative, negative number it makes y bigger$\\
                     \hline
-                    \therefore (-x) + y \geq \abs{x + y} &\\
+                	\abs{x + y} $ can either be $ x + y \geq 0 $ or $ -(x + y) < 0 & $can do this via definition of absolute value$\\
+                    x < 0, y \geq 0 \Rightarrow x + y < y & $because x $< 0, y + $a negative number will be less than x$\\
+                    (-x) + y > y\Rightarrow (-x) + y > x + y & $ because $x + y < y $ we can say $ (-x) + y > x + y \\
+                    \hline
+                    -(x + y) = -x - y & $ distribution$\\
+                    y \geq 0, \Rightarrow y > -y &\\
+                    (-x) + y > -x - y &  $because $ y > -y $ adding -x to y will always be greater than (-x) - y, as long as $ y \geq 0\\
+                    \hline
+                    \therefore \abs{x} + \abs{y} > \abs{x + y} & $ when $ x \geq 0, y < 0\\
                 \end{array} 
         	\end{displaymath}
     Because all the cases of $\abs{x} + \abs{y}$ are either $\geq$ or $=$, $\abs{x} + \abs{y} \geq \abs{x + y}$\\
@@ -134,15 +146,16 @@
 	\section{}
     	\begin{displaymath}
     		\begin{array}{ll}
-            	3a + 5b = 7k & 3c + 5d = 7k\\
-                3(a + c) + 5(b + d) = 7k & k = $some integer$\\
-                3a + 3c + 5b + 5d = 7k & $distribute$\\
-                3a + 3b + 3c + 5d = 7k & \\
-                7k + 7k = 7k & $definition$\\
-                7(k + k) = 7k & $distribution$\\
-                k + k = some integer & $definition$\\
+            	3a + 5b = 7m $, where m is some integer$ & 3c + 5d = 7n $, where n is some integer$\\
+                3(a + c) + 5(b + d) = 7z & z = $some integer$\\
+                3a + 3c + 5b + 5d = 7z & $distribute$\\
+                3a + 3b + 3c + 5d = 7z & \\
+                7m + 7n = 7z & $definition$\\
+                7(m + n) = 7z & $distribution$\\
+                m + n = $some integer$ & $integer + integer = some integer$\\
+                7($some integer$) = 7 ($some integer$) &\\ 
                 \hline
-                \therefore 3(a + c) + 5(b+d) = 7k & $valid$\\
+                \therefore 3(a + c) + 5(b+d) = 7z & $valid$\\
     		\end{array}
     	\end{displaymath}
 \end{document}
