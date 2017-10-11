@@ -16,6 +16,7 @@ public class Driver {
         System.out.println("peekLast: " + quack.peekLast());
         System.out.println("pop: " + quack.pop());
         System.out.println("dequeue: " + quack.dequeue());
+        quack.flip();
         for(int i = 0; i < 10; i++){
             quack.insert(i);
         }
@@ -26,7 +27,7 @@ public class Driver {
         System.out.println("size: " + quack.size());
         quack.flip();
         while(quack.size() > 0){
-            System.out.print(quack.pop() + "->");
+            System.out.print(quack.dequeue() + "->");
             System.out.print(quack.size() + "|");
         }
     }

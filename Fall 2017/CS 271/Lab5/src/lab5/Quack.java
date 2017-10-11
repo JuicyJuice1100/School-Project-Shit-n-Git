@@ -18,10 +18,6 @@ public class Quack<T> implements Cloneable{
         private Node<T> prev;
     }
     
-//    public Quack clone() throws CloneNotSupportedException{
-//        return (Quack)super.clone();
-//    }
-    
     Node<T> head;
     Node<T> tail;
     int size;
@@ -34,7 +30,12 @@ public class Quack<T> implements Cloneable{
     }
     
     //O(1)
-    public void insert(T element){
+    public void insert(T element) throws InvalidInputException{
+        
+        if(element == null){
+            throw new InvalidInputException("Invalid Input");
+        }
+        
         if (head == null){
             head = new Node<>(); 
             head.data = element;
@@ -57,9 +58,6 @@ public class Quack<T> implements Cloneable{
             poppedElement = head.data;
             if(size > 1){
                 head = head.next;
-//                if(head == tail){
-//                    tail = head;
-//                }
                 head.prev = null; 
             }
             else{
@@ -95,9 +93,6 @@ public class Quack<T> implements Cloneable{
             poppedElement = tail.data;
             if(size > 1){
                 tail = tail.prev;
-//                if(tail == head){
-//                    head.next = null;
-//                }
                 tail.next = null;
             }
             else{
@@ -109,13 +104,22 @@ public class Quack<T> implements Cloneable{
     }
     
     //O(n)
-    public void flip(){
-        Quack<T> temp = new Quack();
-        while(size > 0){
-            temp.insert(pop());
-        }
-        while(temp.size() > 0){
-            insert(temp.dequeue());
+    public void flip() {
+        if(size != 0){
+            T tempData = head.data;
+            Node<T> currentHead = head, currentTail = tail;
+            int tailIndex = size - 1, headIndex = 0;
+            while(headIndex < tailIndex){
+                tempData = head.data;
+                head.data = tail.data;
+                tail.data = tempData;
+                head = head.next;
+                headIndex++;
+                tail = tail.prev;
+                tailIndex--;
+            }
+        head = currentHead;
+        tail = currentTail;
         }
     }
     
@@ -123,22 +127,14 @@ public class Quack<T> implements Cloneable{
     public int size(){
         return size;
     }
-    
-//    @Override
-//    //O(n)
-//    public String toString(){
-//        try{
-//            Quack<T> clone = (Quack)this.clone(); 
-//        }
-//        catch(CloneNotSupportedException ex){
-//            
-//        }
-//        StringBuilder sb = new StringBuilder("[|");
-//        for(int i = 0; i < size; i++){
-//            sb.append(clone.pop() + "|");
-//        }
-//        sb.append("]");
-//        return sb.toString();
-//    };
+}
+
+class InvalidInputException extends RuntimeException{
+    public InvalidInputException(){
+        
+    }
+    public InvalidInputException(String message) {
+        super(message);
+    }
 }
 
