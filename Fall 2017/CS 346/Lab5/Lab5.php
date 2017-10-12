@@ -11,22 +11,20 @@
     </head>
     <body>
         <div id="phpOutput">
-            <p>
-                Dear <?php echo $_POST["firstName"]; ?>, 
-            </p>
-            <p>
-                Thank you for your note about <?php echo $_POST["subject"]; ?> (see below),
-                which I received at <?php date_default_timezone_set("America/Chicago"); echo date("h:i:s A"); ?> on <?php echo date("Y-m-d"); ?>.
-                I will get back to you at <?php echo $_POST["email"]; ?> as soon as I can.
-            </p>
-            <p>
-                Have a great day!
-            </p>
-            <p>
-                Dr. Nip
-            </p>
+            <?php 
+                $firstName = $_POST[("firstName")];
+                $subject = $_POST[("subject")];
+                $email = $_POST[("email")];
+                $myNotes = $_POST[("myNotes")];
+                $html = "<p>Dear " . htmlspecialchars($firstName) . "</p>
+                <p>Thank you for your note about" . htmlspecialchars($subject) . "(see below), 
+                which I received at " . date_default_timezone_set("America/Chicago") . date("h:i:s A") . 
+                " on " . date("Y-m-d") . " I will get back to you at " . htmlspecialchars($email) . " as soon as I can. 
+                </p><p>Have a great day!</p><p>Dr. Nip</p>";
+                echo $html;
+            ?>
             <p id="phpNotes">
-                Your note: <?php echo $_POST["myNotes"]; ?>
+                Your note: <?php echo htmlspecialchars($myNotes); ?>
             </p>
         </div>
     </body>
