@@ -9,29 +9,25 @@
         <link rel="stylesheet" type="text/css" href="Lab5.css">
     </head>
     <body>
-        <form action="lab5.php" method="POST">
-            <div>
-                <label>Full Name
-                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required/>
-                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required/>
-                </label>
-                <label>Email
-                    <input type="text" id="email" name="email" required/>
-                </label>
-                <label>Student ID Number
-                    <input type="text" id="studentID" name="studentId" required maxlength="7"/>
-                </label>
-                <label>Subject
-                    <select name="subject" size="1">
-                        <option>Advising</option>
-                        <option selected="selected">CS 346</option>
-                        <option>Internship/Practicum</option>
-                        <option>Other</option>
-                    </select>
-                </label>
-                <label>Your Note
-                    <textarea id="myNotes" name="myNotes" rows="5" cols="50"></textarea>
-                </label> 
+        <form action="Lab5.php" method="post">
+            <div id="form">
+                <label for="nameInput">Full Name</label>
+                <input type="text" name="firstName" class="name" placeholder="First Name" required/>
+                <input type="text" name="lastName" class="name" placeholder="Last Name" required/>
+                <label for="emailInput">Email</label>
+                <input type="email" id="emailInput" class="input" name="email" required/>
+                <label for="studentIDInput">Student ID Number</label>
+                <input type="text" id="studentIDInput" class="input" name="studentId" required maxlength="7"/>
+                <label for="subjectSelect">Subject</label>
+                <select id="subjectSelect" class="input" name="subject" size="1">
+                    <option>Advising</option>
+                    <option selected="selected">CS 346</option>
+                    <option>Internship/Practicum</option>
+                    <option>Other</option>
+                </select>
+                <label for="myNotesInput">Your Note</label> 
+                <textarea id="myNotesInput" class="input" name="myNotes" rows="5" cols="50"></textarea>
+                <input id="submitButton" type="submit" value="Send Note"/>
             </div>
         </form>
     </body>
