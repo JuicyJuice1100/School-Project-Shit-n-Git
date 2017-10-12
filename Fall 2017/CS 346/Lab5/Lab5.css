@@ -1,0 +1,20 @@
+form{
+    width: 550px;
+    background: lightgray;
+    border: 1px solid black;
+}
+
+label, input{
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+}
+
+label input, label selection{
+    display: inline-block;
+}
+
+.firstName, .lastName{
+    width: 50%;
+}

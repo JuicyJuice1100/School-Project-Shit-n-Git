@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Justin Espiritu">
+        <meta name="keywords" content="Lab5">
+        <meta name="description" content="CS 346 Lab5">
+        <meta name="date" content="10/11/2017">
+        <link rel="stylesheet" type="text/css" href="Lab5.css">
+    </head>
+    <body>
+        <form action="lab5.php" method="POST">
+            <div>
+                <label>Full Name
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required/>
+                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required/>
+                </label>
+                <label>Email
+                    <input type="text" id="email" name="email" required/>
+                </label>
+                <label>Student ID Number
+                    <input type="text" id="studentID" name="studentId" required maxlength="7"/>
+                </label>
+                <label>Subject
+                    <select name="subject" size="1">
+                        <option>Advising</option>
+                        <option selected="selected">CS 346</option>
+                        <option>Internship/Practicum</option>
+                        <option>Other</option>
+                    </select>
+                </label>
+                <label>Your Note
+                    <textarea id="myNotes" name="myNotes" rows="5" cols="50"></textarea>
+                </label> 
+            </div>
+        </form>
+    </body>
+</html>
