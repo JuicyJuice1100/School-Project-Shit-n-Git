@@ -1,26 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Question Creator</title>
         <meta charset="utf-8">
         <meta name="author" content="Justin Espiritu">
         <meta name="keywords" content="Lab5">
         <meta name="description" content="CS 346 Lab5">
         <meta name="date" content="10/11/2017">
-        <link rel="stylesheet" type="text/css" href="individualProject2.css">
+        <link rel="stylesheet" type="text/css" href="IndividualProject2.css">
+        <!-- <script type="text/javascript" src="IndividualProject2.js"></script> -->
     </head>
     <body>
         <form action="IndividualProject2.php" method="post">
             <div id="form">
                 <label for="questionNumber">Question Number:</label>
-                <select id="questionNumber" class="input" name="questionNumber" size="1" required>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                </select>
+                <input id="questionNumber" class="input" name="questionNumber" size="1" required>
                 <label for="points">Point Value:</label>
                 <input type="number" id="points" class="input" name="points"required/>
                 <label for="chapter">Chapter:</label>
@@ -31,6 +25,17 @@
                 <textarea type="text" id="description" name="description" rows="5" cols="50" required></textarea>
                 <label for="gradingCriteria">Grading Criteria</label> 
                 <textarea id="gradingCriteria" class="input" name="gradingCriteria" rows="5" cols="50" required></textarea>
+                <label for="questionType">Question Type:</label>
+                <select id="questionType" name="questionType" size="1">
+                    <option value="0">true/false</option>
+                    <option value="1">multiple choice/one correct answer</option>
+                    <option value="2">multiple choice/multiple selection</option>
+                    <option value="3">short answer</option>
+                </select>
+                <label for="answers">Answers:</label> 
+                <textarea id="answers" class="input" name="answers" rows="5" cols="50"></textarea>
+                <label for="correctAnswer">Correct Answer:</label>
+                <textarea id="correctAnswer" class="input" name="correctAnswer" rows="5" cols="50" required></textarea>
                 <input id="submitButton" type="submit" value="Create"/>
             </div>
         </form>
