@@ -56,7 +56,7 @@ public class Assignment1{
                 //So user can see postfix expression
                 System.out.println(arrayListEquation.toString());
                 //Answer as double rounded to 2 decimal places
-                System.out.printf("\033[31m%.2f \n", equationInputOutput.EvaluateEquation(arrayListEquation));
+                System.out.printf("\033[31m>>%.2f \n", equationInputOutput.EvaluateEquation(arrayListEquation));
             }
             command = scan.nextLine();
         }
