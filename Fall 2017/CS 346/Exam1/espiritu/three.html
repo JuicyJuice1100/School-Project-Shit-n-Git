@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Justin Espiritu">
+        <meta name="keywords" content="Lab5">
+        <meta name="description" content="CS 346 Lab5">
+        <meta name="date" content="10/11/2017">
+        <link rel="stylesheet" type="text/css" href="two.css">
+    </head>
+    <body>
+        <form action="four.php" method="post">
+            <div id="form">
+                <div id="margin">
+                    <label for="rmin">rmin:</label>
+                    <input type="number" id="rmin" name="rmin"required/>
+                </div>
+                <div id="margin">
+                    <label for="rmax">rmax:</label>
+                    <input type="number" id="rmax" class="input" name="rmax" required/>
+                </div>
+                <div id="margin">
+                    <label for="cmin">cmin:</label>
+                    <input type="number" id="cmin" class="input" name="cmax" required/>
+                </div>
+                <div id="margin">
+                    <label for="cmax">cmax:</label>
+                    <input type="number" id="cmax" class="input" name="cmax" required/>
+                </div>
+                <div id="margin">
+                    <select id="select" class="input" name="expression" size="1">
+                        <option value="+">Addition</option>
+                        <option value="-">Subtraction</option>
+                        <option value="*">Multiplication</option>
+                        <option value="/">Division</option>
+                    </select>
+                </div>
+                <div id="margin">
+                    <input id="submitButton" type="submit" value="Create Table"/>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>
