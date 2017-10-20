@@ -1,0 +1,52 @@
+form{
+    width: 550px;
+    background: lightgray;
+    border: 2px solid black;
+    border-radius: 25px;
+    margin: 0 auto;
+}
+
+#form{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: left;
+    font-weight: bold;
+    align-content: space-between;
+    margin: 20px 15px;
+}
+
+label, input, select, textarea{
+    flex: 1 100%;
+}
+
+label, h1{
+    font-weight: bold;
+    color: black;
+}
+
+
+
+#submitButton{
+    text-align: center;
+    background: lightseagreen;
+    border: none;
+    padding: 8px;
+    color: white;
+    flex: none;
+    width: 100px;
+}
+
+#phpOutput{
+    border: 2px solid black;
+    background: lightgray;
+    width: 550px;
+    margin: 0 auto;
+    color: whitesmoke;
+    padding: 20px;
+}
+
+#phpNotes{
+    display: inline-block;
+    border-top: 2px solid black;
+}

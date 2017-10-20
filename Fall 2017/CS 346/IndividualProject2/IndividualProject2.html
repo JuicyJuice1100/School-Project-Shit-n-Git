@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Justin Espiritu">
+        <meta name="keywords" content="Lab5">
+        <meta name="description" content="CS 346 Lab5">
+        <meta name="date" content="10/11/2017">
+        <link rel="stylesheet" type="text/css" href="individualProject2.css">
+    </head>
+    <body>
+        <form action="IndividualProject2.php" method="post">
+            <div id="form">
+                <label for="questionNumber">Question Number:</label>
+                <select id="questionNumber" class="input" name="questionNumber" size="1" required>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                </select>
+                <label for="points">Point Value:</label>
+                <input type="number" id="points" class="input" name="points"required/>
+                <label for="chapter">Chapter:</label>
+                <input type="number" id="chapter" class="input" name="chapter" step=".01" maxlength="4" required/>
+                <label for="question">Question:</label>
+                <textarea type="text" id="question" name="question" rows="5" cols="50" required></textarea>
+                <label for="description">Description</label>
+                <textarea type="text" id="description" name="description" rows="5" cols="50" required></textarea>
+                <label for="gradingCriteria">Grading Criteria</label> 
+                <textarea id="gradingCriteria" class="input" name="gradingCriteria" rows="5" cols="50" required></textarea>
+                <input id="submitButton" type="submit" value="Create"/>
+            </div>
+        </form>
+    </body>
+</html>
