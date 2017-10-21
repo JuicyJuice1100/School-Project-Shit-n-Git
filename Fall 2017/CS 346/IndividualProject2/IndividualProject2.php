@@ -30,7 +30,9 @@
                     $html .= "<input type=\"radio\" id=\"false\" name=\"answer\">";
                     $html .= "</div>";
                 }
-                else if(intval($type) === 3){}
+                else if(intval($type) === 3){
+                    
+                }
                 else{
                     $html .= "<label for=\"answers\">Answers:</label>";
                     $html .= "<p id=\"answers\">".$answers."</p>"; 

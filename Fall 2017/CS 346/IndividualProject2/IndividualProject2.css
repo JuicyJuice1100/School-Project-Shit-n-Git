@@ -53,3 +53,20 @@ label, h1{
 input, select, textarea{
     margin-bottom: 15px;
 }
+
+.radio, .checkbox{
+    display: block;
+}
+
+img{
+    max-height: 200px;
+    max-width: 300px;
+}
+
+#response{
+    margin: 15px 0px;
+}
+
+#multipleChoice{
+    width: 100%;
+}
