@@ -16,6 +16,8 @@
         <meta name="keywords" content="IndividualProject2">
         <meta name="description" content="CS 346 IndividualProject2">
         <meta name="date" content="10/19/2017">
+        <link rel="stylesheet" type="text/css" href="IndividualProject2.css">
+        <!-- this is for testing when it returns html back -->
         <link rel="stylesheet" type="text/css" href="../IndividualProject2.css">
         <?php 
             function answers($type){
@@ -73,7 +75,7 @@
             }
 
             function image($image){
-                $html = "\t\t\t<img src=\"./Images/".$image."\" alt=\"".$image."\">\n";
+                $html = "\t\t\t<img src=\"./files/".$image."\" alt=\"".$image."\">\n";
                 return $html;
             }
         ?>
@@ -96,7 +98,7 @@
 </html>
 
 <?php                 
-    $file = fopen("Q".$questionNumber.".html", "c") or die("Cannot Open File");
+    $file = fopen("../Q".$questionNumber.".html", "c") or die("Cannot Open File");
     fwrite($file, ob_get_flush());
     fclose($file); 
 ?>

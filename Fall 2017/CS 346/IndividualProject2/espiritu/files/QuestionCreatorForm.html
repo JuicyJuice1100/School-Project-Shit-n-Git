@@ -7,9 +7,8 @@
         <meta name="keywords" content="Lab5">
         <meta name="description" content="CS 346 Lab5">
         <meta name="date" content="10/11/2017">
-        <link rel="stylesheet" type="text/css" href="IndividualProject2.css">
+        <link rel="stylesheet" type="text/css" href="..\IndividualProject2.css">
         <script src="https://www.w3schools.com/lib/w3.js"></script>
-        <!-- <script type="text/javascript" src="IndividualProject2.js"></script> -->
         <script>
             function addForm() {
                 var select = document.getElementById("questionType").value;
@@ -24,14 +23,14 @@
         </script>
     </head>
     <body>
-        <form action="IndividualProject2QuestionCreator.php" method="post">
+        <form action="QuestionCreator.php" method="post">
             <div id="form">
                 <label for="questionNumber">Question Number:</label>
                 <input type="number" id="questionNumber" class="input" name="questionNumber" size="1" required>
                 <label for="points">Point Value:</label>
                 <input type="number" id="points" class="input" name="points"required/>
                 <label for="chapter">Chapter:</label>
-                <input type="number" id="chapter" class="input" name="chapter" step=".01" maxlength="4" required/>
+                <input type="text" id="chapter" class="input" name="chapter" required/>
                 <label for="question">Question:</label>
                 <textarea type="text" id="question" name="question" rows="5" cols="50" required></textarea>
                 <label for="questionType">Question Type:</label>
@@ -42,6 +41,8 @@
                     <option value="3">short answer</option>
                 </select>
                 <div id="multipleChoice" w3-include-html="multipleChoice.html"></div>
+                <label for="uploadedImage">Upload Image:</label>
+                <input type="file" id="uploadedImage" name="uploadedImage" accept="image/*">
                 <input id="submitButton" type="submit" value="Create"/>
             </div>
         </form>
