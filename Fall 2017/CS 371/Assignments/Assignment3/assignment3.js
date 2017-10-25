@@ -28,10 +28,15 @@ var modelViewMatrixLoc, projectionMatrixLoc;
 var eye;			// Established by radius, theta, phi as we move
 
 const black = vec4(0.0, 0.0, 0.0, 1.0);
-const red = vec4(Math.random(), Math.random(), Math.random(), 1.0);
+const random = vec4(Math.random(), Math.random(), Math.random(), 1.0);
 
 const at = vec3(0.0, 0.0, 0.0);
 const up = vec3(0.0, 1.0, 0.0);
+
+var rotation = 0.0;
+var ballRotation = 0.0;
+var x = 0.0;
+var y = 1.0;
 
 ////////////////// Object 1 vertex information //////////////////  
 
@@ -107,11 +112,9 @@ window.onload = function init() {
     
     pointsArray1 = pointsArray1.concat(mobiusBandVerticies);
     
-    debugger;
     for (var i = 0; i < buckyBall.length; i++) {
         pointsArray1 = pointsArray1.concat(buckyBall[i]);
     }
-    debugger;
 
     gl.bufferData( gl.ARRAY_BUFFER, flatten(pointsArray1), gl.STATIC_DRAW );
     
@@ -145,8 +148,10 @@ var render = function() {
     radius*Math.cos(theta));
 
     modelViewMatrix = lookAt(eye, at , up);
-    modelViewMatrix = mult(modelViewMatrix, translate(-1.5,0.0,0.0));
+    modelViewMatrix = mult(modelViewMatrix, rotateY(-rotation));
+    modelViewMatrix = mult(modelViewMatrix, translate(0.0,0.0,1.5));
     modelViewMatrix = mult(modelViewMatrix, scalem(0.5,0.5,0.5));
+    modelViewMatrix = mult(modelViewMatrix, rotateY(rotation));
     projectionMatrix = perspective(fovy, aspect, near, far);
 
     gl.uniformMatrix4fv( modelViewMatrixLoc, false, flatten(modelViewMatrix) );
@@ -162,20 +167,68 @@ for(var i=0; i<mobiusBandVerticies.length; i+=4) {
     gl.drawArrays( gl.LINE_LOOP, i, 4 );
     bufferPointer += mobiusBandVerticies[i].length;
 }
-    debugger;
     // The BuckyBall
 
     
     modelViewMatrix = lookAt(eye, at , up);
-    modelViewMatrix = mult(modelViewMatrix, translate(0.75,0.0,0.0));
-    modelViewMatrix = mult(modelViewMatrix, scalem(0.03,0.03,0.03));
+    modelViewMatrix = mult(modelViewMatrix, rotateY(rotation));
+    modelViewMatrix = mult(modelViewMatrix, translate(0, Math.cos(y) , -1.5));
+    modelViewMatrix = mult(modelViewMatrix, scalem(0.01,0.01,0.01));
+    modelViewMatrix = mult(modelViewMatrix, rotateX(-ballRotation));
+    modelViewMatrix = mult(modelViewMatrix, rotateZ(ballRotation));
     projectionMatrix = perspective(fovy, aspect, near, far);
 
     gl.uniformMatrix4fv( modelViewMatrixLoc, false, flatten(modelViewMatrix) );
     gl.uniformMatrix4fv( projectionMatrixLoc, false, flatten(projectionMatrix) );
     
-    bufferPointer = 2500;
     // Draw buckyBall
+    for (var i = 0; i < buckyBall.length - 12; i++){
+        gl.uniform4fv(gl.getUniformLocation(program, "fColor"), flatten(vec4(1.0, 1.0, 1.0, 1.0)));
+        gl.drawArrays( gl.TRIANGLE_FAN, bufferPointer, buckyBall[i].length);
+        gl.uniform4fv(gl.getUniformLocation(program, "fColor"), flatten(vec4(0.0, 0.0, 0.0, 1.0)));
+        gl.drawArrays( gl.LINE_LOOP, bufferPointer, buckyBall[i].length);
+        bufferPointer += buckyBall[i].length;
+    }
+
+    for(var i = 20; i < 32; i++){
+        gl.uniform4fv(gl.getUniformLocation(program, "fColor"), flatten(vec4(Math.random(), Math.random(), Math.random(), 1.0)));
+        gl.drawArrays( gl.TRIANGLE_FAN, bufferPointer, buckyBall[i].length);
+        bufferPointer += buckyBall[i].length;
+    }
+
+    bufferPointer = 0;
+
+    modelViewMatrix = lookAt(eye, at , up);
+    modelViewMatrix = mult(modelViewMatrix, rotateY(rotation));
+    modelViewMatrix = mult(modelViewMatrix, translate(0.0,0.0,1.5));
+    modelViewMatrix = mult(modelViewMatrix, scalem(0.5,0.5,0.5));
+    modelViewMatrix = mult(modelViewMatrix, rotateY(-rotation));
+    projectionMatrix = perspective(fovy, aspect, near, far);
+
+    gl.uniformMatrix4fv( modelViewMatrixLoc, false, flatten(modelViewMatrix) );
+    gl.uniformMatrix4fv( projectionMatrixLoc, false, flatten(projectionMatrix) );
+
+    // draw each quad as two filled red triangles
+    // and then as two black line loops
+
+    for(var i=0; i<mobiusBandVerticies.length; i+=4) { 
+        gl.uniform4fv(gl.getUniformLocation(program, "fColor"), flatten(vec4(Math.random(), Math.random(), Math.random(), 1.0)));
+        gl.drawArrays( gl.TRIANGLE_FAN, i, 4 );
+        gl.uniform4fv(gl.getUniformLocation(program, "fColor"), flatten(black));
+        gl.drawArrays( gl.LINE_LOOP, i, 4 );
+        bufferPointer += mobiusBandVerticies[i].length;
+    }
+    modelViewMatrix = lookAt(eye, at , up);
+    modelViewMatrix = mult(modelViewMatrix, rotateY(-rotation));
+    modelViewMatrix = mult(modelViewMatrix, translate(0, Math.sin(y) , -1.5));
+    modelViewMatrix = mult(modelViewMatrix, scalem(0.01,0.01,0.01));
+    modelViewMatrix = mult(modelViewMatrix, rotateX(ballRotation));
+    modelViewMatrix = mult(modelViewMatrix, rotateZ(-ballRotation));
+    projectionMatrix = perspective(fovy, aspect, near, far);
+
+    gl.uniformMatrix4fv( modelViewMatrixLoc, false, flatten(modelViewMatrix) );
+    gl.uniformMatrix4fv( projectionMatrixLoc, false, flatten(projectionMatrix) );
+
     for (var i = 0; i < buckyBall.length - 12; i++){
         gl.uniform4fv(gl.getUniformLocation(program, "fColor"), flatten(vec4(Math.random(), Math.random(), Math.random(), 1.0)));
         gl.drawArrays( gl.TRIANGLE_FAN, bufferPointer, buckyBall[i].length);
@@ -184,6 +237,9 @@ for(var i=0; i<mobiusBandVerticies.length; i+=4) {
         bufferPointer += buckyBall[i].length;
     }
 
+    rotation += 1;
+    ballRotation += 45;
+    y -= .2;
     bufferPointer = 0;
     requestAnimFrame(render);
 };
