@@ -1,4 +1,7 @@
-
+/*
+* @author: Justin Espiritu and Tyler Bates
+GGW points are labeled with GGW comments
+*/
 var canvas;
 var gl;
 var program;
@@ -94,9 +97,9 @@ window.onload = function init() {
     gl.clearColor( 0.0, 0.0, 0.0, 1.0 );
     gl.enable(gl.DEPTH_TEST);
     
-    // gl.depthFunc(gl.LEQUAL);
-    // gl.enable(gl.POLYGON_OFFSET_FILL);
-    // gl.polygonOffset(1.0, 2.0);
+    gl.depthFunc(gl.LEQUAL);
+    gl.enable(gl.POLYGON_OFFSET_FILL);
+    gl.polygonOffset(1.0, 2.0);
    
     //
     //  Load shaders and initialize attribute buffers
@@ -147,6 +150,8 @@ var render = function() {
     radius*Math.sin(theta)*Math.sin(phi),
     radius*Math.cos(theta));
 
+    //GGW translate away from the orgin on the z axis to have the so that the mobius strip will also rotate along with the 
+    // bucky ball
     modelViewMatrix = lookAt(eye, at , up);
     modelViewMatrix = mult(modelViewMatrix, rotateY(-rotation));
     modelViewMatrix = mult(modelViewMatrix, translate(0.0,0.0,1.5));
@@ -157,19 +162,18 @@ var render = function() {
     gl.uniformMatrix4fv( modelViewMatrixLoc, false, flatten(modelViewMatrix) );
     gl.uniformMatrix4fv( projectionMatrixLoc, false, flatten(projectionMatrix) );
 
-// draw each quad as two filled red triangles
-// and then as two black line loops
-
-for(var i=0; i<mobiusBandVerticies.length; i+=4) { 
-    gl.uniform4fv(gl.getUniformLocation(program, "fColor"), flatten(vec4(Math.random(), Math.random(), Math.random(), 1.0)));
-    gl.drawArrays( gl.TRIANGLE_FAN, i, 4 );
-    gl.uniform4fv(gl.getUniformLocation(program, "fColor"), flatten(black));
-    gl.drawArrays( gl.LINE_LOOP, i, 4 );
-    bufferPointer += mobiusBandVerticies[i].length;
-}
+    //GGW we wanted to make the mobius strip look like rainbow road from mario kart 64 so we made the colors random
+    for(var i=0; i<mobiusBandVerticies.length; i+=4) { 
+        gl.uniform4fv(gl.getUniformLocation(program, "fColor"), flatten(vec4(Math.random(), Math.random(), Math.random(), 1.0)));
+        gl.drawArrays( gl.TRIANGLE_FAN, i, 4 );
+        gl.uniform4fv(gl.getUniformLocation(program, "fColor"), flatten(black));
+        gl.drawArrays( gl.LINE_LOOP, i, 4 );
+        bufferPointer += mobiusBandVerticies[i].length;
+    }
     // The BuckyBall
 
-    
+    //GGW to make the ball rotate on the same axis as the mobius strip.  We also wanted to make the ball have top spin
+    // so we added rotate before the translate
     modelViewMatrix = lookAt(eye, at , up);
     modelViewMatrix = mult(modelViewMatrix, rotateY(rotation));
     modelViewMatrix = mult(modelViewMatrix, translate(0, Math.cos(y) , -1.5));
@@ -181,6 +185,7 @@ for(var i=0; i<mobiusBandVerticies.length; i+=4) {
     gl.uniformMatrix4fv( modelViewMatrixLoc, false, flatten(modelViewMatrix) );
     gl.uniformMatrix4fv( projectionMatrixLoc, false, flatten(projectionMatrix) );
     
+
     // Draw buckyBall
     for (var i = 0; i < buckyBall.length - 12; i++){
         gl.uniform4fv(gl.getUniformLocation(program, "fColor"), flatten(vec4(1.0, 1.0, 1.0, 1.0)));
@@ -189,7 +194,7 @@ for(var i=0; i<mobiusBandVerticies.length; i+=4) {
         gl.drawArrays( gl.LINE_LOOP, bufferPointer, buckyBall[i].length);
         bufferPointer += buckyBall[i].length;
     }
-
+    //GGW to make sure people don't have "seizures", we only made the pentagons random colors and not the whole buckyball
     for(var i = 20; i < 32; i++){
         gl.uniform4fv(gl.getUniformLocation(program, "fColor"), flatten(vec4(Math.random(), Math.random(), Math.random(), 1.0)));
         gl.drawArrays( gl.TRIANGLE_FAN, bufferPointer, buckyBall[i].length);
@@ -198,6 +203,8 @@ for(var i=0; i<mobiusBandVerticies.length; i+=4) {
 
     bufferPointer = 0;
 
+    //GGW because one wasn't enough we wanted to make two buckyballs and mobius strips
+    // to differentiate this mobius stip we had it rotate the other way
     modelViewMatrix = lookAt(eye, at , up);
     modelViewMatrix = mult(modelViewMatrix, rotateY(rotation));
     modelViewMatrix = mult(modelViewMatrix, translate(0.0,0.0,1.5));
@@ -218,6 +225,8 @@ for(var i=0; i<mobiusBandVerticies.length; i+=4) {
         gl.drawArrays( gl.LINE_LOOP, i, 4 );
         bufferPointer += mobiusBandVerticies[i].length;
     }
+
+    //GGW to help differentiate this from the other buckyball we had it spin and rotate in the opposite direction
     modelViewMatrix = lookAt(eye, at , up);
     modelViewMatrix = mult(modelViewMatrix, rotateY(-rotation));
     modelViewMatrix = mult(modelViewMatrix, translate(0, Math.sin(y) , -1.5));
@@ -229,6 +238,8 @@ for(var i=0; i<mobiusBandVerticies.length; i+=4) {
     gl.uniformMatrix4fv( modelViewMatrixLoc, false, flatten(modelViewMatrix) );
     gl.uniformMatrix4fv( projectionMatrixLoc, false, flatten(projectionMatrix) );
 
+    //GGW to also help differentiate from the other we made the hexagons on this buckyball random colors to induce "seizures"
+    // we also thought it was cool to have the pentagon missing so we just didn't drawthose so you can see through this buckyball
     for (var i = 0; i < buckyBall.length - 12; i++){
         gl.uniform4fv(gl.getUniformLocation(program, "fColor"), flatten(vec4(Math.random(), Math.random(), Math.random(), 1.0)));
         gl.drawArrays( gl.TRIANGLE_FAN, bufferPointer, buckyBall[i].length);
