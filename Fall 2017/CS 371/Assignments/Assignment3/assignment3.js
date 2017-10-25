@@ -43,11 +43,6 @@ var y = 1.0;
 
 ////////////////// Object 1 vertex information //////////////////  
 
-// numVerticesObj1, pointsArray1, vertices1, coordsForObj1 are all
-// used to generate the vertex information for "Object 1".  In the
-// assignment, you are required to make this object a more interesting
-// mathematically defined object such as the sombrero surface or
-// Moebius band
 
 var bufferPointer = 0;
 
@@ -107,11 +102,10 @@ window.onload = function init() {
     program = initShaders( gl, "vertex-shader", "fragment-shader" );
     gl.useProgram( program );
     
-    coordsForObj1(); // This will probably change once you finalize Object 1
+    coordsForObj1(); 
     
     var vBuffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER, vBuffer );
-    //gl.bufferData( gl.ARRAY_BUFFER, flatten(pointsArray1), gl.STATIC_DRAW );
     
     pointsArray1 = pointsArray1.concat(mobiusBandVerticies);
     
