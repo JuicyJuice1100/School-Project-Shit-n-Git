@@ -165,6 +165,7 @@ for(var i=0; i<mobiusBandVerticies.length; i+=4) {
     debugger;
     // The BuckyBall
 
+    
     modelViewMatrix = lookAt(eye, at , up);
     modelViewMatrix = mult(modelViewMatrix, translate(0.75,0.0,0.0));
     modelViewMatrix = mult(modelViewMatrix, scalem(0.03,0.03,0.03));
