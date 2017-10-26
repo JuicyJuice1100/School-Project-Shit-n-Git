@@ -212,7 +212,7 @@ public class MyBST<T extends Comparable<T>>{
             return count;
         }
         
-        public int inBetween(MyNode<T> temp, T low, T high){
+        private int inBetween(MyNode<T> temp, T low, T high){
             int count = 0;
             if (temp!=null){
                 count += inBetween(temp.left, low, high);
@@ -240,7 +240,7 @@ public class MyBST<T extends Comparable<T>>{
             return count;
         }
         
-        public int removeLessThan(MyNode<T> temp, MyNode<T> parent, T element){
+        private int removeLessThan(MyNode<T> temp, MyNode<T> parent, T element){
             int count = 0;
             if(temp!=null){
                 count += removeLessThan(temp.left, temp, element);

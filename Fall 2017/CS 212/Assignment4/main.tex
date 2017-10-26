@@ -1,0 +1,72 @@
+\title{Assignment 4}
+\author{Justin Espiritu}
+\documentclass[letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{commath}
+\usepackage{fancyhdr}
+\usepackage[a4paper, margin=1in]{geometry}
+\pagenumbering{gobble}
+\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand{\thesubsection}{\alph{subsection})}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Justin Espiritu}
+\rhead{Assignment 4}
+\begin{document}
+	\section{}
+    	\subsection{}
+        	Not one-to-one: $f(-2) = 4$ and $f(2) = 4$ \\
+            Not onto: if x is negative such as, $-1$, $x^2$ cannot reach a negative
+        \subsection{}
+        	Both one-to-one and onto
+        \subsection{}
+        	Is One-to-one \\
+            Not onto: the number 3 cannot be reached
+	\section{}
+    	\subsection{}
+        	Is one-to-one \\
+            Not onto: \{$0000, 0100, 0110, 0010, 1111, 1011, 1001, 1101$\}
+        \subsection{}
+        	Not one-to-one: $g(010) = 010$ and $g(011) = 010$ \\
+            Is onto
+        \subsection{}
+        	Is a bijection: $f^{-1}(x) =$ the reverse of x\\
+            Example: $f^{-1}(100) = 001$
+        \subsection{}
+        	Is a bijection: $f^{-1}(x) =$ copy the first 3 bits, reverse those bits, then add then to the original bits, x\\
+            Example: $f^{-1}(1101) = 1101011$, we copy the fist 3 bits $(110)$, reverse them, $(011)$, then add them to the original $1101011$ 
+    \section{}
+    	No they are not a bijection.  For them to be a bijection the cardinality of both functions must be the same, by definition of a bijection.  \\
+       	Set for first function: $\{00, 10, 11, 01\}$ \\
+        Set for second function: $\{000, 010, 001, 100, 101, 110, 011, 111\}$ \\
+        As stated above the cardinalities are not the same, therefore it cannot be a bijection.
+    \section{}
+    	\subsection{}
+            Assume $|N| = |F|$ \\
+            Using the given $f: N \rightarrow \{0, 1\}$ we can represent any Natural Number using 0's or 1's\\
+            With that we can represent Natural Numbers in the following manner \\
+            x is a natural number; a can either be 0 or 1; $i$ is some number \\
+            \begin{displaymath}
+                \begin{array}{lll}
+                    x_1 & = & a_{11}a_{12}a_{13}a_{14}...a_{1i}\\
+                    x_2 & = & a_{21}a_{22}a_{23}a_{24}...a_{2i}\\
+                    x_3 & = & a_{31}a_{32}a_{33}a_{34}...a_{3i}\\
+                    x_4 & = & a_{41}a_{42}a_{43}a_{44}...a_{4i}\\
+                    ... & = & ... \\
+                    x_i & = & a_{i1}a_{i2}a_{i3}a_{i4}...a_{ii}\\
+                \end{array}
+            \end{displaymath}
+            let y = $a_{11}a_{22}a_{33}a_{44}...a_{ii}$, which will be represented as y = $e_1 e_2 e_3 e_4 ... e_i$ \\
+            so by definition $e_i = a_{ii}$\\
+            y is a natural number, therefore $y\epsilon N \Rightarrow y = x_i$ meaning $y$ is a natural number, $x_i$\\
+            this is a contradiction, as $y$ cannot equal both $e_1 e_2 e_3 e_4 ... e_i$ and $x_i$ \\
+            Therefore $|N| = |F|$ must be true\\
+		\subsection{}
+      		$|\mathcal{P}(N)| > |N|$ \\
+            This is proven by the answer in part a of question 4, we proved that $|N| \neq |F|$.  With this we showed that the every natural number cannot
+            represent itself which means that, by definition of a Powerset: all subsets of a set or in this case all sets of natural numbers, has to be greater 			than the cardinality of natural numbers.  
+\end{document}
