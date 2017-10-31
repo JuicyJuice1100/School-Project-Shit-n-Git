@@ -194,29 +194,7 @@ public class MyTreeSet<T extends Comparable<T>>{
     }
 
 //////////////////////////////////////////////////////////
-    public static void main(String args[]){
-        MyTreeSet<Integer> tree = new MyTreeSet<>();
-        tree.insert(7);
-        tree.insert(10);
-        tree.insert(11);
-        tree.insert(15);
-        tree.insert(20);
-        tree.insert(30);
-        tree.insert(40);
 
-        tree.inorder();
-        tree.levelTraverse();
-        tree.checkBalance();
-        ///*
-        tree.remove(7); //node with no children
-        tree.remove(15); //node with one child
-        tree.remove(10); //interior node with two children, and a node with no children
-        tree.remove(20); //root removal and node with 2 children, node with children
-        //*/
-        tree.inorder();
-        tree.levelTraverse();
-        tree.checkBalance();
-    }
 
 
 ///////////////////////////////////////////////////////////
@@ -268,21 +246,132 @@ public class MyTreeSet<T extends Comparable<T>>{
         if(root == null){
             return null;
         }
+        return higher(root, element);
+    }
+    
+    private T higher(MyNode<T> temp, T element){
+        int comparable = element.compareTo(temp.data);
+        if(temp != null){
+            if(comparable < 0){
+                if(temp.left == null || element.compareTo(temp.left.data) > 0){
+                    return temp.data;
+                }
+                return higher(temp.left, element);
+            }
+            else if(comparable == 0){
+                if(temp.right != null){
+                    return higher(temp.right, element); 
+                }
+            }
+            else{
+                if(temp.right != null){
+                    return higher(temp.right,element);
+                }
+            }
+        }
+        return null;
     }
     
     public T lower(T element){
-        
+        if(root == null){
+            return null;
+        }
+        return lower(root, element);
+    }
+    
+    private T lower(MyNode<T> temp, T element){
+        int comparable = element.compareTo(temp.data);
+        if(temp != null){
+            if(comparable > 0){
+                if(temp.right == null || element.compareTo(temp.right.data) < 0){
+                    return temp.data;
+                }
+                return lower(temp.right, element);
+            }
+            else if(comparable == 0){
+                if(temp.left != null){
+                    return lower(temp.left, element); 
+                }
+            }
+            else{
+                if(temp.left != null){
+                    return lower(temp.left,element);
+                }
+            }
+        }
+        return null;
     }
     
     public MyTreeSet<T> tailSet(T fromElement){
-        
+        if(root == null){
+            return null;
+        }
+        MyTreeSet<T> tailSet = new MyTreeSet();
+        return tailSet(tailSet, root, fromElement);
+    }
+    
+    private MyTreeSet<T> tailSet(MyTreeSet<T> tailSet, MyNode<T> temp, T fromElement){
+        int comparable = fromElement.compareTo(temp.data);
+        if(temp != null){
+            if(comparable == 0){
+                tailSet(tailSet, temp.right, fromElement);
+                tailSet.insert(temp.data);
+            }
+            else if(comparable < 0){
+                createSet(tailSet, temp);
+                return tailSet;
+            }
+            else{
+                return tailSet(tailSet, temp.left, fromElement);
+            }
+        }
+        return tailSet;
+    }
+    
+    private void createSet(MyTreeSet<T> set, MyNode<T> temp){
+        if(temp != null){
+            createSet(set, temp.left);
+            set.insert(temp.data);
+            createSet(set, temp.right);
+        }
     }
     
     public MyTreeSet<T> headSet(T toElement){
-        
+        if(root == null){
+            return null;
+        }
+        MyTreeSet<T> headSet = new MyTreeSet();
+        return headSet(headSet, root, toElement);
     }
     
+    private MyTreeSet<T> headSet(MyTreeSet<T> headSet, MyNode<T> temp, T toElement){
+       int comparable = toElement.compareTo(temp.data);
+       if(temp != null){
+           if(comparable > 0){
+               createSet(headSet, temp);
+           }
+           else{
+               headSet(headSet, temp.left, toElement);
+           }
+       }
+       return headSet;
+    }
+    
+    @Override
     public String toString(){
-        
+        if(root == null){
+            return null;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        toString(stringBuilder, root);
+        return stringBuilder.toString();
+    }
+    
+    private void toString(StringBuilder stringBuilder, MyNode<T> temp){
+        if(temp != null){
+            toString(stringBuilder, temp.left);
+            stringBuilder.append(temp.data);
+            toString(stringBuilder, temp.right);
+        }
     }
 }
