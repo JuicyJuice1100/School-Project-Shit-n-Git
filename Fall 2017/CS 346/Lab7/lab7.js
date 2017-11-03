@@ -134,11 +134,14 @@ function process_click(tile) {
    tiles to fill the board using the current value of N
 */
 function clearAndRefillBoard() {
+  var boardNode = document.getElementById("board");
   board = [ null ];
   blank.row = 0;
   blank.col = 0;
   N = document.getElementById("N").value;
-  document.getElementById("board").innerText = "";
+  while (boardNode.hasChildNodes()){
+    boardNode.removeChild(boardNode.lastChild);
+  }
 }
 
 /* update the value of the global N, call the previous function, and finally
@@ -157,7 +160,6 @@ function initialize_tile_positions() {
     block.id = i;
     block.className = "tile";
     block.onclick = "process_click(this)";
-    // var node = document.createTextNode("<div id=\"" + i + "\" class=\"tile\">" + i + "</div>");
     block.appendChild(node);
     document.getElementById("board").appendChild(block);
     board = board.concat(block);
