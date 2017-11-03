@@ -220,6 +220,7 @@ public class MyTreeSet<T extends Comparable<T>>{
         return height(temp);
     }
     
+    //O(log n) 
     public T first(){
         MyNode<T> temp = root;
         if(temp == null){
@@ -231,6 +232,7 @@ public class MyTreeSet<T extends Comparable<T>>{
         return temp.data;
     }
     
+    //O(log n)
     public T last(){
         MyNode<T> temp = root;
         if(temp == null){
@@ -242,6 +244,7 @@ public class MyTreeSet<T extends Comparable<T>>{
         return temp.data;
     }
     
+    //O(log n) with the private function higher
     public T higher(T element){
         if(root == null){
             return null;
@@ -249,6 +252,7 @@ public class MyTreeSet<T extends Comparable<T>>{
         return higher(root, element);
     }
     
+    //O(log n)
     private T higher(MyNode<T> temp, T element){
         int comparable = element.compareTo(temp.data);
         if(temp != null){
@@ -272,6 +276,7 @@ public class MyTreeSet<T extends Comparable<T>>{
         return null;
     }
     
+    //O(log n) with the private function lower
     public T lower(T element){
         if(root == null){
             return null;
@@ -279,6 +284,7 @@ public class MyTreeSet<T extends Comparable<T>>{
         return lower(root, element);
     }
     
+    //O(log n)
     private T lower(MyNode<T> temp, T element){
         int comparable = element.compareTo(temp.data);
         if(temp != null){
@@ -302,6 +308,7 @@ public class MyTreeSet<T extends Comparable<T>>{
         return null;
     }
     
+    //O(log n) witht he private function tailSet
     public MyTreeSet<T> tailSet(T fromElement){
         if(root == null){
             return null;
@@ -310,6 +317,7 @@ public class MyTreeSet<T extends Comparable<T>>{
         return tailSet(tailSet, root, fromElement);
     }
     
+    //O(log n) + O(n) = O(log n)
     private MyTreeSet<T> tailSet(MyTreeSet<T> tailSet, MyNode<T> temp, T fromElement){
         int comparable = fromElement.compareTo(temp.data);
         if(temp != null){
@@ -328,6 +336,7 @@ public class MyTreeSet<T extends Comparable<T>>{
         return tailSet;
     }
     
+    //O(n)
     private void createSet(MyTreeSet<T> set, MyNode<T> temp){
         if(temp != null){
             createSet(set, temp.left);
@@ -336,6 +345,7 @@ public class MyTreeSet<T extends Comparable<T>>{
         }
     }
     
+    //O(log n) with the private function headSet
     public MyTreeSet<T> headSet(T toElement){
         if(root == null){
             return null;
@@ -344,6 +354,7 @@ public class MyTreeSet<T extends Comparable<T>>{
         return headSet(headSet, root, toElement);
     }
     
+    //O(log n)
     private MyTreeSet<T> headSet(MyTreeSet<T> headSet, MyNode<T> temp, T toElement){
        int comparable = toElement.compareTo(temp.data);
        if(temp != null){
@@ -358,6 +369,7 @@ public class MyTreeSet<T extends Comparable<T>>{
     }
     
     @Override
+    //O(n) with the big O of the private toString function
     public String toString(){
         if(root == null){
             return null;
@@ -367,10 +379,11 @@ public class MyTreeSet<T extends Comparable<T>>{
         return stringBuilder.toString();
     }
     
+    //O(n)
     private void toString(StringBuilder stringBuilder, MyNode<T> temp){
         if(temp != null){
             toString(stringBuilder, temp.left);
-            stringBuilder.append(temp.data);
+            stringBuilder.append(temp.data + " ");
             toString(stringBuilder, temp.right);
         }
     }
