@@ -12,42 +12,27 @@ var num_shuffle_steps = 10;  // number of random moves when shuffling board
 
 /* return true iff the given tile is directly to the right of the blank */
 function is_to_the_right_of_blank(tile) {
-  if(blank.col != N -1 && tile === board[blank.row][blank.col + 1]){
-    return true;
-  }
-  return false;
+  return blank.col != N -1 && tile === board[blank.row][blank.col + 1];
 }
 
 /* return true iff the given tile is directly to the left of the blank */
 function is_to_the_left_of_blank(tile) {
-  if(blank.col != 0 && tile === board[blank.row][blank.col - 1]){
-    return true;
-  }
-  return false;
+  return blank.col != 0 && tile === board[blank.row][blank.col - 1];
 }
 
 /* return true iff the given tile is directly above the blank */
 function is_above_blank(tile) {
-  if(blank.row != 0 && tile === board[blank.row - 1][blank.col]){
-    return true;
-  }
-  return false;
+  return blank.row != 0 && tile === board[blank.row - 1][blank.col];
 }
 
 /* return true iff the given tile is directly under the blank */
 function is_below_blank(tile) {
-  if(blank.row != N -1 && tile === board[blank.row + 1][blank.col]){
-    return true;
-  }
-  return false;
+  return blank.row != N -1 && tile === board[blank.row + 1][blank.col];
 }
 
 /* return true iff the given tile is immediately adjacent to the blank */
 function is_next_to_blank(tile) {
-  if(is_to_the_right_of_blank(tile) || is_to_the_left_of_blank(tile) || is_above_blank(tile) || is_below_blank(tile)){
-    return true;
-  }
-  return false;
+  return is_to_the_right_of_blank(tile) || is_to_the_left_of_blank(tile) || is_above_blank(tile) || is_below_blank(tile);
 }
 
 /* return true iff the tiles are in their initial configuration */
@@ -120,38 +105,6 @@ function position_tile(tile,row,col) {
   }
 }
 
-/* position all of the tiles to build the initial configuration of the board
-   must update the tiles (position, size, and font-size), the blank, and
-   the board (size)
-*/
-function initialize_tile_positions() {
-  var rowPx = 0;
-  var colPx = board_size/N;
-  var tempArray = [];
-  board = [ null ];
-  blank.row = 0;
-  blank.col = 0;
-  for(var i = 1; i < N*N; i+=1){
-    board = board.concat(document.getElementById(i));
-    board[i].style.width = "100px";
-    board[i].style.height = "100px";
-    board[i].style.fontSize = "50px";
-    board[i].style.display = "absolute";
-    board[i].setAttribute("onclick", "process_click(this)");
-    if(i%N === 0){
-      rowPx += board_size/N;
-      colPx = 0;
-    }
-    board[i].style.left = colPx + "px";
-    board[i].style.top = rowPx + "px";
-    colPx += board_size/N;
-  }
-  for(var i = 0; i < N; i+=1){
-    tempArray = board.splice(0, N);
-    board.push(tempArray);
-  }
-}
-
 /* move the given tile to the blank location
    (assume that the given tile is adjacent to the blank before the move)
    must update the tile, the blank, and the board
@@ -160,15 +113,6 @@ function swap_with_blank(tile) {
   tile.style.left = blank.col * board_size/N + "px";
   tile.style.top = blank.row * board_size/N + "px";
   position_tile(tile, blank.row, blank.col);
-}
-
-/* perform num_shuffle_steps random legal moves starting from the current board
-   configuration
-*/
-function shuffle_tiles() {
-  for(var i = 0; i < num_shuffle_steps; i+=1){
-    swap_with_blank(pick_tile());
-  }
 }
 
 /* event handler for a click on a tile
@@ -186,6 +130,65 @@ function process_click(tile) {
   }
 }
 
+/* empty the board of its tiles and recreate enough
+   tiles to fill the board using the current value of N
+*/
+function clearAndRefillBoard() {
+  board = [ null ];
+  blank.row = 0;
+  blank.col = 0;
+  N = document.getElementById("N").value;
+  document.getElementById("board").innerText = "";
+}
+
+/* update the value of the global N, call the previous function, and finally
+   position all of the tiles to build the initial configuration of the board
+   [must update the tiles (position, size, and font-size), the blank, and
+   the board (size)]
+*/
+function initialize_tile_positions() {
+  clearAndRefillBoard();
+  var rowPx = 0;
+  var colPx = board_size/N;
+  var tempArray = [];
+  for(var i = 1; i < N*N; i+=1){
+    var block = document.createElement("div");
+    var node = document.createTextNode(i);
+    block.id = i;
+    block.className = "tile";
+    block.onclick = "process_click(this)";
+    // var node = document.createTextNode("<div id=\"" + i + "\" class=\"tile\">" + i + "</div>");
+    block.appendChild(node);
+    document.getElementById("board").appendChild(block);
+    board = board.concat(block);
+    board[i].style.width = board_size/N + "px";
+    board[i].style.height = board_size/N + "px";
+    board[i].style.fontSize = board_size/N/2 + "px";
+    board[i].style.display = "absolute";
+    board[i].setAttribute("onclick", "process_click(this)");
+    if(i%N === 0){
+      rowPx += board_size/N;
+      colPx = 0;
+    }
+    board[i].style.left = colPx + "px";
+    board[i].style.top = rowPx + "px";
+    colPx += board_size/N;
+  }
+  for(var i = 0; i < N; i+=1){
+    tempArray = board.splice(0, N);
+    board.push(tempArray);
+  }
+}
+
+/* perform num_shuffle_steps random legal moves starting from the current board
+   configuration
+*/
+function shuffle_tiles() {
+  for(var i = 0; i < num_shuffle_steps; i+=1){
+    swap_with_blank(pick_tile());
+  }
+}
+
 /* attach all click event handlers (to the buttons and the tiles)
    furthermore, position all of the tiles in their initial configuration
 */
@@ -195,4 +198,4 @@ window.onload = function () {
   document.getElementById("shuffle").setAttribute("onclick", "shuffle_tiles()");
   document.getElementById("reset").setAttribute("onclick", "initialize_tile_positions()");
   initialize_tile_positions();
-}
+};
