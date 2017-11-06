@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- This is planned to be just a popup dialog.  As of right now it will just open this page. -->
+<html>
+    <head>
+        <title>Question 1</title>
+        <meta charset="utf-8">
+        <meta name="author" content="Justin Espiritu">
+        <meta name="keywords" content="IndividualProject3">
+        <meta name="description" content="CS 346 IndividualProject3">
+        <meta name="date" content="11/5/2017">
+        <link rel="stylesheet" type="text/css" href="Question.css">
+            </head>
+    <body>
+        <section id="phpOutput">
+            <h1>Q1 | 3 Points | Chapter 1.1.3</h1>
+            <h2>Your response:</h2>
+            <p id="question">Which of the following will open the file, text.html, when connecting to a PC to itself as a server. (Assume text.html is the directory of the server)</p>
+            <!-- Repsonses that will be checked are the ones the student checked -->
+			<div id="response">
+				<label class="checkbox">A)
+					<input type="checkbox" id="choiceA" class="response" name="response">./text.html
+				</label>
+				<label class="checkbox">B)
+					<input type="checkbox" id="choiceB" class="response" name="response" checked>localhost/text.html
+				</label>
+				<label class="checkbox">C)
+					<input type="checkbox" id="choiceC" class="response" name="response" checked>127.0.0.1/text.html
+				</label>
+				<label class="checkbox">D)
+					<input type="checkbox" id="choiceD" class="response" name="response">file:///C:/text.html
+				</label>
+            </div>
+            <!-- Correct Response will be dynamic once we have more php and javascript-->
+            <h2>Correct Response</h2>
+            <p>A, B</p>
+            <!-- Point earned will change once we have more php and javascript -->
+            <h2>Points Earned:</h2>
+            <p>2</p>
+			<button id="submitButton" type="button" onclick="location.href='StudentHomePage.html'">Return to Home</button>
+        </section>
+        <footer>
+            <a href="http://validator.w3.org/check/referer">HTML Validator</a>
+			<a href="https://jigsaw.w3.org/css-validator/check/referer">CSS Validator</a>
+        </footer>
+    </body>
+</html>

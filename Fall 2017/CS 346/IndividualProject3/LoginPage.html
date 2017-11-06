@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>UWO WebCLICKER</title>
+        <meta charset="utf-8">
+        <meta name="author" content="Justin Espiritu">
+        <meta name="keywords" content="IndividualProject3">
+        <meta name="description" content="CS 346 IndividualProject3">
+        <meta name="date" content="11/5/2017">
+        <link rel="stylesheet" href="WebClicker.css" />
+        <script type="text/javascript" src="LoginPage.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>UWO WebClicker</h1>
+        </header>
+        <div id="main" class="loginpage">
+            <div class="content">
+                <form id="loginForm" class="box">
+                    <div>
+                        <input placeholder="Username" type="text" id="userName" name="username" size="12" value="" required/>
+                    </div>
+                    <div>
+                        <input placeholder="Password" type="password" id="password" name="password" size="12" value="" required/>
+                    </div>
+                    <div class="centered">
+                        <input type="submit" onclick="checkPermissions()" name="submit" value="Log in"/>
+                    </div>
+                    <span class="psw">Forgot <a href="PasswordReset.html">password?</a></span>
+                </form>
+            </div>
+        </div>
+        <footer>
+            <a href="http://validator.w3.org/check/referer">HTML Validator</a>
+			<a href="https://jigsaw.w3.org/css-validator/check/referer">CSS Validator</a>
+        </footer>
+    </body>
+</html>
+

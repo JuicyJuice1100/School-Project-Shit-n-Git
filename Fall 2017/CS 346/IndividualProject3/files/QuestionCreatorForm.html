@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Question Creator</title>
+        <meta charset="utf-8">
+        <meta name="author" content="Justin Espiritu">
+        <meta name="keywords" content="Lab5">
+        <meta name="description" content="CS 346 Lab5">
+        <meta name="date" content="10/11/2017">
+        <link rel="stylesheet" type="text/css" href="..\IndividualProject2.css">
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+        <script>
+            function addForm() {
+                var select = document.getElementById("questionType").value;
+                w3.includeHTML();
+                if(select == 1 || select == 2){
+                    document.getElementById("multipleChoice").style.display = "block";
+                }
+                else{
+                    document.getElementById("multipleChoice").style.display = "none";
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <form action="QuestionCreator.php" method="post">
+            <div id="form">
+                <label for="questionNumber">Question Number:</label>
+                <input type="number" id="questionNumber" class="input" name="questionNumber" size="1" required>
+                <label for="points">Point Value:</label>
+                <input type="number" id="points" class="input" name="points"required/>
+                <label for="chapter">Chapter:</label>
+                <input type="text" id="chapter" class="input" name="chapter" required/>
+                <label for="question">Question:</label>
+                <textarea type="text" id="question" name="question" rows="5" cols="50" required></textarea>
+                <label for="questionType">Question Type:</label>
+                <select id="questionType" onchange="addForm()"name="questionType" size="1">
+                    <option value="0">true/false</option>
+                    <option value="1">multiple choice/one correct answer</option>
+                    <option value="2">multiple choice/multiple selection</option>
+                    <option value="3">short answer</option>
+                </select>
+                <div id="multipleChoice" w3-include-html="multipleChoice.html"></div>
+                <label for="uploadedImage">Upload Image:</label>
+                <input type="file" id="uploadedImage" name="uploadedImage" accept="image/*">
+                <input id="submitButton" type="submit" value="Create"/>
+            </div>
+        </form>
+    </body>
+</html>

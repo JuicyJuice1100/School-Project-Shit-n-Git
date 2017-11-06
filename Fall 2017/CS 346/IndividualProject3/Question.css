@@ -1,0 +1,95 @@
+form{
+    background: lightgray;
+    border: 2px solid black;
+    border-radius: 25px;
+}
+
+#form{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: left;
+    font-weight: bold;
+    align-content: space-between;
+    margin: 20px 15px;
+}
+
+label, input, select, textarea{
+    flex: 1 100%;
+}
+
+label, h1{
+    font-weight: bold;
+    color: black;
+}
+
+#logOut{
+    display: block;
+    background: rgb(13, 185, 13);
+    border: none;
+    padding: 8px;
+    text-align: center;
+}
+
+#submitButton{
+    text-align: center;
+    background: rgb(13, 185, 13);
+    border: none;
+    padding: 8px;
+    flex: none;
+    width: 100px;
+}
+
+#phpOutput{
+    border: 2px solid black;
+    background: lightgray;
+    width: 550px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#phpNotes{
+    display: inline-block;
+    border-top: 2px solid black;
+}
+
+input, select, textarea{
+    margin-bottom: 15px;
+}
+
+.radio, .checkbox{
+    display: block;
+}
+
+img{
+    max-height: 1000px;
+    max-width: 550px;
+}
+
+.response{
+    margin: 15px 0px;
+}
+
+#multipleChoice{
+    width: 100%;
+}
+
+.submitButton:hover, #logOut:hover{
+    background-color: green;
+}
+
+h2{
+    font-weight: bold;
+}
+
+.activeQuestion{
+    background: lightgreen;
+}
+
+.inactiveQuestion{
+    background: lightcoral;
+}
+
+#deactivateAll{
+    margin: 10px;
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>UWO WebCLICKER</title>
+        <meta charset="utf-8">
+        <meta name="author" content="Justin Espiritu">
+        <meta name="keywords" content="IndividualProject3">
+        <meta name="description" content="CS 346 IndividualProject3">
+        <meta name="date" content="11/5/2017">
+        <link rel="stylesheet" href="WebClicker.css" />
+        <link rel="stylesheet" type="text/css" href="Question.css">
+        <script type="text/javascript" src="Question.js"></script>
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+        <script>
+            function addForm() {
+                var select = document.getElementById("questionType").value;
+                w3.includeHTML();
+                if(select == 1 || select == 2){
+                    document.getElementById("multipleChoice").style.display = "block";
+                }
+                else{
+                    document.getElementById("multipleChoice").style.display = "none";
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <header>
+            <h1>UWO WebClicker</h1>
+            <div>
+                <button id="logOut" type="button" onclick="location.href='LoginPage.html';">Log Out</button>
+            </div>
+            <div class="tab">
+                <button class="tablinks" onclick="openTab(event, 'Home')" id="defaultOpen">Home</button>
+                <button class="tablinks" onclick="openTab(event, 'CreateQuestion')">Create Question</button>
+                <button class="tablinks" onclick="openTab(event, 'AllQuestions')">All Questions</button>
+            </div>       
+        </header>
+            <div id="Home" class="tabcontent" >
+                <!-- Will show the username when signing in -->
+                <p>
+                    Welcome, instructor!
+                </p>
+            </div>
+                
+            <div id="CreateQuestion" class="tabcontent">
+                <form>
+                    <div id="form">
+                        <label for="questionNumber">Question Number:</label>
+                        <input type="number" id="questionNumber" class="input" name="questionNumber" size="1" required>
+                        <label for="points">Point Value:</label>
+                        <input type="number" id="points" class="input" name="points" required/>
+                        <label for="chapter">Chapter:</label>
+                        <input type="text" id="chapter" class="input" name="chapter" required/>
+                        <label>Question:
+                            <textarea class="question" name="question" rows="5" cols="50" required></textarea>
+                        </label>
+                        <label for="questionType">Question Type:</label>
+                        <select id="questionType" onchange="addForm()" name="questionType" size="1">
+                            <option value="0">true/false</option>
+                            <option value="1">multiple choice/one correct answer</option>
+                            <option value="2">multiple choice/multiple selection</option>
+                            <option value="3">short answer</option>
+                        </select>
+                        <div id="multipleChoice" w3-include-html="multipleChoice.html"></div>
+                        <label for="uploadedImage">Upload Image:</label>
+                        <input type="file" id="uploadedImage" name="uploadedImage" accept="image/*">
+                        <button id="submitButton" type="submit" onclick="alert('Question Created')">Create</button>
+                    </div>
+                </form>
+            </div>
+                
+            <div id="AllQuestions" class="tabcontent">
+                <div>
+                    <button id="deactivateAll" onclick="alert('All questions deactivated')">Deactive All Questions</button>
+                </div>
+                <!-- This will use php or javascript to repeat buttons for each question in database answered so far -->
+                <div>
+                    <button class="reviewTablinks activeQuestion" onclick="openQuestion(event, 'question1')">Question 1</button>
+                    <button class="reviewTablinks inactiveQuestion" onclick="openQuestion(event, 'question2')">Question 2</button>
+                    <button class="reviewTablinks inactiveQuestion" onclick="openQuestion(event, 'question3')">Question 3</button>
+                </div>
+                <div id="question1" class="questionTabContent activeQuestion">
+                    <h1>Q1 | 3 Points | Chapter 1.1.3</h1>
+                    <h2>Active</h2>
+                    <p class="question">Which of the following will open the file, text.html, when connecting to a PC to itself as a server. (Assume text.html is the directory of the server)</p>
+                    <!-- Repsonses that will be checked are the ones the student checked -->
+                    <div id="response">
+                        <label class="checkbox">A)
+                            <input type="checkbox" class="response" name="response" disabled>./text.html
+                        </label>
+                        <label class="checkbox">B)
+                            <input type="checkbox" class="response" name="response" checked disabled>localhost/text.html
+                        </label>
+                        <label class="checkbox">C)
+                            <input type="checkbox" class="response" name="response" checked disabled>127.0.0.1/text.html
+                        </label>
+                        <label class="checkbox">D)
+                            <input type="checkbox" class="response" name="response" disabled>file:///C:/text.html
+                        </label>
+                    </div>
+                    <!-- Correct Response will be dynamic once we have more php and javascript-->
+                    <h2>Correct Answer(s):</h2>
+                    <p>A, B</p>
+                    <!-- This button will change text and color dynamically depending if the question is active or not -->
+                    <button type="button" onclick="alert('question deactivated/activated')">Activate/Deactivate</button>
+                    <button type="button" onclick="location.href='EditDialog.html'">Edit</button>
+                    <!-- No javascript or php yet but will delete the question -->
+                    <button type="button" onclick="alert('Question Deleted')">Delete</button>
+                </div>
+                <div id="question2" class="questionTabContent inactiveQuestion">
+                    <h1>Q2 | 2 Points | Chapter 2.3.2</h1>
+                    <h2>Inactive</h2>
+                    <p class="question">Is the following html below valid?</p>
+                    <img src="./files/Q2Image.PNG" alt="Q2Image.PNG">
+                    <div class="response">
+                        <label class="radio">
+                            <input type="radio" id="true" class="response" name="response" disabled>True
+                        </label>
+                        <label class="radio">
+                            <input type="radio" id="false" class="response" name="response" checked disabled>False
+                        </label>
+                    </div> 
+                    <!-- Correct Response will be dynamic once we have more php and javascript-->
+                    <h2>Correct Answer(s)</h2>
+                    <p>False</p>
+                    <!-- This button will change text and color dynamically depending if the question is active or not -->
+                    <button type="button" onclick="alert('question deactivated/activated')">Activate/Deactivate</button>
+                    <button type="button" onclick="location.href='EditDialog.html'">Edit</button>
+                    <!-- No javascript or php yet but will delete the question -->
+                    <button type="button" onclick="alert('Question Deleted')">Delete</button>
+                </div>
+                <div id="question3" class="questionTabContent inactiveQuestion">
+                    <h1>Q3 | 3 Points | Chapter 3.3.2 & 3.3.3</h1>
+                    <h2>Inactive</h2>
+                    <p class="question">Which of the following selectors will style the following code below.</p>
+                    <img src="./files/Q3Image.PNG" alt="Q3Image.PNG">
+                    <div class="response">
+                        <label class="checkbox">A)
+                            <input type="checkbox" id="choiceA" class="response" name="response" disabled>p
+                        </label>
+                        <label class="checkbox">B)
+                            <input type="checkbox" id="choiceB" class="response" name="response" disabled>#sexiestManAlive
+                        </label>
+                        <label class="checkbox">C)
+                            <input type="checkbox" id="choiceC" class="response" name="response" checked disabled>#classy
+                        </label>
+                        <label class="checkbox">D)
+                            <input type="checkbox" id="choiceD" class="response" name="response" checked disabled>Ryan Reynolds
+                        </label>
+                    </div>
+                    <!-- Correct Response will be dynamic once we have more php and javascript-->
+                    <h2>Correct Answer(s):</h2>
+                    <p>A, B</p>
+                    <!-- This button will change text and color dynamically depending if the question is active or not -->
+                    <button type="button" onclick="alert('question deactivated/activated')">Activate/Deactivate</button>
+                    <!-- This will be a popup dialog -->
+                    <button type="button" onclick="location.href='EditDialog.html'">Edit</button>
+                    <!-- No javascript or php yet but will delete the question. This wil be a custom confirm with a yes or no confirmation button. -->
+                    <button type="button" onclick="alert('Question Deleted')">Delete</button>
+                </div>
+            </div>
+        <footer>
+            <a href="http://validator.w3.org/check/referer">HTML Validator</a>
+			<a href="https://jigsaw.w3.org/css-validator/check/referer">CSS Validator</a>
+        </footer>
+    </body>
+</html>

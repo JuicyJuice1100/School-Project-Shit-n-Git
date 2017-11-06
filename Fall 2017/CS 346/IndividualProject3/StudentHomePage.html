@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>UWO WebCLICKER</title>
+        <meta charset="utf-8">
+        <meta name="author" content="Justin Espiritu">
+        <meta name="keywords" content="IndividualProject3">
+        <meta name="description" content="CS 346 IndividualProject3">
+        <meta name="date" content="11/5/2017">
+        <link rel="stylesheet" href="WebClicker.css" />
+        <link rel="stylesheet" type="text/css" href="Question.css">
+        <script type="text/javascript" src="Question.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>UWO WebClicker</h1>
+            <div>
+                <button id="logOut" type="button" onclick="location.href='LoginPage.html';">Log Out</button>
+            </div>
+            <div class="tab">
+                <button class="tablinks" onclick="openTab(event, 'Home')" id="defaultOpen">Home</button>
+                <!-- If there are no active questions no question will appear -->
+                <button class="tablinks" onclick="openTab(event, 'CurrentQuestion')">Active Question</button>
+                <button class="tablinks" onclick="openTab(event, 'ReviewQuestions')">Review Questions</button>
+            </div>       
+        </header>
+            <div id="Home" class="tabcontent" >
+                <p>
+                    Welcome, student!
+                </p>
+            </div>
+                
+            <div id="CurrentQuestion" class="tabcontent">
+                <section id="phpOutput">
+                    <h2>Q1 | 3 Points | Chapter 1.1.3</h2>
+                    <p class="question">Which of the following will open the file, text.html, when connecting to a PC to itself as a server. (Assume text.html is the directory of the server)</p>
+                    <div class="response">
+                        <label class="checkbox">A)
+                            <input type="checkbox" class="response" name="response">./text.html
+                        </label>
+                        <label class="checkbox">B)
+                            <input type="checkbox" class="response" name="response">localhost/text.html
+                        </label>
+                        <label class="checkbox">C)
+                            <input type="checkbox" class="response" name="response">127.0.0.1/text.html
+                        </label>
+                        <label class="checkbox">D)
+                            <input type="checkbox" class="response" name="response">file:///C:/text.html
+                        </label>
+                    </div>
+                    <button class="submitButton" type="button" onclick="location.href='Answer.html'">Submit</button>
+                </section>
+            </div>
+                
+            <div id="ReviewQuestions" class="tabcontent">
+                <!-- This will use php or javascript to repeat buttons for each question in database answered so far -->
+                <div>
+                    <button class="reviewTablinks" onclick="openQuestion(event, 'question1')">Question 1</button>
+                    <button class="reviewTablinks" onclick="openQuestion(event, 'question2')">Question 2</button>
+                    <button class="reviewTablinks" onclick="openQuestion(event, 'question3')">Question 3</button>
+                </div>
+                <div id="question1" class="questionTabContent">
+                    <h2>Q1 | 3 Points | Chapter 1.1.3</h2>
+                    <h2>Your response:</h2>
+                    <p class="question">Which of the following will open the file, text.html, when connecting to a PC to itself as a server. (Assume text.html is the directory of the server)</p>
+                    <!-- Repsonses that will be checked are the ones the student checked -->
+                    <div class="response">
+                        <label class="checkbox">A)
+                            <input type="checkbox" class="response" name="response" disabled>./text.html
+                        </label>
+                        <label class="checkbox">B)
+                            <input type="checkbox" class="response" name="response" checked disabled>localhost/text.html
+                        </label>
+                        <label class="checkbox">C)
+                            <input type="checkbox" class="response" name="response" checked disabled>127.0.0.1/text.html
+                        </label>
+                        <label class="checkbox">D)
+                            <input type="checkbox" class="response" name="response" disabled>file:///C:/text.html
+                        </label>
+                    </div>
+                    <!-- Correct Response will be dynamic once we have more php and javascript-->
+                    <h2>Correct Response:</h2>
+                    <p>A, B</p>
+                    <!-- Point earned will change once we have more php and javascript -->
+                    <h2>Points Earned:</h2>
+                    <p>2</p>
+                </div>
+                <div id="question2" class="questionTabContent">
+                    <h2>Q2 | 2 Points | Chapter 2.3.2</h2>
+                    <h2>Your response:</h2>
+                    <p class="question">Is the following html below valid?</p>
+                    <img src="./files/Q2Image.PNG" alt="Q2Image.PNG">
+                    <div class="response">
+                        <label class="radio">
+                            <input type="radio" id="true" class="response" name="response" disabled>True
+                        </label>
+                        <label class="radio">
+                            <input type="radio" id="false" class="response" name="response" checked disabled>False
+                        </label>
+                    </div> 
+                    <!-- Correct Response will be dynamic once we have more php and javascript-->
+                    <h2>Correct Response:</h2>
+                    <p>False</p>
+                    <!-- Point earned will change once we have more php and javascript -->
+                    <h2>Points Earned:</h2>
+                    <p>2</p>
+                </div>
+                <div id="question3" class="questionTabContent">
+                    <h2>Q3 | 3 Points | Chapter 3.3.2 & 3.3.3</h2>
+                    <h2>Your response:</h2>
+                    <p class="question">Which of the following selectors will style the following code below.</p>
+                    <img src="./files/Q3Image.PNG" alt="Q3Image.PNG">
+                    <div class="response">
+                        <label class="checkbox">A)
+                            <input type="checkbox" class="response" name="response" disabled>p
+                        </label>
+                        <label class="checkbox">B)
+                            <input type="checkbox" class="response" name="response" disabled>#sexiestManAlive
+                        </label>
+                        <label class="checkbox">C)
+                            <input type="checkbox" class="response" name="response" checked disabled>#classy
+                        </label>
+                        <label class="checkbox">D)
+                            <input type="checkbox" class="response" name="response" checked disabled>Ryan Reynolds
+                        </label>
+                    </div>
+                    <!-- Correct Response will be dynamic once we have more php and javascript-->
+                    <h2>Correct Response:</h2>
+                    <p>A, B</p>
+                    <!-- Point earned will change once we have more php and javascript -->
+                    <h2>Points Earned:</h2>
+                    <p>1</p>
+                </div>
+            </div>
+        <footer>
+            <a href="http://validator.w3.org/check/referer">HTML Validator</a>
+            <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS Validator</a>
+        </footer>
+    </body>
+</html>

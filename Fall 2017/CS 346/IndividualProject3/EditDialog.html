@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!-- This is planned to be just a popup dialog.  As of right now it will just open this page. -->
+<!-- This will be an autofill and will autofill information with the selected question -->
+<html>
+    <head>
+        <title>Edit</title>
+        <meta charset="utf-8">
+        <meta name="author" content="Justin Espiritu">
+        <meta name="keywords" content="IndividualProject3">
+        <meta name="description" content="CS 346 IndividualProject3">
+        <meta name="date" content="11/5/2017">
+        <link rel="stylesheet" type="text/css" href="Question.css">
+            </head>
+    <body>
+        <div id="CreateQuestion" class="tabcontent">
+            <form>
+                <div id="form">
+                    <label for="questionNumber">Question Number:</label>
+                    <input type="number" id="questionNumber" class="input" name="questionNumber" size="1" required>
+                    <label for="points">Point Value:</label>
+                    <input type="number" id="points" class="input" name="points" required/>
+                    <label for="chapter">Chapter:</label>
+                    <input type="text" id="chapter" class="input" name="chapter" required/>
+                    <label for="question">Question:</label>
+                    <textarea id="question" name="question" rows="5" cols="50" required></textarea>
+                    <label for="questionType">Question Type:</label>
+                    <select id="questionType" onchange="addForm()" name="questionType" size="1">
+                        <option value="0">true/false</option>
+                        <option value="1">multiple choice/one correct answer</option>
+                        <option value="2">multiple choice/multiple selection</option>
+                        <option value="3">short answer</option>
+                    </select>
+                    <div id="multipleChoice" w3-include-html="multipleChoice.html"></div>
+                    <label for="uploadedImage">Upload Image:</label>
+                    <input type="file" id="uploadedImage" name="uploadedImage" accept="image/*">
+                    <button id="submitButton" type="submit" onclick="location.href='InstructorHomePage.html'">Create</button>
+                </div>
+            </form>
+        </div>
+        <footer>
+            <a href="http://validator.w3.org/check/referer">HTML Validator</a>
+			<a href="https://jigsaw.w3.org/css-validator/check/referer">CSS Validator</a>
+        </footer>
+    </body>
+</html>
