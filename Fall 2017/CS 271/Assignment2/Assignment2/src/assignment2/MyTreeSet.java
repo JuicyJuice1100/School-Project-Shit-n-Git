@@ -1,5 +1,11 @@
 package assignment2;
 
+/**
+ * 
+ * @author Juice
+ * @param <T> 
+ * Creates a AVL Tree
+ */
 public class MyTreeSet<T extends Comparable<T>>{
     private static final int ALLOWED_IMBALANCE = 1;
 
@@ -7,12 +13,15 @@ public class MyTreeSet<T extends Comparable<T>>{
     private class MyNode<T extends Comparable<T>> {
         private T data;
         private MyNode<T> left;
+        //Tree to hold the line  numbers of the given data
+        private MyTreeSet<Integer> lineNumber;
         private MyNode<T> right;
         private int height=0;
 
         private MyNode(T e, MyNode<T> l, MyNode<T> r){
             data=e;
             left=l;
+            lineNumber = new MyTreeSet();
             right=r;
         }
     }
@@ -20,13 +29,40 @@ public class MyTreeSet<T extends Comparable<T>>{
     //Data members
     private MyNode<T>root;
     private int size;
-
+    
+    
     //Operations
     public MyTreeSet(){
         root = null;
         size=0;
     }
-
+    /**
+     * Inserts line number into the tree inside the node that contains element, uses helper function 
+     * @param element
+     * @param line 
+     */
+    public void insertLine(T element, int line){
+        insertLine(root, element, line);
+    }
+    
+    private void insertLine(MyNode<T> temp, T element, int line){
+        while(temp != null){
+            int compared = temp.data.compareTo(element);
+            if(compared == 0){
+                temp.lineNumber.insert(line);
+            }
+            else if(compared < 0)
+                insertLine(temp.right, element, line);
+            else
+                insertLine(temp.left, element, line);
+        }
+    }
+    
+    /**
+     * Checks to see if tree contains element 
+     * @param element
+     * @return 
+     */
     public boolean contains(T element){
         return containsNode(root,element);
     }
@@ -44,6 +80,10 @@ public class MyTreeSet<T extends Comparable<T>>{
         return false;
     }
 
+    /**
+     * Inserts an element into tree, uses helper function
+     * @param element 
+     */
     public void insert(T element){
         root = insertNode(root, element);
         size++;
@@ -51,7 +91,7 @@ public class MyTreeSet<T extends Comparable<T>>{
 
     private MyNode<T> insertNode(MyNode<T> temp, T element){
         if (temp==null)
-            return new MyNode<T>(element,null,null);
+            return new MyNode<T>(element,null, null);
 
         int compared = temp.data.compareTo(element);
         if(compared > 0)
@@ -61,6 +101,10 @@ public class MyTreeSet<T extends Comparable<T>>{
         return balance(temp);
     }
 
+    /**
+     * Removes element from tree, uses helper function
+     * @param element 
+     */
     public void remove(T element){
         root = remove(root,element);
     }
@@ -97,6 +141,10 @@ public class MyTreeSet<T extends Comparable<T>>{
         return balance(temp);
     }
 
+    /**
+     * Return the size of tree
+     * @return 
+     */
     public int size(){
         return size;
     }
@@ -109,12 +157,19 @@ public class MyTreeSet<T extends Comparable<T>>{
         inorder(current.right);
     }
 
+    /**
+     * print elements in order of smallest to largest
+     */
     public void inorder(){
         System.out.print("Tree of size "+size+": ");
         inorder(root);
         System.out.println();
     }
-
+    
+    /**
+     * Traverses and prints elements in tree starting at the root and goes down 
+     * doing a level traversal
+     */
     public void levelTraverse(){
         java.util.Queue<MyNode<T>> queue = new java.util.LinkedList<MyNode<T>>();
         MyNode<T> temp = root;
@@ -191,200 +246,5 @@ public class MyTreeSet<T extends Comparable<T>>{
     private MyNode<T> doubleRightLeft(MyNode<T> k1){
         k1.right = rotateRight(k1.right);
         return rotateLeft(k1);
-    }
-
-//////////////////////////////////////////////////////////
-
-
-
-///////////////////////////////////////////////////////////
-    public void checkBalance( )
-    {
-        checkBalance(root);
-    }
-
-    private int checkBalance( MyNode<T> temp )
-    {
-        if( temp == null )
-            return -1;
-
-        if( temp != null )
-        {
-            int hl = checkBalance(temp.left);
-            int hr = checkBalance(temp.right);
-            if(Math.abs(height(temp.left) - height(temp.right)) > ALLOWED_IMBALANCE ||
-                    height(temp.left) != hl || height(temp.right) != hr)
-                System.out.println( "OOPS!!" );
-        }
-
-        return height(temp);
-    }
-    
-    //O(log n) 
-    public T first(){
-        MyNode<T> temp = root;
-        if(temp == null){
-            return null;
-        }  
-        while(temp.left != null){
-            temp = temp.left;
-        }
-        return temp.data;
-    }
-    
-    //O(log n)
-    public T last(){
-        MyNode<T> temp = root;
-        if(temp == null){
-            return null;
-        }
-        while(temp.right != null){
-            temp = temp.right;
-        }
-        return temp.data;
-    }
-    
-    //O(log n) with the private function higher
-    public T higher(T element){
-        if(root == null){
-            return null;
-        }
-        return higher(root, element);
-    }
-    
-    //O(log n)
-    private T higher(MyNode<T> temp, T element){
-        int comparable = element.compareTo(temp.data);
-        if(temp != null){
-            if(comparable < 0){
-                if(temp.left == null || element.compareTo(temp.left.data) > 0){
-                    return temp.data;
-                }
-                return higher(temp.left, element);
-            }
-            else if(comparable == 0){
-                if(temp.right != null){
-                    return higher(temp.right, element); 
-                }
-            }
-            else{
-                if(temp.right != null){
-                    return higher(temp.right,element);
-                }
-            }
-        }
-        return null;
-    }
-    
-    //O(log n) with the private function lower
-    public T lower(T element){
-        if(root == null){
-            return null;
-        }
-        return lower(root, element);
-    }
-    
-    //O(log n)
-    private T lower(MyNode<T> temp, T element){
-        int comparable = element.compareTo(temp.data);
-        if(temp != null){
-            if(comparable > 0){
-                if(temp.right == null || element.compareTo(temp.right.data) < 0){
-                    return temp.data;
-                }
-                return lower(temp.right, element);
-            }
-            else if(comparable == 0){
-                if(temp.left != null){
-                    return lower(temp.left, element); 
-                }
-            }
-            else{
-                if(temp.left != null){
-                    return lower(temp.left,element);
-                }
-            }
-        }
-        return null;
-    }
-    
-    //O(log n) witht he private function tailSet
-    public MyTreeSet<T> tailSet(T fromElement){
-        if(root == null){
-            return null;
-        }
-        MyTreeSet<T> tailSet = new MyTreeSet();
-        return tailSet(tailSet, root, fromElement);
-    }
-    
-    //O(log n) + O(n) = O(log n)
-    private MyTreeSet<T> tailSet(MyTreeSet<T> tailSet, MyNode<T> temp, T fromElement){
-        int comparable = fromElement.compareTo(temp.data);
-        if(temp != null){
-            if(comparable == 0){
-                tailSet(tailSet, temp.right, fromElement);
-                tailSet.insert(temp.data);
-            }
-            else if(comparable < 0){
-                createSet(tailSet, temp);
-                return tailSet;
-            }
-            else{
-                return tailSet(tailSet, temp.left, fromElement);
-            }
-        }
-        return tailSet;
-    }
-    
-    //O(n)
-    private void createSet(MyTreeSet<T> set, MyNode<T> temp){
-        if(temp != null){
-            createSet(set, temp.left);
-            set.insert(temp.data);
-            createSet(set, temp.right);
-        }
-    }
-    
-    //O(log n) with the private function headSet
-    public MyTreeSet<T> headSet(T toElement){
-        if(root == null){
-            return null;
-        }
-        MyTreeSet<T> headSet = new MyTreeSet();
-        return headSet(headSet, root, toElement);
-    }
-    
-    //O(log n)
-    private MyTreeSet<T> headSet(MyTreeSet<T> headSet, MyNode<T> temp, T toElement){
-       int comparable = toElement.compareTo(temp.data);
-       if(temp != null){
-           if(comparable > 0){
-               createSet(headSet, temp);
-           }
-           else{
-               headSet(headSet, temp.left, toElement);
-           }
-       }
-       return headSet;
-    }
-    
-    @Override
-    //O(n) with the big O of the private toString function
-    public String toString(){
-        if(root == null){
-            return null;
-        }
-        StringBuilder stringBuilder = new StringBuilder();
-        toString(stringBuilder, root);
-        return stringBuilder.toString();
-    }
-    
-    //O(n)
-    private void toString(StringBuilder stringBuilder, MyNode<T> temp){
-        if(temp != null){
-            toString(stringBuilder, temp.left);
-            stringBuilder.append(temp.data + " ");
-            toString(stringBuilder, temp.right);
-        }
     }
 }
