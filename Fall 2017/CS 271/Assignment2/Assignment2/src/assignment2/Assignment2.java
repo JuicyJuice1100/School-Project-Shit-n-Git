@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package assignment2;
+import java.io.*;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author Justin Espiritu
@@ -15,16 +19,35 @@ public class Assignment2 {
      */
     public static void main(String[] args) {
         MyTreeSet<String> keyWordsTree = new MyTreeSet();
-        FileInputStream fstream = new FileInputStream("keywords.txt");
-        BufferedReader br = new BufferedReader(new InputStreamREader(fstream));
+        try{
+            FileInputStream fstream = new FileInputStream("../keywords.txt");
+            BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+            
+            String strLine;
         
-        String strLine;
-        
-        while((strLine = br.readLine()) != null){
-            keyWordsTree.insert(strLine);
+            while((strLine = br.readLine()) != null){
+                strLine.replaceAll("\\s+","");
+                keyWordsTree.insert(strLine);
+            }
+
+            br.close();
+        }
+        catch(FileNotFoundException ex){
+            ex.printStackTrace();
+        }
+        catch(IOException ex){
+            ex.printStackTrace();
         }
         
-        br.close();
-    }
-    
+        keyWordsTree.levelTraverse();
+        
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Java File", "java");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(null);
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+           System.out.println("You chose to open this file: " +
+                chooser.getSelectedFile().getName());
+        }
+    }   
 }
