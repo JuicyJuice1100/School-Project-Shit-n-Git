@@ -1,0 +1,126 @@
+\title{Assignment 6}
+\author{Justin Espiritu}
+\documentclass[letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{commath}
+\usepackage{fancyhdr}
+\usepackage[a4paper, margin=1in]{geometry}
+\pagenumbering{gobble}
+\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand{\thesubsection}{\alph{subsection})}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Justin Espiritu}
+\rhead{Assignment 6}
+\begin{document}
+	\section{}
+    	\begin{displaymath}
+            \begin{array}{llll}
+            $Type$ & $Vanilla Induction$ &&\\
+            $Prove:$ & 10^n$ mod $3=1 $ $ \forall_n \geq 0 &&\\
+            $Base:$ & n=0 &&\\
+            & 10^0 $ mod $ 3 = 1 &&\\
+            $Inductive Step:$ & $Assume $ 10^k $ mod $ 3 = 1, $ then $ 10^{k+1} $ mod $ 3 = 1 &&\\
+            \\
+            & 10^{k+1} $ mod $ 3 = (10^k $ mod $ 3 * 10^1 $ mod $ 3) $ mod $ 3 && \\
+            \\
+            & $using Theorem from 6.11.12, it is applicable here as property of log can simplify to$&&\\
+            & 10^k * 10^1 $. We can then apply the Theorem from 6.11.12 which become the above equation$&&\\
+            \\
+            & (10^k $ mod $ 3 * 1) $ mod $ 3 && \\
+            & (1 * 1) $ mod $ 3 && \\
+            \\
+            & $we can simplify $ 10^k $ mod $ 3 $ to 1 via the assumption$ &&\\
+            \\
+            & 1 $ mod $ 3 = 1 &&\\
+            \\
+            & $ we have gotten the original assumption proving it is true$ && \\
+            \end{array}
+        \end{displaymath}
+    \section{}
+    	\begin{displaymath}
+            \begin{array}{llll}
+            $Type$ & $Structural Induction$ &&\\
+            $Prove:$ & h={\lfloor}\log_2{n}{\rfloor} &&\\
+            & $h = height n = number of nodes$ &&\\
+            & $all logs are base 2$ &&\\
+            $Base:$ & n=1 &&\\
+            $Inductive Step:$ & $Assume $ T = h $ then $ T_1 $ is at most $ h+1, $ otherwise it's h$ &&\\
+            & $where T is the height of the subtree inside the original tree $&&\\
+            \\
+            & $and $ T_1 $ is the height of the the complete tree. $&&\\
+			& T $ is a perfect tree via definition of a complete tree $ &&\\
+            & n = $ amount of nodes$ &&\\
+            & n = 2^{h+1} - 1 $via definition of a perfect tree $ &&\\
+            & n + 1 = 2^{h+1} \rightarrow\log{(n+1)}=h+1\rightarrow h=\log{(n+1)}-1&&\\
+			\\
+            & $ solve for h using properties of log $ &&\\
+            \\
+            & h=\log{(n+1)}-1 \rightarrow \log{((n+1)/2)} &&\\
+            \\
+            & $ via property of logs $ &&\\
+            \\
+            & $plug in for $ T_1 \rightarrow \log{((n+1)/2)} - 1 &&\\
+            & \log((n+1)/2/2) \rightarrow \log(n+1) $ via property of logs$ &&\\
+            &$ I don't know where to go from here... $&&\\
+            &$ but I need to end up where $T_1$ returns to the proof.$&&\\
+            \end{array}
+        \end{displaymath}
+    \section{}
+    	\begin{displaymath}
+            \begin{array}{llll}
+            $Type$ & $Strong Induction$ &&\\
+            $Prove:$ 3 + 2^n &&\\
+            $Base:$ & n = 3 &&\\
+            & a_3 = 3(a_2) - 2(a_1) &&\\
+            & 3(5) - 2(7) = 11 &&\\
+            & 3 + 2^3 = 11 &&\\
+            & 10^0 $ mod $ 3 = 1 &&\\
+            $Inductive Step:$ & $Assume $ a_n = 3 + 2^n $ $\forall_n \leq k &&\\
+            & $then $3 + 2^{k+1} $must be true $ &&\\
+            \\
+          	& a_{k+1} = 3a_{k+1-1} - 2a_{k+1-2} &&\\
+            \\
+            & $plug in $ k+1 &&\\
+            \\
+            & a_{k+1} = 3a_{k} - 2a_{k-1} &&\\
+            \\
+            & $simplify$&&\\
+            \\
+            & = 3(3 + 2^k) - 2(3+2^{k-1}) &&\\
+            \\
+            & $ via assumption $ &&\\
+            \\
+            & = 9 + 3(2^k) - 6 - 2(2^{k-1}) &&\\
+            \\
+            & $ distribution $ &&\\
+            \\
+            & 3 + 3(2^k) - 2(2^{k-1}) &&\\
+            \\
+            & $simplify$ &&\\
+            \\
+            & (3 * 2 - 2)2^{k-1} + 3 &&\\
+            \\
+            & $factor out a $ 2^{k-1} &&\\
+            \\
+            & 2^2 * 2^{k-1} + 3 &&\\
+            \\
+            & $ evaluate parenthesis which is 4, then make it base 2, which is $ 2^2 &&\\
+            \\ 
+            & 2^{k+1} + 3 &&\\
+            \\
+            & $ simplify by adding powers together of same base.  $&&\\
+            & $ This returns what we are trying to prove making this valid $ &&\\
+            \end{array}
+        \end{displaymath}
+    \section{}
+    	No, the basis step is incorrect and the step in induction where you state
+        "via induction assumption".  Cases in this proof are not all the same which 
+        means that the basis case must be stronger either one more base.  In the
+        induction step you assume $r^{k-1}$ is always one 1 which it is not. 
+        If k = 0 it does not work and that still follows your assumption.
+\end{document}
