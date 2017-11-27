@@ -3,7 +3,6 @@
 
 
 <script id="vertex-shader" type="x-shader/x-vertex">
-
 attribute vec4 vPosition;
 attribute vec4 vNormal;
 varying vec3 N, L, E;
@@ -11,7 +10,6 @@ varying vec3 objCoords;
 uniform mat4 modelViewMatrix;
 uniform mat4 projectionMatrix;
 uniform vec4 lightPosition;
-
 void main()
 {
     vec3 pos = (modelViewMatrix * vPosition).xyz;
@@ -25,43 +23,60 @@ void main()
 </script>
 
 <script id="fragment-shader" type="x-shader/x-fragment">
-
 precision mediump float;
-
 uniform vec4 ambientProduct;
 uniform vec4 diffuseProduct;
 uniform vec4 specularProduct;
 uniform float shininess;
 varying vec3 N, L, E;
 varying vec3 objCoords;
+uniform bool texture1; //shows checkerboard when true
+uniform bool texture2; //shows 2nd texture when true
+                       //if both are false, shows the 3rd and GGW texture
+
 
 void main()
-{    
+{   
     vec4 fColor;
     vec4 color;
-
     vec3 H = normalize( L + E );
+    float diffuseFactor = dot(N,L);
     vec4 ambient = ambientProduct;
-
     float Kd = max( dot(L, N), 0.0 );
     vec4  diffuse = Kd*diffuseProduct;
-
     float Ks = pow( max(dot(N, H), 0.0), shininess );
     vec4  specular = Ks * specularProduct;
-    
+
+
     if( dot(L, N) < 0.0 ) specular = vec4(0.0, 0.0, 0.0, 1.0);
+    fColor = ambient + diffuse + specular;
 
-    fColor = ambient + diffuse +specular;
-
-    if(mod(floor(objCoords.x) + floor(objCoords.y) + floor(objCoords.z), 2.0) < 1.0){
-        color = vec4(0.2, 1.0, 0.5, 1.0);
+    if(texture1){ //checkerboard
+        if(mod(floor(objCoords.x) + floor(objCoords.y) + floor(objCoords.z), 2.0) < 1.0){
+            color = vec4(0.2, 1.0, 0.5, 1.0);
+        }
+        else{
+            color = vec4(0.3, 0.6, 0.4, 1.0);
+        }
+        gl_FragColor = fColor * color;
+    } else if(texture2) { //2nd texture
+        float t = (objCoords.x + 2.0*objCoords.y + objCoords.z)*0.25;
+        float value = t - floor(t);
+        value = value*(1.0 - smoothstep(0.95,1.0,value));  // smooth out the discontinuity
+        value = 0.333 + value*0.667;
+        color = vec4(value, value, 1, 1);
+        gl_FragColor = diffuseFactor*color;
+    } else { //3rd texture GGW
+        float t = (objCoords.x + 2.0*objCoords.y + objCoords.z)*2.0;
+        float value =  (1.0 + sin(t))/2.0;
+        value = 0.5 + value/2.0;
+        color = vec4(1, value, value, 1);
+        gl_FragColor = fColor*color; //uses fColor to get a firey color
     }
-    else{
-        color = vec4(0.3, 0.6, 0.4, 1.0);
-    }
-
-    gl_FragColor = fColor * color;
 }
+
+
+
 </script>
 
 <script type="text/javascript" src="../Common/webgl-utils.js"></script>
@@ -72,16 +87,17 @@ void main()
 <script type="text/javascript" src="assignment5.js"></script>
 
 <body>
-<canvas id="gl-canvas" width="600" height="600">
-Oops ... your browser doesn't support the HTML5 canvas element
-</canvas>
-<p>
-<button id = "ButtonX">Rotate X</button>
-<button id = "ButtonY">Rotate Y</button>
-<button id = "ButtonZ">Rotate Z</button>
-<button id = "ButtonT">Toggle Rotation</button>
-<button id = "ButtonS">Switch between checkerboard and an even better procedural texture</button>
+    <canvas id="gl-canvas" width="600" height="600">
+        Oops ... your browser doesn't support the HTML5 canvas element
+    </canvas>
+    <p>
+        <button id="ButtonX">Rotate X</button>
+        <button id="ButtonY">Rotate Y</button>
+        <button id="ButtonZ">Rotate Z</button>
+        <button id="ButtonT">Toggle Rotation</button>
+        <button id="ButtonS">Random procedural texture</button>
 
-</p>  
+    </p>
 </body>
+
 </html>

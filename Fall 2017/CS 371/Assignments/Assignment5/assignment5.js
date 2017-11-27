@@ -1,3 +1,10 @@
+/**
+ * @author: Justin and Tyler
+ * GGW Description: We have implemented an additional texture and 
+ * a random number generated selection to determine which texture
+ * to display.
+ */
+
 // assign5-starter-code.js
 
 // Assumes vertices for patches and indices of patch pointers into
@@ -25,6 +32,10 @@ var program;
 
 var flag = true;		// flag to toggle rotation
 
+//if both are false, it shows the third texture
+var texture1 = true; //shows the checkerboard texture first
+var texture2 = false; //used to show second texture
+
 // Return an array with the Bernstein polys of degree three evaluated
 // at u
 bezier = function (u) {
@@ -33,7 +44,7 @@ bezier = function (u) {
     b[3] = a * a * a;
     b[2] = 3 * a * a * u;
     b[1] = 3 * a * u * u;
-    b[0] = u * u * u;
+    b[0] = u * u * u;s
     return b;
 }
 
@@ -198,6 +209,35 @@ onload = function init() {
     document.getElementById("ButtonZ").onclick = function () { axis = zAxis; };
     document.getElementById("ButtonT").onclick = function () { flag = !flag; };
 
+
+    //GGW random texture button
+    document.getElementById("ButtonS").onclick = function (x) {
+        var oldNum; //texture currently on the screen
+        if (texture1) { //checkerboard
+            oldNum = 1;
+        } else if (texture2) { //2nd texture
+            oldNum = 2;
+        } else if (!texture1 & !texture2) { //3rd texture
+            oldNum = 3;
+        }
+
+        var num = Math.floor(Math.random() * 3) + 1; //random number between 1 and 3
+        //to pick the next texture
+        while (num == oldNum)
+            var num = Math.floor(Math.random() * 3) + 1; //garuntees a new texture
+
+        if (num == 1) { //show checkerboard texture
+            texture1 = true;
+            texture2 = false;
+        } else if (num == 2) { //show 2nd texture
+            texture1 = false;
+            texture2 = true;
+        } else if (num == 3) { //show 3rd texture
+            texture1 = false;
+            texture2 = false;
+        }
+    }; //End ggw button
+
     program = initShaders(gl, "vertex-shader", "fragment-shader");
     gl.useProgram(program);
 
@@ -218,6 +258,7 @@ onload = function init() {
     var vNormal = gl.getAttribLocation(program, "vNormal");
     gl.vertexAttribPointer(vNormal, 4, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(vNormal);
+
 
     projection = ortho(-2.0, 2.0, -2.0, 2.0, -20, 20);
     gl.uniformMatrix4fv(gl.getUniformLocation(program, "projectionMatrix"), false, flatten(projection));
@@ -254,6 +295,14 @@ var render = function () {
 
     if (flag) theta[axis] += 0.5;
 
+    //GGW update the variables in glsl
+    var texture1Loc = gl.getUniformLocation(program, "texture1");
+    gl.uniform1f(texture1Loc, texture1); //shows checkerboard when true
+
+    var texture2Loc = gl.getUniformLocation(program, "texture2");
+    gl.uniform1f(texture2Loc, texture2); //shows 2nd texture when true
+    //when both are false, shows the 3rd texture
+
     modelView = mat4();
 
     modelView = mult(modelView, rotate(theta[xAxis], [1, 0, 0]));
@@ -264,6 +313,7 @@ var render = function () {
     gl.uniformMatrix4fv(gl.getUniformLocation(program, "modelViewMatrix"), false, flatten(modelView));
 
     gl.drawArrays(gl.TRIANGLES, 0, points.length);
+
 
     requestAnimFrame(render);
 }
