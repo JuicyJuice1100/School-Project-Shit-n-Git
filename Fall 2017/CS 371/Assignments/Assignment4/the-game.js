@@ -61,7 +61,7 @@ window.onload = function init(){
     gl.useProgram( program );
 
     eyex  = ARENASIZE/2.0;	// Where the hero starts
-    eyez  =  -ARENASIZE/2.0;
+    eyez  = -.1;
     aspect=width/height;
 
     modelViewMatrixLoc = gl.getUniformLocation( program, "modelViewMatrix" );
@@ -77,7 +77,7 @@ window.onload = function init(){
     arena = new Arena(program);
     arena.init();
 
-    hero = new Hero(program, eyex, 0.0, eyez, 45, 10.0);
+    hero = new Hero(program, eyex, 0.0, eyez, -90, 10.0);
     hero.init();
 
     thingSeeking = new ThingSeeking(program, ARENASIZE/4.0, 0.0, -ARENASIZE/4.0, 0, 10.0);

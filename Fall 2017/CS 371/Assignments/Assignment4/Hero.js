@@ -1,6 +1,11 @@
 //////////////////////////  Hero class /////////////////////////////////
 
-
+//program = object
+//x = x-coord
+//y = y-coord
+//z = z-coord
+//degrees = which direction we are facing
+//bounding_cir_rad = ????????
 function Hero(program, x, y, z, degrees, bounding_cir_rad)  {
     GameObject.call(this, program, x, y, z, degrees, bounding_cir_rad);
 
