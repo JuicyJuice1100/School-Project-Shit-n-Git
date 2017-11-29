@@ -1,3 +1,5 @@
+package lab11;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -47,4 +49,10 @@ public class Edge {
         return to;
     }
     
+    @Override
+    public String toString(){
+        StringBuilder str = new StringBuilder();
+        str.append("(").append(from).append(", ").append(to).append(")");
+        return str.toString();
+    }
 }
