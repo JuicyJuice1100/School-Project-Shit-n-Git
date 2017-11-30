@@ -17,11 +17,20 @@ public class Graph<T> {
     private int edgeCount = 0, vertexCount = 0;
     private HashMap<Vertex, ArrayList<Edge>> map;
     
+    /**
+     * Constructor
+     * @param isDirected 
+     */
     public Graph(boolean isDirected){
         this.isDirected = isDirected;
         map = new HashMap<>();
     }
     
+    /**
+     * insert new vertex to hashmap if it doesn't exist already
+     * @param vertex
+     * @return 
+     */
     public boolean insertVertex(Vertex vertex){
         if(map.containsKey(vertex)){
             return false;
@@ -31,6 +40,11 @@ public class Graph<T> {
         return true;
     }
     
+    /**
+     * insert new edge to hashmap if edge doesn't exist already and vertex exists
+     * @param edge
+     * @return 
+     */
     public boolean insertEdge(Edge edge){
         if(!map.containsKey(edge.getFrom()) || !map.containsKey(edge.getTo())){
             return false;
@@ -56,6 +70,11 @@ public class Graph<T> {
         return true;
     }
     
+    /**
+     * remove vertex, if vertex exists, and removes all edges associated with the vertex
+     * @param vertex
+     * @return 
+     */
     public boolean removeVertex(Vertex vertex){
         if(!map.containsKey(vertex)){
             return false;
@@ -70,6 +89,11 @@ public class Graph<T> {
         return true;
     }
     
+    /**
+     * remove edge if edge exists
+     * @param edge
+     * @return 
+     */
     public boolean removeEdge(Edge edge){
         ArrayList<Edge> edgeList = map.get(edge.getFrom());
         if(edgeList.remove(edge)){
@@ -91,6 +115,11 @@ public class Graph<T> {
         return false;
     }
     
+    /**
+     * creates a string of BFS order
+     * @param vertex
+     * @return 
+     */
     public String BFS(Vertex vertex){
         StringBuilder str = new StringBuilder();
         ArrayList<Vertex> visited = new ArrayList<>();
@@ -103,7 +132,7 @@ public class Graph<T> {
         {
             vertex = queue.poll();
             str.append(vertex);
-            ArrayList<Edge> edges = vertex.outgoingNeighbors();
+            ArrayList<Edge> edges = vertex.getOutgoingNeighbors();
             for(Edge edge: edges){
                 if(!visited.contains(edge.getTo())){
                     visited.add(edge.getTo());
@@ -114,6 +143,11 @@ public class Graph<T> {
         return str.toString();
     }
     
+    /**
+     * returns String of DFS
+     * @param vertex
+     * @return 
+     */
     public String DFS(Vertex vertex){
         StringBuilder str = new StringBuilder();
         ArrayList<Vertex> visited = new ArrayList<>();
@@ -126,7 +160,7 @@ public class Graph<T> {
         {
             vertex = stack.pop();
             str.append(vertex);
-            ArrayList<Edge> edges = vertex.outgoingNeighbors();
+            ArrayList<Edge> edges = vertex.getOutgoingNeighbors();
             for(Edge edge: edges){
                 if(!visited.contains(edge.getTo())){
                     visited.add(edge.getTo());
@@ -137,6 +171,10 @@ public class Graph<T> {
         return str.toString();
     }
     
+    /**
+     * standard toString method
+     * @return 
+     */
     @Override
     public String toString(){
         StringBuilder str = new StringBuilder();

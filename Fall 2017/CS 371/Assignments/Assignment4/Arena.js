@@ -124,7 +124,7 @@ function Arena() {
 		gl.uniform4fv(gl.getUniformLocation(program, "specularProduct"),
 			flatten(specularProduct));
 
-		gl.drawArrays(gl.TRIANGLE_FAN, 16, 4);
+		gl.drawArrays(gl.TRIANGLE_FAN, 16, 4)
 		// IMPORTANT: Disable current vertex attribute arrays so those in
 		// a different object can be activated.  
 		gl.disableVertexAttribArray(this.vPosition);

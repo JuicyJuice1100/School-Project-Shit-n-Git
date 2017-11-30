@@ -1,9 +1,9 @@
 // the-game.js
 var gl;
 var canvas; 
-const WALLHEIGHT     = 70.0; // Some playing field parameters
+const WALLHEIGHT     = 140.0; // Some playing field parameters
 const ARENASIZE      = 1000.0;
-const EYEHEIGHT      = 15.0;
+var eyeHeight      = 10.0;
 const HERO_VP        = 0.625;
 
 const  upx=0.0, upy=1.0, upz=0.0;    // Some LookAt params 
@@ -11,7 +11,7 @@ const  upx=0.0, upy=1.0, upz=0.0;    // Some LookAt params
 const fov = 60.0;     // Perspective view params 
 const near = 1.0;
 const far = 10000.0;
-var aspect, eyex, eyez;
+var aspect, eyex, eyez, eyey;
 
 const width = 1000;       // canvas size 
 const height = 625;
@@ -44,6 +44,8 @@ var villain;
 
 var g_matrixStack = []; // Stack for storing a matrix
 
+var isAbove = true;
+
 window.onload = function init(){
     canvas = document.getElementById( "gl-canvas" );
     
@@ -61,7 +63,10 @@ window.onload = function init(){
     gl.useProgram( program );
 
     eyex  = ARENASIZE/2.0;	// Where the hero starts
-    eyez  = -.1;
+    eyez  = 0.0;
+
+    villainDistance = 250;
+   
     aspect=width/height;
 
     modelViewMatrixLoc = gl.getUniformLocation( program, "modelViewMatrix" );
@@ -77,13 +82,13 @@ window.onload = function init(){
     arena = new Arena(program);
     arena.init();
 
-    hero = new Hero(program, eyex, 0.0, eyez, -90, 10.0);
+    hero = new Hero(program, eyex, eyeHeight, eyez, -90, 10.0);
     hero.init();
 
     thingSeeking = new ThingSeeking(program, ARENASIZE/4.0, 0.0, -ARENASIZE/4.0, 0, 10.0);
     thingSeeking.init();
 
-    villain = new Villain(program, (3*ARENASIZE)/4.0, 0.0, -ARENASIZE/4.0, 0, 10.0);
+    villain = new Villain(program, ARENASIZE/2.0, 0.0, eyez+250, 0, 10.0);
     villain.init();
     
     render();
@@ -98,11 +103,11 @@ function render()
     gl.viewport( vp1_left, vp1_bottom, (HERO_VP * width), height );
     
     lp0[0] = hero.x + hero.xdir; // Light in front of hero, in line with hero's direction
-    lp0[1] = EYEHEIGHT;
+    lp0[1] = eyeHeight;
     lp0[2] = hero.z + hero.zdir;
-    modelViewMatrix = lookAt( vec3(hero.x, EYEHEIGHT, hero.z),
-			      vec3(hero.x + hero.xdir, EYEHEIGHT, hero.z + hero.zdir),
-			      vec3(upx, upy, upz) );
+    modelViewMatrix = lookAt( vec3(hero.x, hero.y, hero.z),
+			      vec3(hero.x + hero.xdir, hero.y, hero.z + hero.zdir),
+                  vec3(upx, upy, upz) );
     projectionMatrix = perspective( fov, HERO_VP * aspect, near, far );
     gl.uniformMatrix4fv( modelViewMatrixLoc, false, flatten(modelViewMatrix) );
     gl.uniformMatrix4fv( projectionMatrixLoc, false, flatten(projectionMatrix) );
@@ -121,38 +126,13 @@ function render()
     projectionMatrix = ortho( -500,500, -500,500, 0,200 );
     gl.uniformMatrix4fv( modelViewMatrixLoc, false, flatten(modelViewMatrix) );
     gl.uniformMatrix4fv( projectionMatrixLoc, false, flatten(projectionMatrix) );
+    villain.move(-3.0);
     arena.show();
     hero.show();
     thingSeeking.show();
     villain.show();
+   
 
     requestAnimFrame( render );
-};
-
-// Key listener
-
-window.onkeydown = function(event) {
-    var key = String.fromCharCode(event.keyCode);
-    // For letters, the upper-case version of the letter is always
-    // returned because the shift-key is regarded as a separate key in
-    // itself.  Hence upper- and lower-case can't be distinguished.
-    switch (key) {
-    case 'S':
-	// Move backward
-	hero.move(-1.0);
-	break;
-    case 'W':
-	// Move forward
-	hero.move(1.0);
-	break;
-    case 'D':
-	// Turn left 
-	hero.turn(1);
-	break;
-    case 'A':
-	// Turn right 
-	hero.turn(-1);
-	break;
-    }
 };
 
