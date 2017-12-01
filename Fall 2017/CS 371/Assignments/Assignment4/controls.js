@@ -3,7 +3,7 @@
 // Key listener
 
 var isFLast;
-var isLow = true;
+var isJump;
 
 window.onkeydown = function(event) {
     var key = String.fromCharCode(event.keyCode);
@@ -33,23 +33,23 @@ window.onkeydown = function(event) {
             villain.move(-1.0);
         }
         break;
-    case 'U':
-        if(isLow){
-            hero.jump(70.0);
-            isLow = !isLow;
+    case ' ':
+        if(hero.y === 10){
+            hero.y = hero.jump(20.0);
+            isJump = true;
         } else{
             villain.move(-1.0);
         }
         break;
-    case 'R':
-        if(!isLow){
-            hero.jump(-70.0);
-            isLow = !isLow;
-        } else{
-            villain.move(-1.0);
-        }
-        break;
+    // case 'R':
+    //     if(!isLow){
+    //         hero.jump(-100.0);
+    //         isLow = !isLow;
+    //     } else{
+    //         villain.move(-1.0);
+    //     }
+    //     break;
     default:
-        villain.move(-0.5);
+        villain.move(-1.0);
     }
 };

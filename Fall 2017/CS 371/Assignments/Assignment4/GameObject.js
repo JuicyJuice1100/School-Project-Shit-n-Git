@@ -1,7 +1,5 @@
 //////////////////////////  GameObject prototype /////////////////////////////////
 
-
-
 function GameObject(program, x, y, z, degrees, bounding_cir_rad, modelViewMatrix)  {
 
     this.x = x;
@@ -25,9 +23,33 @@ function GameObject(program, x, y, z, degrees, bounding_cir_rad, modelViewMatrix
     };
 
     GameObject.prototype.jump = function(height){
-        this.y = this.y + height;
+        return this.y + height;
     }
 
+    GameObject.prototype.gravity = function(){
+        return this.y - 10.0;
+    }
+
+    GameObject.prototype.vwCoords = function(mesh){
+        var hitbox = [];
+        var xCoords = [];
+        var yCoords = [];
+        var zCoords = [];
+        for (var i = 0; i < mesh.vertices[0].values.length; i+=3)
+        {
+            xCoords.push(mesh.vertices[0].values[i]);
+            yCoords.push(mesh.vertices[0].values[i+1]);
+            zCoords.push(mesh.vertices[0].values[i+2]);
+        }
+        hitbox["xMin"] = Math.min.apply(null, xCoords);
+		hitbox["xMax"] = Math.max.apply(null, xCoords);
+		hitbox["yMin"] = Math.min.apply(null, yCoords);
+		hitbox["yMax"] = Math.max.apply(null, yCoords);
+		hitbox["zMin"] = Math.min.apply(null, zCoords);
+        hitbox["zMax"] = Math.max.apply(null, zCoords);
+       
+        return hitbox;
+    }
     
 };
 

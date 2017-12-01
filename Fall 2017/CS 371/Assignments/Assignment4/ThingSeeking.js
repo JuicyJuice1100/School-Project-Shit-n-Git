@@ -37,8 +37,8 @@ ThingSeeking.prototype.init = function() {
 ThingSeeking.prototype.show = function() {
 
     g_matrixStack.push(modelViewMatrix);
-    modelViewMatrix = mult(modelViewMatrix, translate(this.x, 0.0, this.z));
-    modelViewMatrix = mult(modelViewMatrix, scalem(0.8,0.8,0.8));
+    modelViewMatrix = mult(modelViewMatrix, translate(this.x, this.y, this.z));
+    // modelViewMatrix = mult(modelViewMatrix, scalem(0.8,0.8,0.8));
 
     gl.bindBuffer( gl.ARRAY_BUFFER, this.vBuffer );
     this.vPosition = gl.getAttribLocation( program, "vPosition" );

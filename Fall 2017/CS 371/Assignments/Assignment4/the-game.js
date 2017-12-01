@@ -39,12 +39,14 @@ var program;
 
 var arena;
 var hero;
-var thingSeeking;
+var volkshagon;
 var villain;
 
 var g_matrixStack = []; // Stack for storing a matrix
 
 var isAbove = true;
+var isReloading;
+var hitBox;
 
 window.onload = function init(){
     canvas = document.getElementById( "gl-canvas" );
@@ -85,8 +87,9 @@ window.onload = function init(){
     hero = new Hero(program, eyex, eyeHeight, eyez, -90, 10.0);
     hero.init();
 
-    thingSeeking = new ThingSeeking(program, ARENASIZE/4.0, 0.0, -ARENASIZE/4.0, 0, 10.0);
-    thingSeeking.init();
+    volkshagon = new ThingSeeking(program, ARENASIZE/2.0, -10.0, -ARENASIZE, 0, 10.0);
+    volkshagon.init();
+    hitBox = volkshagon.vwCoords(vwMesh);
 
     villain = new Villain(program, ARENASIZE/2.0, 0.0, eyez+250, 0, 10.0);
     villain.init();
@@ -113,7 +116,7 @@ function render()
     gl.uniformMatrix4fv( projectionMatrixLoc, false, flatten(projectionMatrix) );
     arena.show();
     hero.show();
-    thingSeeking.show();
+    volkshagon.show();
     villain.show();
     
     // Overhead viewport 
@@ -127,9 +130,45 @@ function render()
     gl.uniformMatrix4fv( modelViewMatrixLoc, false, flatten(modelViewMatrix) );
     gl.uniformMatrix4fv( projectionMatrixLoc, false, flatten(projectionMatrix) );
     villain.move(-3.0);
+
+    
+    if(isJump){
+        hero.y = Math.min(225, hero.jump(25));
+        if(hero.y >= 225){
+            isJump = false;
+        }
+    }
+
+    //check if hero is grounded
+    if(!isJump){
+        //gravity for jumping
+        hero.y = Math.max(10, hero.gravity());
+    }
+
+    //check if hero is eaten by villain
+    if(eatenCheck(hero, villain) && !isReloading){
+        window.alert("Oh, He Gotchu");
+        window.location.reload(false);
+        isReloading = true;
+    }
+
+    //check if hero is at the finish line
+    if(finishLine(hero) && !isReloading){
+        window.alert("You're still alive.  Now go again!");
+        window.location.reload(false);
+        isReloading = true;
+    }
+
+    if(hitByCarCheck(hero) && !isReloading){
+        window.alert("You gotta dodge the car... YOU DIED!");
+        window.location.reload(false);
+        isReloading = true;
+    }
+
+    volkshagon.move(5.0);
     arena.show();
     hero.show();
-    thingSeeking.show();
+    volkshagon.show();
     villain.show();
    
 
