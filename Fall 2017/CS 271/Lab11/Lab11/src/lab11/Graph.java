@@ -26,6 +26,7 @@ public class Graph<T> {
         map = new HashMap<>();
     }
     
+    
     /**
      * insert new vertex to hashmap if it doesn't exist already
      * @param vertex
@@ -116,6 +117,14 @@ public class Graph<T> {
     }
     
     /**
+     * basic get function.  Gets map
+     * @return 
+     */
+    public HashMap getMap(){
+        return map;
+    }
+    
+    /**
      * creates a string of BFS order
      * @param vertex
      * @return 
@@ -170,6 +179,7 @@ public class Graph<T> {
         }
         return str.toString();
     }
+    
     
     /**
      * standard toString method
