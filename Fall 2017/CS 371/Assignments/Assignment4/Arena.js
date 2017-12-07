@@ -76,6 +76,8 @@ function Arena() {
 
 	this.show = function () {
 
+		gl.enable(gl.DEPTH_TEST);
+
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.vBuffer);
 		this.vPosition = gl.getAttribLocation(program, "vPosition");
 		if (this.vPosition < 0) {
@@ -109,11 +111,11 @@ function Arena() {
 
 		gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
 		gl.drawArrays(gl.TRIANGLE_FAN, 4, 4);
-		gl.drawArrays(gl.TRIANGLE_FAN, 8, 4);
-		gl.drawArrays(gl.TRIANGLE_FAN, 12, 4);
+		// gl.drawArrays(gl.TRIANGLE_FAN, 8, 4);
+		// gl.drawArrays(gl.TRIANGLE_FAN, 12, 4);
 
 		ambientProduct = mult(la0, blue);
-		//	ambientProduct = mult(vec4(1.0,1.0,1.0,1.0), blue);
+		// ambientProduct = mult(vec4(1.0,1.0,1.0,1.0), blue);
 		diffuseProduct = mult(ld0, blue);
 		specularProduct = mult(ls0, blue);
 

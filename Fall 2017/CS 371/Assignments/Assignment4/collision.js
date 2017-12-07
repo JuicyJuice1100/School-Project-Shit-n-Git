@@ -7,6 +7,5 @@ finishLine = function(hero){
 }
 
 hitByCarCheck = function(hero){
-    debugger;
     return hero.z <= volkshagon.z + hitBox["zMax"] && hero.z >= volkshagon.z + hitBox["zMin"] && hero.y < volkshagon.y + hitBox["yMax"];
 }

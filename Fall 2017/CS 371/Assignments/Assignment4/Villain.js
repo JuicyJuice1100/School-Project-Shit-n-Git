@@ -155,8 +155,8 @@ Villain.prototype.show = function() {
 
     gl.bindBuffer( gl.ELEMENT_ARRAY_BUFFER, this.iBuffer );
 
-    gl.enable(gl.CULL_FACE);	
-    gl.cullFace(gl.BACK);
+    // gl.enable(gl.CULL_FACE);	
+    // gl.cullFace(gl.BACK);
     gl.uniform1i(gl.getUniformLocation(program, "texture_flag"),
  		 1);
     gl.uniformMatrix4fv( modelViewMatrixLoc, false, flatten(modelViewMatrix) );
@@ -173,7 +173,7 @@ Villain.prototype.show = function() {
     gl.drawElements( gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 48 );
     gl.uniform1i(gl.getUniformLocation(program, "texture"), 0);   // See on left
     gl.drawElements( gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 60 );
-    gl.disable(gl.CULL_FACE);
+    // gl.disable(gl.CULL_FACE);
     
     modelViewMatrix = g_matrixStack.pop();
     gl.uniform1i(gl.getUniformLocation(program, "texture_flag"),

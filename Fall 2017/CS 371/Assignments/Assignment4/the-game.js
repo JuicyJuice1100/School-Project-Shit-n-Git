@@ -47,12 +47,15 @@ var g_matrixStack = []; // Stack for storing a matrix
 var isAbove = true;
 var isReloading;
 var hitBox;
+var isHit;
+var rotation = 0.0;
+var hasWon;
 
 window.onload = function init(){
     canvas = document.getElementById( "gl-canvas" );
     
-    //    gl = WebGLUtils.setupWebGL( canvas );
-    gl = WebGLDebugUtils.makeDebugContext( canvas.getContext("webgl") ); // For debugging
+       gl = WebGLUtils.setupWebGL( canvas );
+    // gl = WebGLDebugUtils.makeDebugContext( canvas.getContext("webgl") ); // For debugging
     if ( !gl ) { alert( "WebGL isn't available" ); }
     
     //  Configure WebGL
@@ -87,7 +90,7 @@ window.onload = function init(){
     hero = new Hero(program, eyex, eyeHeight, eyez, -90, 10.0);
     hero.init();
 
-    volkshagon = new ThingSeeking(program, ARENASIZE/2.0, -10.0, -ARENASIZE, 0, 10.0);
+    volkshagon = new ThingSeeking(program, ARENASIZE/2.0, -10.0, -ARENASIZE*1.5, 0, 10.0);
     volkshagon.init();
     hitBox = volkshagon.vwCoords(vwMesh);
 
@@ -99,7 +102,7 @@ window.onload = function init(){
 
 function render()
 {
-    gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.clear( gl.COLOR_BUFFER_BIT || gl.DEPTH_BUFFER_BIT);
 
     
     // Hero's eye viewport 
@@ -111,9 +114,26 @@ function render()
     modelViewMatrix = lookAt( vec3(hero.x, hero.y, hero.z),
 			      vec3(hero.x + hero.xdir, hero.y, hero.z + hero.zdir),
                   vec3(upx, upy, upz) );
+    
+    if(hasWon){
+        modelViewMatrix = mult(modelViewMatrix, translate(ARENASIZE/2, -20.0, -ARENASIZE));
+        // modelViewMatrix = mult(modelViewMatrix, rotateX(-45.0));
+        modelViewMatrix = mult(modelViewMatrix, rotateY(rotation));
+        modelViewMatrix = mult(modelViewMatrix, translate(-hero.x, -hero.y, -hero.z));
+        rotation += 1.0;
+    }
+
+    if(isHit){
+        // modelViewMatrix = mult(modelViewMatrix, translate(0.0, volkshagon.y + 10.0, 0.0));
+        modelViewMatrix = mult(modelViewMatrix, rotateX(rotation));
+        hero.move(15.0);            
+        rotation += 1.0;
+    }
+
     projectionMatrix = perspective( fov, HERO_VP * aspect, near, far );
     gl.uniformMatrix4fv( modelViewMatrixLoc, false, flatten(modelViewMatrix) );
     gl.uniformMatrix4fv( projectionMatrixLoc, false, flatten(projectionMatrix) );
+
     arena.show();
     hero.show();
     volkshagon.show();
@@ -129,12 +149,17 @@ function render()
     projectionMatrix = ortho( -500,500, -500,500, 0,200 );
     gl.uniformMatrix4fv( modelViewMatrixLoc, false, flatten(modelViewMatrix) );
     gl.uniformMatrix4fv( projectionMatrixLoc, false, flatten(projectionMatrix) );
-    villain.move(-3.0);
+
+    if(!hasWon){
+        villain.move(-2.5);
+        volkshagon.move(8.0);
+    }
+    
 
     
     if(isJump){
-        hero.y = Math.min(225, hero.jump(25));
-        if(hero.y >= 225){
+        hero.y = Math.min(250, hero.jump(25));
+        if(hero.y >= 250){
             isJump = false;
         }
     }
@@ -153,19 +178,26 @@ function render()
     }
 
     //check if hero is at the finish line
-    if(finishLine(hero) && !isReloading){
-        window.alert("You're still alive.  Now go again!");
-        window.location.reload(false);
-        isReloading = true;
+    // if(finishLine(hero) && !isReloading){
+    //     window.alert("You're still alive.  Now go again!");
+    //     window.location.reload(false);
+    //     isReloading = true;
+    // }
+
+    if(finishLine(hero)){
+        hasWon = true;
     }
 
-    if(hitByCarCheck(hero) && !isReloading){
-        window.alert("You gotta dodge the car... YOU DIED!");
-        window.location.reload(false);
-        isReloading = true;
+    // if(hitByCarCheck(hero) && !isReloading){
+    //     window.alert("You gotta dodge the car... YOU DIED!");
+    //     window.location.reload(false);
+    //     isReloading = true;
+    // }
+
+    if(hitByCarCheck(hero) && !isHit){
+        isHit = true;
     }
 
-    volkshagon.move(5.0);
     arena.show();
     hero.show();
     volkshagon.show();

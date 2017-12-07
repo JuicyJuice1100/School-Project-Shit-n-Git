@@ -36,6 +36,8 @@ ThingSeeking.prototype.init = function() {
 
 ThingSeeking.prototype.show = function() {
 
+    gl.enable(gl.DEPTH_TEST);
+    
     g_matrixStack.push(modelViewMatrix);
     modelViewMatrix = mult(modelViewMatrix, translate(this.x, this.y, this.z));
     // modelViewMatrix = mult(modelViewMatrix, scalem(0.8,0.8,0.8));

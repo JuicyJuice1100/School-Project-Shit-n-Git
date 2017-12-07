@@ -40,7 +40,7 @@ Hero.prototype.init = function() {
 };
 
 Hero.prototype.show = function() {
-
+    
     g_matrixStack.push(modelViewMatrix);
     modelViewMatrix = mult(modelViewMatrix, translate(this.x, 10.0, this.z));
     modelViewMatrix = mult(modelViewMatrix, scalem(10.0,10.0,10.0));
