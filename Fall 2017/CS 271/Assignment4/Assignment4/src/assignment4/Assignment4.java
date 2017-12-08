@@ -59,7 +59,7 @@ public class Assignment4 {
                 }
             }
             System.out.println("Most Popular" + mostPopular.toString());
-            fGraph.getMap()
+            fGraph.getMap();
         }
     }
 
