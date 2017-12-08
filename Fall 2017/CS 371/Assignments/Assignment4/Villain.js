@@ -120,13 +120,19 @@ Villain.prototype.init = function() {
 
 Villain.prototype.show = function() {
 
+    gl.enable(gl.DEPTH_TEST);
+
     g_matrixStack.push(modelViewMatrix);
-    this.rotate = this.rotate + 0.5;
-    modelViewMatrix = mult(modelViewMatrix, translate(this.x, 0.0, this.z));
+    this.rotate = this.rotate + 1.0;
+    modelViewMatrix = mult(modelViewMatrix, translate(this.x, this.y, this.z));
     modelViewMatrix = mult(modelViewMatrix, scalem(100.0,100.0,100.0));
     // this will roll the villain
+    if(villain.z <= -500){
+        modelViewMatrix = mult(modelViewMatrix, translate(0.0, 0.5, 0.0));
+        modelViewMatrix = mult(modelViewMatrix, rotateY(this.rotate));
+        modelViewMatrix = mult(modelViewMatrix, translate(0.0, -0.5, 0.0));
+    }
     // modelViewMatrix = mult(modelViewMatrix, translate(0.0, 0.5, 0.0));
-    // modelViewMatrix = mult(modelViewMatrix, rotateX(this.rotate));
     // modelViewMatrix = mult(modelViewMatrix, translate(0.0, -0.5, 0.0));
 
     gl.bindBuffer( gl.ARRAY_BUFFER, this.vBuffer );
@@ -155,8 +161,10 @@ Villain.prototype.show = function() {
 
     gl.bindBuffer( gl.ELEMENT_ARRAY_BUFFER, this.iBuffer );
 
-    // gl.enable(gl.CULL_FACE);	
-    // gl.cullFace(gl.BACK);
+    gl.enable(gl.CULL_FACE);	
+    gl.cullFace(gl.BACK);
+
+    gl.enable(gl.DEPTH_TEST);
     gl.uniform1i(gl.getUniformLocation(program, "texture_flag"),
  		 1);
     gl.uniformMatrix4fv( modelViewMatrixLoc, false, flatten(modelViewMatrix) );
@@ -173,7 +181,7 @@ Villain.prototype.show = function() {
     gl.drawElements( gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 48 );
     gl.uniform1i(gl.getUniformLocation(program, "texture"), 0);   // See on left
     gl.drawElements( gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 60 );
-    // gl.disable(gl.CULL_FACE);
+    gl.disable(gl.CULL_FACE);
     
     modelViewMatrix = g_matrixStack.pop();
     gl.uniform1i(gl.getUniformLocation(program, "texture_flag"),

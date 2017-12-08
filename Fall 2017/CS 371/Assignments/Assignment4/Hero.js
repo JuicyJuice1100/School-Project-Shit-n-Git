@@ -41,6 +41,8 @@ Hero.prototype.init = function() {
 
 Hero.prototype.show = function() {
     
+    gl.enable(gl.DEPTH_TEST);
+    
     g_matrixStack.push(modelViewMatrix);
     modelViewMatrix = mult(modelViewMatrix, translate(this.x, 10.0, this.z));
     modelViewMatrix = mult(modelViewMatrix, scalem(10.0,10.0,10.0));

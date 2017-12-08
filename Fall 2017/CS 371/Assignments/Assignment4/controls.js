@@ -11,7 +11,7 @@ window.onkeydown = function(event) {
     // For letters, the upper-case version of the letter is always
     // returned because the shift-key is regarded as a separate key in
     // itself.  Hence upper- and lower-case can't be distinguished.
-    if(!isHit || !hasWon){
+    if(!isHit && !hasWon && !heroEaten){
         switch (key) {
             // case 'S':
             //     // Move backward
@@ -23,7 +23,7 @@ window.onkeydown = function(event) {
                     hero.move(-5.0);
                     isFLast = !isFLast;
                 } else{
-                    villain.move(-1.0);
+                    villain.move(-2.0);
                 }
                 break;
             case 'J':
@@ -31,7 +31,7 @@ window.onkeydown = function(event) {
                     hero.move(-5.0);
                     isFLast = !isFLast;
                 } else{
-                    villain.move(-1.0);
+                    villain.move(-2.0);
                 }
                 break;
             case ' ':
@@ -39,7 +39,7 @@ window.onkeydown = function(event) {
                     hero.y = hero.jump(20.0);
                     isJump = true;
                 } else{
-                    villain.move(-1.0);
+                    villain.move(-2.0);
                 }
                 break;
             // case 'R':
@@ -51,7 +51,7 @@ window.onkeydown = function(event) {
             //     }
             //     break;
             default:
-                villain.move(-1.0);
+                villain.move(-2.0);
             
         }
     } 

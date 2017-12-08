@@ -51,6 +51,11 @@ var isHit;
 var rotation = 0.0;
 var hasWon;
 
+var prevX, prevY, prevZ;
+var vWRotation = 0.0;
+var villainHit;
+var heroEaten;
+
 window.onload = function init(){
     canvas = document.getElementById( "gl-canvas" );
     
@@ -114,21 +119,72 @@ function render()
     modelViewMatrix = lookAt( vec3(hero.x, hero.y, hero.z),
 			      vec3(hero.x + hero.xdir, hero.y, hero.z + hero.zdir),
                   vec3(upx, upy, upz) );
-    
+                  
+    //constantly rotate camera when player wins
     if(hasWon){
-        modelViewMatrix = mult(modelViewMatrix, translate(ARENASIZE/2, -20.0, -ARENASIZE));
+        prevX = hero.x;
+        prevY = hero.y;
+        prevZ = hero.z;
+        modelViewMatrix = mult(modelViewMatrix, translate(0.0, -10.0, -ARENASIZE/4));
+        modelViewMatrix = mult(modelViewMatrix, translate(prevX, prevY, prevZ));
         // modelViewMatrix = mult(modelViewMatrix, rotateX(-45.0));
         modelViewMatrix = mult(modelViewMatrix, rotateY(rotation));
         modelViewMatrix = mult(modelViewMatrix, translate(-hero.x, -hero.y, -hero.z));
         rotation += 1.0;
+        (function win(){
+            var body = document.getElementById("body");
+            var image = document.createElement("p");
+            var node = document.createTextNode("test");
+            image.appendChild(node);
+            image.innerHTML = "You Win!";
+            image.style.margin = 0 + "px";
+            image.style.padding = 0 + "px";
+            image.style.position = "absolute";
+            image.style.zIndex = -1;
+            image.style.right = Math.random() * 2000 + "px";
+            image.style.left = Math.random() * 2000 + "px";
+            image.style.top = Math.random() * 2000 + "px";
+            image.style.bottom = Math.random() * 2000 + "px";
+            body.appendChild(image);
+        }());
     }
 
-    if(isHit){
+    if(heroEaten){
+        prevX = hero.x;
+        prevY = hero.y;
+        prevZ = hero.z;
+        modelViewMatrix = mult(modelViewMatrix, translate(0.0, -20.0, -ARENASIZE/2));
+        modelViewMatrix = mult(modelViewMatrix, translate(prevX, prevY, prevZ));        
+        modelViewMatrix = mult(modelViewMatrix, rotateX(-45.0));
+        modelViewMatrix = mult(modelViewMatrix, rotateY(rotation));
+        modelViewMatrix = mult(modelViewMatrix, translate(-hero.x, -hero.y, -hero.z));
+        rotation += 1.0;
+        (function win(){
+            var body = document.getElementById("body");
+            var image = document.createElement("p");
+            var node = document.createTextNode("test");
+            image.appendChild(node);
+            image.innerHTML = "You Lose!";
+            image.style.margin = 0 + "px";
+            image.style.padding = 0 + "px";
+            image.style.position = "absolute";
+            image.style.zIndex = -1;
+            image.style.right = Math.random() * 2000 + "px";
+            image.style.left = Math.random() * 2000 + "px";
+            image.style.top = Math.random() * 2000 + "px";
+            image.style.bottom = Math.random() * 2000 + "px";
+            body.appendChild(image);
+        }());
+    }
+
+    //Will cause the hero to fall backwards when hit by volkshagon
+    if(isHit && !heroEaten){
         // modelViewMatrix = mult(modelViewMatrix, translate(0.0, volkshagon.y + 10.0, 0.0));
         modelViewMatrix = mult(modelViewMatrix, rotateX(rotation));
         hero.move(15.0);            
         rotation += 1.0;
     }
+    
 
     projectionMatrix = perspective( fov, HERO_VP * aspect, near, far );
     gl.uniformMatrix4fv( modelViewMatrixLoc, false, flatten(modelViewMatrix) );
@@ -150,13 +206,12 @@ function render()
     gl.uniformMatrix4fv( modelViewMatrixLoc, false, flatten(modelViewMatrix) );
     gl.uniformMatrix4fv( projectionMatrixLoc, false, flatten(projectionMatrix) );
 
-    if(!hasWon){
-        villain.move(-2.5);
-        volkshagon.move(8.0);
+    if(!hasWon && !heroEaten){
+        villain.move(-2.0);
+        volkshagon.move(7.5);
     }
     
-
-    
+    //A check to see if the hero hit the jump button while on the ground
     if(isJump){
         hero.y = Math.min(250, hero.jump(25));
         if(hero.y >= 250){
@@ -171,31 +226,23 @@ function render()
     }
 
     //check if hero is eaten by villain
-    if(eatenCheck(hero, villain) && !isReloading){
-        window.alert("Oh, He Gotchu");
-        window.location.reload(false);
-        isReloading = true;
+    if(eatenCheck(hero, villain)){
+        heroEaten = true;
     }
 
-    //check if hero is at the finish line
-    // if(finishLine(hero) && !isReloading){
-    //     window.alert("You're still alive.  Now go again!");
-    //     window.location.reload(false);
-    //     isReloading = true;
-    // }
-
+    //check to see if hero made it to the end
     if(finishLine(hero)){
         hasWon = true;
     }
 
-    // if(hitByCarCheck(hero) && !isReloading){
-    //     window.alert("You gotta dodge the car... YOU DIED!");
-    //     window.location.reload(false);
-    //     isReloading = true;
-    // }
-
+    //a check to see if the hero has gotten hit by the car
     if(hitByCarCheck(hero) && !isHit){
         isHit = true;
+    }
+
+    //check to see if villain hit car
+    if(hitByCarCheck(villain)){
+        villainHit = true;
     }
 
     arena.show();

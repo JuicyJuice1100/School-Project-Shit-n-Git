@@ -39,7 +39,15 @@ ThingSeeking.prototype.show = function() {
     gl.enable(gl.DEPTH_TEST);
     
     g_matrixStack.push(modelViewMatrix);
+    
     modelViewMatrix = mult(modelViewMatrix, translate(this.x, this.y, this.z));
+    //check to see if villain hit the car
+    if(villainHit){
+        modelViewMatrix = mult(modelViewMatrix, translate(vWRotation, 0.0, 0.0));
+        modelViewMatrix = mult(modelViewMatrix, rotateY(vWRotation));
+        vWRotation += 8.0;
+    }
+    
     // modelViewMatrix = mult(modelViewMatrix, scalem(0.8,0.8,0.8));
 
     gl.bindBuffer( gl.ARRAY_BUFFER, this.vBuffer );
