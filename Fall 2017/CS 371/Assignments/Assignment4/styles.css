@@ -12,3 +12,15 @@ canvas{
     bottom: 0;
     margin: auto;
 }
+
+p{
+    position: absolute;
+    right: 30%;
+    bottom: 80%;
+    font-size: 18px;
+}
+
+#image{
+    max-height: 500px;
+    max-width: 500px;
+}

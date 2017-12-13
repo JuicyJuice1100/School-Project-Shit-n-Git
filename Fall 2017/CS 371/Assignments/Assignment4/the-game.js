@@ -1,4 +1,19 @@
 // the-game.js
+/*****************************************
+ * Justin Espiritu & Tyler Bates
+ * 
+ * GGW:  
+ * When the hero loses the camera rotates around and looks at the villain.  All other objects freeze.
+ * When the hero wins the camera rotates around and looks at the hero.   All other objects freeze.
+ * When the villain collides with the VW the vw spins out of control.
+ * When the hero collides with the VW the hero falls backwards, show via the camera, until it collides with the villain
+ * If the hero makes any mistake the villain does get faster.
+ * We have two extra lights, one on each of the flags for the check points.
+ * Changed the size of the arena to make it more narrow to represent more of a hallway.
+ * Implimented semi realistic jumping.
+ * There is a score multiplier when the player crosses half way.
+ * When the villain passes the middle checkpoint the villain begins to spin.
+ */
 var gl;
 var canvas; 
 const WALLHEIGHT     = 140.0; // Some playing field parameters
@@ -41,6 +56,10 @@ var arena;
 var hero;
 var volkshagon;
 var villain;
+var checkpointFlag;
+var checkpointFlag2;
+
+var score = 0;
 
 var g_matrixStack = []; // Stack for storing a matrix
 
@@ -55,6 +74,8 @@ var prevX, prevY, prevZ;
 var vWRotation = 0.0;
 var villainHit;
 var heroEaten;
+var VILLAIN_SPEED = -1.5;
+var multiplier = 1.0;
 
 window.onload = function init(){
     canvas = document.getElementById( "gl-canvas" );
@@ -102,6 +123,12 @@ window.onload = function init(){
     villain = new Villain(program, ARENASIZE/2.0, 0.0, eyez+250, 0, 10.0);
     villain.init();
     
+    checkpointFlag = new Checkpoint(program, ARENASIZE * .4, 0.0, -ARENASIZE/2, 0, 10.0);
+    checkpointFlag.init();
+
+    checkpointFlag2 = new Checkpoint(program, ARENASIZE*.6, 0.0, -ARENASIZE/2, 0, 10.0);
+    checkpointFlag2.init();
+
     render();
 };
 
@@ -133,10 +160,11 @@ function render()
         rotation += 1.0;
         (function win(){
             var body = document.getElementById("body");
-            var image = document.createElement("p");
+            var image = document.createElement("img");
             var node = document.createTextNode("test");
             image.appendChild(node);
-            image.innerHTML = "You Win!";
+            image.id = "image";
+            image.src = "MattFirst.bmp";
             image.style.margin = 0 + "px";
             image.style.padding = 0 + "px";
             image.style.position = "absolute";
@@ -161,10 +189,11 @@ function render()
         rotation += 1.0;
         (function win(){
             var body = document.getElementById("body");
-            var image = document.createElement("p");
+            var image = document.createElement("img");
             var node = document.createTextNode("test");
             image.appendChild(node);
-            image.innerHTML = "You Lose!";
+            image.id = "image";
+            image.src = "Luke.jpg";
             image.style.margin = 0 + "px";
             image.style.padding = 0 + "px";
             image.style.position = "absolute";
@@ -194,6 +223,8 @@ function render()
     hero.show();
     volkshagon.show();
     villain.show();
+    checkpointFlag.show();
+    checkpointFlag2.show();
     
     // Overhead viewport 
     var horiz_offset = (width * (1.0 - HERO_VP) / 20.0);
@@ -206,8 +237,11 @@ function render()
     gl.uniformMatrix4fv( modelViewMatrixLoc, false, flatten(modelViewMatrix) );
     gl.uniformMatrix4fv( projectionMatrixLoc, false, flatten(projectionMatrix) );
 
+    //change score
+    document.getElementById("score").innerHTML = score;
+    
     if(!hasWon && !heroEaten){
-        villain.move(-2.0);
+        villain.move(VILLAIN_SPEED);
         volkshagon.move(7.5);
     }
     
@@ -245,11 +279,16 @@ function render()
         villainHit = true;
     }
 
+    if(hero.z <= -500){
+        multiplier = 4;
+    }
+
     arena.show();
     hero.show();
     volkshagon.show();
     villain.show();
-   
+    checkpointFlag.show();
+    checkpointFlag2.show();
 
     requestAnimFrame( render );
 };

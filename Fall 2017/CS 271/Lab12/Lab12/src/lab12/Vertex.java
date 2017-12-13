@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author Justin Espiritu
  */
-public class Vertex <T>{
+public class Vertex <T> implements Comparable<Vertex>{
     private String label;
     private T data;
     private ArrayList<Edge> incoming;
@@ -117,5 +117,13 @@ public class Vertex <T>{
         StringBuilder str = new StringBuilder();
         str.append(label);
         return str.toString();
+    }
+
+    @Override
+    public int compareTo(Vertex vertex){
+        if(vertex.getLabel().equals(label)){
+            return 0;
+        }
+        return -1;
     }
 }

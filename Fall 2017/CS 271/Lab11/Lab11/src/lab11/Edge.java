@@ -10,7 +10,7 @@ package lab11;
  *
  * @author Justin Espiritu
  */
-public class Edge {
+public class Edge implements Comparable<Edge> {
     private Vertex from;
     private Vertex to;
     private int weight;
@@ -84,6 +84,10 @@ public class Edge {
         return to;
     }
     
+    @Override
+    public int compareTo(Edge edge){
+        return edge.getWeight() - weight;
+    }
     /**
      * standard toString method
      * @return 

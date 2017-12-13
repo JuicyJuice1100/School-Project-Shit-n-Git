@@ -5,6 +5,7 @@
 var isFLast;
 var isJump;
 
+
 window.onkeydown = function(event) {
     var key = String.fromCharCode(event.keyCode);
     
@@ -20,26 +21,32 @@ window.onkeydown = function(event) {
             //     break;
             case 'F':
                 if(!isFLast){
-                    hero.move(-5.0);
+                    hero.move(-5.5);
                     isFLast = !isFLast;
+                    score += 1 * multiplier;
                 } else{
-                    villain.move(-2.0);
+                    villain.move(VILLAIN_SPEED);
+                    score -= 1 * multiplier;
                 }
                 break;
             case 'J':
                 if(isFLast){
-                    hero.move(-5.0);
+                    hero.move(-5.5);
                     isFLast = !isFLast;
+                    score += 1 * multiplier;
                 } else{
-                    villain.move(-2.0);
+                    villain.move(VILLAIN_SPEED);
+                    score -= 1 * multiplier;
                 }
                 break;
             case ' ':
                 if(hero.y === 10){
                     hero.y = hero.jump(20.0);
                     isJump = true;
+                    score += 1 * multiplier;
                 } else{
-                    villain.move(-2.0);
+                    villain.move(VILLAIN_SPEED);
+                    score -= 1 * multiplier;
                 }
                 break;
             // case 'R':
@@ -51,8 +58,8 @@ window.onkeydown = function(event) {
             //     }
             //     break;
             default:
-                villain.move(-2.0);
-            
+                villain.move(VILLAIN_SPEED);
+                score -= 1 * multiplier;
         }
     } 
 };

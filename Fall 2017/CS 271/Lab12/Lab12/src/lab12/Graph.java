@@ -12,7 +12,7 @@ import java.util.*;
  *
  * @author Justin Espiritu
  */
-public class Graph<T> {
+public class Graph{
     private boolean isDirected;
     private int edgeCount = 0, vertexCount = 0;
     private HashMap<Vertex, ArrayList<Edge>> map;
@@ -180,6 +180,91 @@ public class Graph<T> {
         return str.toString();
     }
     
+    public String Dijkstra(Vertex vertex){
+        StringBuilder str = new StringBuilder();
+        ArrayList<Vertex> notVisited = new ArrayList<>();
+        PriorityQueue<Vertex> queue = new PriorityQueue<>();
+        HashMap<Vertex, Vertex> pred = new HashMap<>();
+        HashMap<Vertex, Integer> distances = new HashMap<>();
+ 
+        for(Vertex key: map.keySet()){
+            notVisited.add(key);
+            pred.put(key, null);
+        }
+        for(ArrayList<Edge> edges: map.values()){
+            for(Edge edge: edges){
+                distances.put(edge.getTo(), 0);
+            }
+        }
+        
+        queue.add(vertex);
+        do{
+            vertex = queue.poll();
+            notVisited.remove(vertex);
+            ArrayList<Vertex> neighbors = vertex.getOutgoingNeighbors();
+            for(Vertex neighbor: neighbors){
+                if(notVisited.contains(neighbor)){
+                    int prev = distances.get(neighbor);
+                    distances.put(neighbor, Math.min(distances.get(neighbor), distances.get(vertex) + Cost(vertex, neighbor)));
+                    if(prev != distances.get(neighbor)){
+                        pred.put(vertex, neighbor);
+                        queue.add(neighbor);
+                    }
+                }
+            }
+        } while(!notVisited.isEmpty());
+        return "didn't have time to implement algorithm that has the shortest path.  Do have most of Dijkstra's completed";
+    }
+    
+    private int Cost(Vertex vertex, Vertex neighbor){
+        ArrayList<Edge> neighbors = map.get(vertex);
+        for(Edge edge: neighbors){
+            if(neighbor.compareTo(edge.getTo()) == 0){
+                return edge.getWeight();
+            }
+        }
+        return 0;
+    }
+    
+    public String Prim(Vertex vertex){
+        StringBuilder str = new StringBuilder();
+        ArrayList<Vertex> notVisited = new ArrayList<>();
+        PriorityQueue<Vertex> queue = new PriorityQueue<>();
+        HashMap<Vertex, Vertex> pred = new HashMap<>();
+        HashMap<Vertex, Integer> distances = new HashMap<>();
+ 
+        for(Vertex key: map.keySet()){
+            notVisited.add(key);
+            pred.put(key, null);
+        }
+        for(ArrayList<Edge> edges: map.values()){
+            for(Edge edge: edges){
+                distances.put(edge.getTo(), 0);
+            }
+        }
+        
+        queue.add(vertex);
+        do{
+            vertex = queue.poll();
+            notVisited.remove(vertex);
+            ArrayList<Vertex> neighbors = vertex.getOutgoingNeighbors();
+            for(Vertex neighbor: neighbors){
+                if(notVisited.contains(neighbor)){
+                    int prev = distances.get(neighbor);
+                    distances.put(neighbor, Math.min(distances.get(neighbor), Cost(vertex, neighbor)));
+                    if(prev != distances.get(neighbor)){
+                        pred.put(vertex, neighbor);
+                        queue.add(neighbor);
+                    }
+                }
+            }
+        } while(!notVisited.isEmpty());
+        return "didn't have time to implement algorithm that has the shortest path.  Do have most of Dijkstra's completed";
+    }
+
+//    public String Topological(){
+//        
+//    }
     
     /**
      * standard toString method

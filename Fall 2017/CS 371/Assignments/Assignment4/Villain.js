@@ -84,7 +84,7 @@ Villain.prototype.init = function() {
     // Texture 0
     var image0 = new Image();
     image0.crossOrigin = "anonymous";
-    image0.src = "bingley128.png";
+    image0.src = "Luke.png";
     image0.onload = function() { 
 	var texture0 = gl.createTexture();
 	gl.activeTexture( gl.TEXTURE0);
@@ -101,7 +101,7 @@ Villain.prototype.init = function() {
     // Texture 1
     var image1 = new Image();
     image1.crossOrigin = "anonymous";
-    image1.src = "darcy128.png";
+    image1.src = "Luke.png";
     image1.onload = function() { 
 	var texture1 = gl.createTexture();
 	gl.activeTexture( gl.TEXTURE1);

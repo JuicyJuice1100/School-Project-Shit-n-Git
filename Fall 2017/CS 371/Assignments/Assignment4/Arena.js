@@ -16,10 +16,10 @@ function Arena() {
 		ARENASIZE*.75,0.0,-ARENASIZE*2,
 		
 		//North Wall
-		ARENASIZE*.25,0.0,-ARENASIZE,
-        ARENASIZE*.75,0.0,-ARENASIZE,
-        ARENASIZE*.75,WALLHEIGHT,-ARENASIZE,
-		ARENASIZE*.25,WALLHEIGHT,-ARENASIZE,
+		ARENASIZE*.6,0.0,-ARENASIZE/2,
+        ARENASIZE*.4,0.0,-ARENASIZE/2,
+        ARENASIZE*.6,1.0,-ARENASIZE/2,
+		ARENASIZE*.4,1.0,-ARENASIZE/2,
 		
 		//South Wall
 		ARENASIZE*.25,0.0,0.0,
@@ -111,7 +111,7 @@ function Arena() {
 
 		gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
 		gl.drawArrays(gl.TRIANGLE_FAN, 4, 4);
-		// gl.drawArrays(gl.TRIANGLE_FAN, 8, 4);
+		gl.drawArrays(gl.TRIANGLE_FAN, 8, 4);
 		// gl.drawArrays(gl.TRIANGLE_FAN, 12, 4);
 
 		ambientProduct = mult(la0, blue);
