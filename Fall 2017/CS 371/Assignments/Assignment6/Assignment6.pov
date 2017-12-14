@@ -46,12 +46,12 @@ global_settings{ assumed_gamma 1.0 }
    }
 //--------------------------------------------------------------------------
 // camera ------------------------------------------------------------------
-#declare camera_location = <0.0 , 1.0 ,-10.0>;
+#declare camera_location = <-30+40*clock,80,-120>;
 
    camera {
       location camera_location
       angle    12*ZoomSpline(clock).u
-      look_at  <0.0,0.0,-3.0>+FocusSpline(clock)
+      look_at  <0.2,1.6,1.0>+FocusSpline(clock)
    }
 // sun ---------------------------------------------------------------------
 light_source{<1500,2500,-2500> color White}
@@ -119,7 +119,7 @@ plane{ <0,1,0>, 0
          texture{ pigment{ color rgbt<0.75,0.2,0.0,0.7> }
                   finish { phong 1 }
                 } // end of texture
-         rotate<0,0,clock*-180> translate<-2,-clock * 2,0>  scale<0.3,0.3,0.3>  
+         rotate<0,0,clock*-180> translate<-2,-clock * 2,0>  scale<1,1,1>  
        } // ----------------------------------------------------------------
 //-------------------------------------------------------------------------- 
 
@@ -131,7 +131,7 @@ intersection {
                      normal { granite 0.5 scale <3,0.15,3>*0.8 turbulence 0}
                      finish { phong 0.1}
                    }
-            scale <1,1,1>  rotate<0, 0,0> translate<1 - clock * 2,0,-1>
+            scale <3,3,3>  rotate<0, 0,0> translate<1 - clock * 2,0,-1>
           } // end of object        
     //----------------------------------------------------------------------------
 
@@ -143,7 +143,7 @@ intersection {
                    }
             translate <0,1.15,0> scale 2/(1.15+1.55) translate<1-clock * 2,-1,-1>
             
-            scale 1.35
+            scale 3
             rotate<0,0,0> 
             translate<0,0,0>
           } // end of object -----------------------------------------------------
@@ -158,28 +158,28 @@ torus { 1.0,0.25
         texture { pigment{ color rgb<1,0.7,0>}
                   finish { phong 1 reflection { 0.00 metallic 0.50} }
                 } // end of texture
-        scale <.2,.2,.2> rotate<0,0,0> translate<0,-clock + 1,1>
+        scale <2,2,2> rotate<0,0,0> translate<0,-clock + 1,1>
       } // end of torus  -------------------------------              
 
 torus { 1.0,0.25 
         texture { pigment{ color rgb<1,0,0>}
                   finish { phong 1 reflection { 0.00 metallic 0.50} }
                 } // end of texture
-        scale <0.15,0.15,0.15> rotate<0,0,0> translate<0,-clock + 1.3,1>
+        scale <1.5,1.5,1.5> rotate<0,0,0> translate<0,-clock + 1.3,1>
       } // end of torus  -------------------------------              
 
 torus { 1.0,0.25 
         texture { pigment{ color rgb<0,1,0>}
                   finish { phong 1 reflection { 0.00 metallic 0.50} }
                 } // end of texture
-        scale <0.1,0.1,0.1> rotate<0,0,0> translate<0,-clock + 1.5,1>
+        scale <1,1,1> rotate<0,0,0> translate<0,-clock + 1.5,1>
       } // end of torus  -------------------------------              
 
 torus { 1.0,0.25 
         texture { pigment{ color rgb<0,0,1>}
                   finish { phong 1 reflection { 0.00 metallic 0.50} }
                 } // end of texture
-        scale <0.05,0.05,0.05> rotate<0,0,0> translate<0,-clock + 1.7,1>
+        scale <0.5,0.5,0.5> rotate<0,0,0> translate<0,-clock + 1.7,1>
       } // end of torus  ------------------------------- 
       
 // Include particle system include file
