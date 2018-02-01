@@ -31,7 +31,27 @@ public class MMServer {
    */
   public static void main(String[] args) {
 
-      // to be completed
+      String request, reply;
+      MM masterMind = null;
+      try {
+        serverSocket = new ServerSocket(portNumber);
+        System.out.println("Server started: " + serverSocket);
+        System.out.println("Waiting for a client...");
+        clientSocket = serverSocket.accept();
+        System.out.println("Connection established: " + clientSocket);
+        openStreams();
+        masterMind = new MM();
+        while(true){
+            request = in.readUTF();
+            System.out.println("Client: " + request);
+            reply = masterMind.getReply(request);
+            out.writeUTF(reply);
+            if(reply.equals("Thank you for playing!")){ break; }
+        }
+        close();
+      } catch (IOException e){
+        System.out.println("Server encountered an error. Please try connecting again");
+      }
 
   }// main method
 
@@ -40,16 +60,21 @@ public class MMServer {
    */
   static void openStreams() throws IOException {
 
-      // to be completed
+    in = new DataInputStream(clientSocket.getInputStream());
+    out = new DataOutputStream(clientSocket.getOutputStream());
 
   }// openStreams method
 
   /* close all open I/O streams and sockets
    */
   static void close() {
-
-      // to be completed
-
+    try{
+        if(in != null){ in.close(); }
+        if(out != null) { out.close(); }
+        if(clientSocket != null) {clientSocket.close();}
+    } catch (IOException e){
+        System.err.println("Error in close(): " + e.getMessage());
+    }
   }// close method
 
 }//MMServer class
@@ -66,13 +91,13 @@ class MM {
   static String nextGuess = "    Type your next guess:";
   static String playAgain = "    Another game? (Y/N)";
   static String thankYou = "    Thank you for playing!";
+  static FINAL String AVAILABLELETTERS = "ABCDEF";
 
   /*  the FSM starts in the P state and the trace is empty
    */
   MM() {
-
-      // to be completed
-
+    state = PLAY;
+    answer = pickRandomAnswer();
   }// constructor
 
   /* return a 4-character string in which each character is a uniformly
@@ -80,10 +105,11 @@ class MM {
      to the console before it is returned.
   */
   private String pickRandomAnswer() {
-
-      // to be completed
-
-      return null;
+    StringBuilder pattern = new StringBuilder();
+    for(int i = 0; i < 4; i++){
+        pattern.append(AVAILABLELETTERS.charAt(new Random().nextInt(5)));
+    }
+    return pattern.toString();
   }// pickRandomAnswer method
 
 /*  return a string that encodes the codemaker's feedback to the given guess.
@@ -101,10 +127,13 @@ private String getFeedback(String guess) {
       the current state and other variables as needed.
    */
   public String getReply(String query) {
+    String reply = null;
 
-      // to be completed
-
-      return null;
+    switch(state){
+        case PLAY:
+            reply = ""
+    }
+    return reply;
   }// getReply method
 
 }// MM class

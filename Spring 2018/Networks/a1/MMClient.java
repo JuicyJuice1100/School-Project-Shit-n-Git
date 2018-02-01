@@ -30,7 +30,14 @@ public class MMClient {
      */
     public static void main(String[] args) {
 
-        // to be completed
+        try {
+            socket = new Socket(hostName, portNumber)
+            System.out.println("Connection established: " + socket);
+            openStreams();
+            
+        } catch(){
+
+        }
 
     }// main method
 
