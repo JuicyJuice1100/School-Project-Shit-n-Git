@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LabApplication</string>
+    <string name="playerCard">PlayerCard</string>
+    <string name="opponentCard">OpponentCard</string>
+    <string name="score">Score</string>
+    <string name="numberOfCardRemaining">CardsRemaining</string>
+</resources>

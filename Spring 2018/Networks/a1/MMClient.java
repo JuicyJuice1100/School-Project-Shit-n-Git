@@ -30,13 +30,29 @@ public class MMClient {
      */
     public static void main(String[] args) {
 
+        String query, reply;
+
         try {
-            socket = new Socket(hostName, portNumber)
-            System.out.println("Connection established: " + socket);
+            socket = new Socket(hostName, portNumber);
+            System.out.println("Connected to server: " + socket);
             openStreams();
             
-        } catch(){
-
+            query = "";
+            out.writeUTF(query);
+            while (true){
+                reply = in.readUTF();
+                System.out.println(reply);
+                if(reply.equals("    Thank you for playing!")){ break; }
+                query = console.readLine();
+                out.writeUTF(query);
+            }
+            close();
+        } catch (UnknownHostException e){
+            System.err.println("Unknown host: " + hostName);
+            System.exit(1);
+        } catch (IOException e) {
+            System.err.println("I/O error when connecting to " + hostName);
+            System.exit(1);
         }
 
     }// main method
@@ -45,16 +61,21 @@ public class MMClient {
        static variables; this method does not catch any exceptions.
      */
     static void openStreams() throws IOException {
-
-        // to be completed
-
+        in = new DataInputStream(socket.getInputStream());
+        out = new DataOutputStream(socket.getOutputStream());
+        console = new BufferedReader(new InputStreamReader(System.in));
     }// openStreams method
 
     /* close ALL open I/O streams and sockets
      */
     static void close() {
-
-        // to be completed
-
+        try {
+            if (console != null) {console.close(); }
+            if (in != null)      {in.close();      }
+            if (out != null)     {out.close();     }
+            if (socket != null)  {socket.close();  }
+        } catch (IOException e) {
+            System.err.println("Error in close(): " + e.getMessage());
+        }
     }// close method
 }// MMClient class

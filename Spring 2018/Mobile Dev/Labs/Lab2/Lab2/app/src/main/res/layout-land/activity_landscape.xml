@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/mathWarQuestion"
+        android:layout_width="397dp"
+        android:layout_height="98dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/colorPrimary"
+        android:text="MathWar"
+        app:layout_constraintBottom_toTopOf="@+id/mathWarAnswer"
+        app:layout_constraintEnd_toEndOf="@+id/mathWarSubmitButton"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="@+id/mathWarAnswer" />
+
+    <EditText
+        android:id="@+id/mathWarAnswer"
+        android:layout_width="299dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="Answer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/mathWarSubmitButton" />
+
+    <Button
+        android:id="@+id/mathWarSubmitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mathWarAnswer"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/chatSubmitbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Send"
+        app:layout_constraintBottom_toBottomOf="@+id/chatTextboxSubmission"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/chatTextboxSubmission" />
+
+    <TextView
+        android:id="@+id/playerHandCardRight"
+        android:layout_width="140dp"
+        android:layout_height="177dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="24dp"
+        android:text="PlayerCard3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/playerHandCardCenter" />
+
+    <TextView
+        android:id="@+id/playerHandCardCenter"
+        android:layout_width="140dp"
+        android:layout_height="177dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="20dp"
+        android:text="PlayerCard2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/playerHandCardLeft" />
+
+    <TextView
+        android:id="@+id/playerHandCardLeft"
+        android:layout_width="140dp"
+        android:layout_height="177dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:text="PlayerCard1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/playerScore"
+        android:layout_width="65dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/player"
+        android:text="PlayerScore"
+        app:layout_constraintBottom_toBottomOf="@+id/playerCurrentCard"
+        app:layout_constraintEnd_toStartOf="@+id/opponentScore"
+        app:layout_constraintStart_toEndOf="@+id/playerCurrentCard"
+        app:layout_constraintTop_toBottomOf="@+id/playerCardsRemaining" />
+
+    <TextView
+        android:id="@+id/playerCardsRemaining"
+        android:layout_width="65dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/player"
+        android:text="PlayerCardsRemaining"
+        app:layout_constraintEnd_toStartOf="@+id/opponentCardsRemaining"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toEndOf="@+id/playerCurrentCard"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/opponentCardsRemaining"
+        android:layout_width="65dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/opponent"
+        android:text="OpponentCardsRemaining"
+        app:layout_constraintEnd_toStartOf="@+id/opponentCurrentCard"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/opponentScore"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/opponentScore"
+        android:layout_width="65dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/opponent"
+        android:text="OpponentScore"
+        app:layout_constraintBottom_toBottomOf="@+id/opponentCurrentCard"
+        app:layout_constraintEnd_toStartOf="@+id/opponentCurrentCard"
+        app:layout_constraintTop_toBottomOf="@+id/opponentCardsRemaining" />
+
+    <TextView
+        android:id="@+id/opponentCurrentCard"
+        android:layout_width="140dp"
+        android:layout_height="177dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/opponent"
+        android:text="OpponentCurrentCard"
+        app:layout_constraintEnd_toEndOf="@+id/playerHandCardRight"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/playerCurrentCard"
+        android:layout_width="140dp"
+        android:layout_height="177dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/player"
+        android:text="PlayerCurrentCard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/chatTextboxSubmission"
+        android:layout_width="297dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="172dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Start Typing..."
+        app:layout_constraintEnd_toStartOf="@+id/chatSubmitbutton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/chatTextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/chatTextView"
+        android:layout_width="396dp"
+        android:layout_height="122dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/chatTextboxSubmission"
+        app:layout_constraintEnd_toEndOf="parent" />
+</android.support.constraint.ConstraintLayout>

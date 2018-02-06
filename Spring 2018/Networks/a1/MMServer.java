@@ -46,7 +46,7 @@ public class MMServer {
             System.out.println("Client: " + request);
             reply = masterMind.getReply(request);
             out.writeUTF(reply);
-            if(reply.equals("Thank you for playing!")){ break; }
+            if(reply.equals("    Thank you for playing!")){ break; }
         }
         close();
       } catch (IOException e){
@@ -84,6 +84,7 @@ public class MMServer {
 class MM {
   private static final int PLAY = 0;      // P state
   private static final int GAMEOVER = 1;  // GO state
+  private static final String AVAILABLELETTERS = "ABCDEF"; // allowed letters for MM
   private int state;                      // current state
   private String answer;                  // pattern to discover
   private ArrayList<String> trace;
@@ -91,13 +92,16 @@ class MM {
   static String nextGuess = "    Type your next guess:";
   static String playAgain = "    Another game? (Y/N)";
   static String thankYou = "    Thank you for playing!";
-  static FINAL String AVAILABLELETTERS = "ABCDEF";
+  static String guessAgain = "   Your Guess must be exactly 4 characters long.\n    Guess again...";
+
 
   /*  the FSM starts in the P state and the trace is empty
    */
   MM() {
     state = PLAY;
+    trace = null;
     answer = pickRandomAnswer();
+    System.out.println(answer);
   }// constructor
 
   /* return a 4-character string in which each character is a uniformly
@@ -116,10 +120,17 @@ class MM {
     The format of the feedback is fully specified in the handout.
  */
 private String getFeedback(String guess) {
+    StringBuilder feedback = new StringBuilder();
+      for(int i = 0; i < answer.length(); i++){
+        if (answer.charAt(i) == guess.charAt(i)){
+          feedback.append("B");
+        }
+        else if(answer.indexOf(guess.charAt(i)) != -1) {
+          feedback.append("W");
+        }
+      }
 
-      // to be completed
-
-      return null;
+      return feedback.toString();
 }// getFeedback method
 
   /*  Implement the transition function of the FSM. In other words, return
@@ -127,13 +138,42 @@ private String getFeedback(String guess) {
       the current state and other variables as needed.
    */
   public String getReply(String query) {
-    String reply = null;
+    StringBuilder reply = new StringBuilder();
+    String feedback;
+    boolean isValid = false;
 
     switch(state){
-        case PLAY:
-            reply = ""
+      case PLAY:
+        if(query.length() <= 4 && !query.equals("")){
+          feedback = getFeedback(query);
+            if(feedback.equalsIgnoreCase("BBBB")){
+              state = GAMEOVER;
+              reply = new StringBuilder();
+              reply.append(youWin + "\n" + playAgain);
+            }
+            else{
+              reply.append(nextGuess + " " + feedback);
+            }
+        }
+        else {
+          reply.append(guessAgain);
+        }
+        break;
+      case GAMEOVER:
+        while(!isValid){
+          if(query.equalsIgnoreCase("Y")){
+            reply.append(thankYou);
+          }
+          else if (query.equalsIgnoreCase("N")){
+            reply.append(nextGuess);
+            state = PLAY;
+            isValid = true;
+            answer = pickRandomAnswer();
+            System.out.println(answer);
+          }
+        } 
     }
-    return reply;
+    return reply.toString();
   }// getReply method
 
 }// MM class
