@@ -4,5 +4,5 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="player">#0000FF</color>
-    <color name="opponent">#FF0000</color>
+    <color name="opponent">#ff0000</color>
 </resources>

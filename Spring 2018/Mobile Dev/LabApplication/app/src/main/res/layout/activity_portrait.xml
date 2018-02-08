@@ -7,18 +7,48 @@
     tools:layout_editor_absoluteY="89dp">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/tableSideOpponent"
         android:layout_width="match_parent"
         android:layout_height="314dp"
         tools:layout_editor_absoluteY="-32dp">
 
+        <LinearLayout
+            android:layout_width="584dp"
+            android:layout_height="264dp"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <ImageView
+                android:id="@+id/opponentCardPlayed"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_launcher_background" />
+        </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/tableSidePlayer"
         android:layout_width="match_parent"
         android:layout_height="280dp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="386dp">
 
+        <LinearLayout
+            android:layout_width="584dp"
+            android:layout_height="264dp"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <ImageView
+                android:id="@+id/playerCardPlayed"
+                android:layout_width="75dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_launcher_background" />
+        </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 
     <LinearLayout
@@ -37,26 +67,26 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
-        <TextView
+        <ImageView
             android:id="@+id/playerCardLeft"
+            android:layout_width="75dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/playerCard"
-            android:textAlignment="center" />
+            app:srcCompat="@drawable/ic_launcher_background" />
 
-        <TextView
+        <ImageView
             android:id="@+id/playerCardCenter"
+            android:layout_width="75dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/playerCard"
-            android:textAlignment="center" />
+            app:srcCompat="@drawable/ic_launcher_background" />
 
-        <TextView
+        <ImageView
             android:id="@+id/playerCardRight"
+            android:layout_width="75dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/playerCard"
-            android:textAlignment="center" />
+            app:srcCompat="@drawable/ic_launcher_background" />
     </LinearLayout>
 
     <LinearLayout

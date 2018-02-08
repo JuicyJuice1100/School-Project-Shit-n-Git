@@ -1,6 +1,6 @@
 /** Client program for the MM app
  *
- *  @author YOUR FULL NAME GOES HERE
+ *  @author Justin Espiritu
  *
  *  @version CS 391 - Spring 2018 - A1
  **/
@@ -37,7 +37,7 @@ public class MMClient {
             System.out.println("Connected to server: " + socket);
             openStreams();
             
-            query = "";
+            query = "start";
             out.writeUTF(query);
             while (true){
                 reply = in.readUTF();
