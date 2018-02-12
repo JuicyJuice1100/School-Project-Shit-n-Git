@@ -85,7 +85,7 @@ var $0 = $$.length - 1;
 switch (yystate) {
 case 1:
 if($$[$0-1] % 2 == 0){return "Bingley yipped " + $$[$0-1] + " times";}
-        else{return "Darcey yipped " + $$[$0-1] + " times";}
+        else{return "Darcy yipped " + $$[$0-1] + " times";}
         
 break;
 case 2:

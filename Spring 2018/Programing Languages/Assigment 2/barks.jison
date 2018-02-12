@@ -25,7 +25,7 @@
 program
     : bark "EOF"
         {if($1 % 2 == 0){return "Bingley yipped " + $1 + " times";}
-        else{return "Darcey yipped " + $1 + " times";}
+        else{return "Darcy yipped " + $1 + " times";}
         }
     ;
 
