@@ -81,22 +81,22 @@ var flatten = function (l) {
 // end comment below
 
 // Problem 4
-var remove_every_nth = function (n,ns,index) {
+var remove_every_nth_helper = function (n,ns,index) {
     if(fp.isNull(ns)){
         return []
     } else if(fp.isEq(index, n)){
         return remove_every_nth(n,fp.tl(ns),1);
     } else{
-        return fp.cons(fp.hd(ns), remove_every_nth(n,fp.tl(ns),fp.add(index, 1)))
+        return fp.cons(fp.hd(ns), remove_every_nth_helper(n,fp.tl(ns),fp.add(index, 1)))
     }
 
 };
 
-var remove_every_nth_helper = function(n,ns){
+var remove_every_nth = function(n,ns){
     if(fp.isNull(ns) || fp.isLT(n, 2)){
         return [];
     } else {
-        return remove_every_nth(n,ns,1);
+        return remove_every_nth_helper(n,ns,1);
     }
 }
 
@@ -180,8 +180,8 @@ console.log("Testing Problem 3");
 console.log(flatten([1, 2, [3, 4, 5], 6]));
 
 console.log("Testing Problem 4");
-console.log(remove_every_nth_helper(4, [3, 6, 8, 1, 10, 23, 22, 18, 45]));
-console.log(remove_every_nth_helper(2, [3, 6, 8, 1, 10, 23, 22, 18, 45]));
+console.log(remove_every_nth(4, [3, 6, 8, 1, 10, 23, 22, 18, 45]));
+console.log(remove_every_nth(2, [3, 6, 8, 1, 10, 23, 22, 18, 45]));
 
 var tree1 = [ 20,
 	      [ 10,
