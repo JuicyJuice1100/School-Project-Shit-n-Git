@@ -85,7 +85,7 @@ var remove_every_nth_helper = function (n,ns,index) {
     if(fp.isNull(ns)){
         return []
     } else if(fp.isEq(index, n)){
-        return remove_every_nth(n,fp.tl(ns),1);
+        return remove_every_nth_helper(n,fp.tl(ns),1);
     } else{
         return fp.cons(fp.hd(ns), remove_every_nth_helper(n,fp.tl(ns),fp.add(index, 1)))
     }
