@@ -4,20 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout_editor_absoluteY="89dp">
+    tools:layout_editor_absoluteY="81dp">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/tableSideOpponent"
-        android:layout_width="match_parent"
-        android:layout_height="314dp"
-        tools:layout_editor_absoluteY="-32dp">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/infoBoard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="584dp"
-            android:layout_height="264dp"
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.976">
 
             <ImageView
                 android:id="@+id/opponentCardPlayed"
@@ -30,17 +43,28 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/tableSidePlayer"
-        android:layout_width="match_parent"
-        android:layout_height="280dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="386dp">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/playerHand"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/infoBoard">
 
         <LinearLayout
-            android:layout_width="584dp"
-            android:layout_height="264dp"
+            android:id="@+id/linearLayout2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/playerCardPlayed"
@@ -53,19 +77,14 @@
 
     <LinearLayout
         android:id="@+id/playerHand"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toBottomOf="@+id/tableSidePlayer">
 
         <ImageView
             android:id="@+id/playerCardLeft"
@@ -91,17 +110,18 @@
 
     <LinearLayout
         android:id="@+id/infoBoard"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/playerHand"
+        app:layout_constraintBottom_toTopOf="@+id/tableSidePlayer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tableSideOpponent">
 
         <TextView
             android:id="@+id/playerCardsRemaining"
+            android:layout_width="70dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/numberOfCardRemaining"
@@ -109,6 +129,7 @@
 
         <TextView
             android:id="@+id/playerScore"
+            android:layout_width="70dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/score"
@@ -116,6 +137,7 @@
 
         <TextView
             android:id="@+id/opponentScore"
+            android:layout_width="70dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/score"
@@ -123,6 +145,7 @@
 
         <TextView
             android:id="@+id/opponentCardsRemaining"
+            android:layout_width="70dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/numberOfCardRemaining" />
