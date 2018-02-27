@@ -2,9 +2,13 @@ package com.example.juice.labapplication;
 
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.content.Context;
 import android.widget.ImageView;
@@ -52,25 +56,64 @@ public class MainActivity extends AppCompatActivity {
         playerCardLeft.setImageResource(cards.getResourceId(randomStack.pop(), -1));
         playerCardCenter.setImageResource(cards.getResourceId(randomStack.pop(), -1));
         playerCardRight.setImageResource(cards.getResourceId(randomStack.pop(), -1));
+
+        playerCardLeft.setOnTouchListener(new View.OnTouchListener() {
+            private Rect rect;
+
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    playerCardLeft.setColorFilter(Color.argb(80, 0, 0, 0));
+                    rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
+                    return true;
+                }else if(event.getAction() == MotionEvent.ACTION_UP){
+                    playerCardLeft.setColorFilter(Color.argb(0, 0, 0, 0));
+                    return true;
+                } else{
+                    return false;
+                }
+            }
+        });
+
+        playerCardRight.setOnTouchListener(new View.OnTouchListener() {
+            private Rect rect;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    playerCardRight.setColorFilter(Color.argb(80, 0, 0, 0));
+                    rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
+                    return true;
+                }else if(event.getAction() == MotionEvent.ACTION_UP){
+                    playerCardRight.setColorFilter(Color.argb(0, 0, 0, 0));
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        playerCardCenter.setOnTouchListener(new View.OnTouchListener() {
+            private Rect rect;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    playerCardCenter.setColorFilter(Color.argb(80, 0, 0, 0));
+                    rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
+                    return true;
+                }else if(event.getAction() == MotionEvent.ACTION_UP){
+                    playerCardCenter.setColorFilter(Color.argb(0, 0, 0, 0));
+                    return true;
+                } else{
+                    return false;
+                }
+            }
+        });
     }
 
-/*    public int[] cardArray(){
-        int[] cardArray = new int[52];
-        for(int i = 0; i < 52; i++){
-            if(i < 13){
-                cardArray[i] = getDrawableId(getApplicationContext(), "R.drawable.c" + i);
-            } else if (i < 26){
-                cardArray[i] = getDrawableId(getApplicationContext(), "R.drawable.d" + i);
-            } else if (i < 39){
-                cardArray[i] = getDrawableId(getApplicationContext(), "R.drawable.h" + i);
-            } else {
-                cardArray[i] = getDrawableId(getApplicationContext(), "R.drawable.s" + i);
-            }
-        }
-        return cardArray;
+/*    public int getDrawableId(Context context, String name){
+        return context.getResources().getIdentifier(name, "drawable", context.getPackageName());
     }*/
 
-    public int getDrawableId(Context context, String name){
-        return context.getResources().getIdentifier(name, "drawable", context.getPackageName());
-    }
+
 }
