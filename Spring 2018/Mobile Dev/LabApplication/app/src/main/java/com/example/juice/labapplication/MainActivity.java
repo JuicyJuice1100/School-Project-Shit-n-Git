@@ -33,13 +33,14 @@ public class MainActivity extends AppCompatActivity {
     private EditText enterText;
     private ImageButton sendButton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getResources().getConfiguration().orientation ==
-                Configuration.ORIENTATION_LANDSCAPE){
+        if (getResources().getConfiguration().orientation ==
+                Configuration.ORIENTATION_LANDSCAPE) {
             setContentView(R.layout.activity_landscape);
-        } else{
+        } else {
             setContentView(R.layout.activity_portrait);
         }
         getWindow().setSoftInputMode(
@@ -56,15 +57,17 @@ public class MainActivity extends AppCompatActivity {
         enterText = findViewById(R.id.enterText);
         sendButton = findViewById(R.id.chatSendButton);
         randomCards();
+        getListeners();
     }
 
-    public void randomCards(){
+
+    public void randomCards() {
         Stack<Integer> randomStack = new Stack<>();
         Random random = new Random();
         TypedArray cards = getResources().obtainTypedArray((R.array.cards));
         int randomCard;
 
-        for(int i = 0; i < 3; i++){
+        for (int i = 0; i < 3; i++) {
             do {
                 randomCard = random.nextInt(52);
             } while (randomStack.contains(randomCard));
@@ -73,44 +76,46 @@ public class MainActivity extends AppCompatActivity {
         playerCardLeft.setImageResource(cards.getResourceId(randomStack.pop(), -1));
         playerCardCenter.setImageResource(cards.getResourceId(randomStack.pop(), -1));
         playerCardRight.setImageResource(cards.getResourceId(randomStack.pop(), -1));
+    }
 
+    public void getListeners() {
         playerCardLeft.setOnTouchListener(new View.OnTouchListener() {
             private Rect rect;
 
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    if(!isPlayerCardLeftFiltered){
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if (!isPlayerCardLeftFiltered) {
                         playerCardLeft.setColorFilter(Color.argb(80, 0, 0, 0));
                         rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
                         isPlayerCardLeftFiltered = true;
                     } else {
-                        if(playerCardPlayed.getDrawable() == playerCardLeft.getDrawable()){
+                        if (playerCardPlayed.getDrawable() == playerCardLeft.getDrawable()) {
                             playerCardPlayed.setImageDrawable(null);
-                        } else if(opponentCardPlayed.getDrawable() == playerCardLeft.getDrawable()){
+                        } else if (opponentCardPlayed.getDrawable() == playerCardLeft.getDrawable()) {
                             opponentCardPlayed.setImageDrawable(null);
                         }
-                        playerCardLeft.setColorFilter(Color.argb(0,0,0,0));
+                        playerCardLeft.setColorFilter(Color.argb(0, 0, 0, 0));
                         isPlayerCardLeftFiltered = false;
                     }
                     return true;
-                }else if(event.getAction() == MotionEvent.ACTION_UP){
-                    if(isPlayerCardLeftFiltered){
-                        if(playerCardPlayed.getDrawable() != playerCardLeft.getDrawable()
-                                && opponentCardPlayed.getDrawable() != playerCardLeft.getDrawable()){
-                            if(playerCardPlayed.getDrawable() != playerCardCenter.getDrawable()
-                                    && playerCardPlayed.getDrawable() != playerCardRight.getDrawable()){
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (isPlayerCardLeftFiltered) {
+                        if (playerCardPlayed.getDrawable() != playerCardLeft.getDrawable()
+                                && opponentCardPlayed.getDrawable() != playerCardLeft.getDrawable()) {
+                            if (playerCardPlayed.getDrawable() != playerCardCenter.getDrawable()
+                                    && playerCardPlayed.getDrawable() != playerCardRight.getDrawable()) {
                                 playerCardPlayed.setImageDrawable(playerCardLeft.getDrawable());
-                            } else if(opponentCardPlayed.getDrawable() != playerCardCenter.getDrawable()
+                            } else if (opponentCardPlayed.getDrawable() != playerCardCenter.getDrawable()
                                     && opponentCardPlayed.getDrawable() != playerCardRight.getDrawable()) {
                                 opponentCardPlayed.setImageDrawable(playerCardLeft.getDrawable());
                             } else {
-                                playerCardLeft.setColorFilter(Color.argb(0,0,0,0));
+                                playerCardLeft.setColorFilter(Color.argb(0, 0, 0, 0));
                                 isPlayerCardLeftFiltered = false;
                             }
                         }
                     }
                     return true;
-                } else{
+                } else {
                     return false;
                 }
             }
@@ -121,33 +126,33 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    if(!isPlayerCardRightFiltered){
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if (!isPlayerCardRightFiltered) {
                         playerCardRight.setColorFilter(Color.argb(80, 0, 0, 0));
                         rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
                         isPlayerCardRightFiltered = true;
                     } else {
-                        if(playerCardPlayed.getDrawable() == playerCardRight.getDrawable()){
+                        if (playerCardPlayed.getDrawable() == playerCardRight.getDrawable()) {
                             playerCardPlayed.setImageDrawable(null);
-                        } else if(opponentCardPlayed.getDrawable() == playerCardRight.getDrawable()){
+                        } else if (opponentCardPlayed.getDrawable() == playerCardRight.getDrawable()) {
                             opponentCardPlayed.setImageDrawable(null);
                         }
-                        playerCardRight.setColorFilter(Color.argb(0,0,0,0));
+                        playerCardRight.setColorFilter(Color.argb(0, 0, 0, 0));
                         isPlayerCardRightFiltered = false;
                     }
                     return true;
-                }else if(event.getAction() == MotionEvent.ACTION_UP){
-                    if(isPlayerCardRightFiltered){
-                        if(playerCardPlayed.getDrawable() != playerCardRight.getDrawable()
-                                && opponentCardPlayed.getDrawable() != playerCardRight.getDrawable()){
-                            if(playerCardPlayed.getDrawable() != playerCardLeft.getDrawable()
-                                    && playerCardPlayed.getDrawable() != playerCardCenter.getDrawable()){
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (isPlayerCardRightFiltered) {
+                        if (playerCardPlayed.getDrawable() != playerCardRight.getDrawable()
+                                && opponentCardPlayed.getDrawable() != playerCardRight.getDrawable()) {
+                            if (playerCardPlayed.getDrawable() != playerCardLeft.getDrawable()
+                                    && playerCardPlayed.getDrawable() != playerCardCenter.getDrawable()) {
                                 playerCardPlayed.setImageDrawable(playerCardRight.getDrawable());
-                            } else if(opponentCardPlayed.getDrawable() != playerCardLeft.getDrawable()
+                            } else if (opponentCardPlayed.getDrawable() != playerCardLeft.getDrawable()
                                     && opponentCardPlayed.getDrawable() != playerCardCenter.getDrawable()) {
                                 opponentCardPlayed.setImageDrawable(playerCardRight.getDrawable());
                             } else {
-                                playerCardRight.setColorFilter(Color.argb(0,0,0,0));
+                                playerCardRight.setColorFilter(Color.argb(0, 0, 0, 0));
                                 isPlayerCardRightFiltered = false;
                             }
                         }
@@ -164,39 +169,39 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    if(!isPlayerCardCenterFiltered){
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if (!isPlayerCardCenterFiltered) {
                         playerCardCenter.setColorFilter(Color.argb(80, 0, 0, 0));
                         rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
                         isPlayerCardCenterFiltered = true;
                     } else {
-                        if(playerCardPlayed.getDrawable() == playerCardCenter.getDrawable()){
+                        if (playerCardPlayed.getDrawable() == playerCardCenter.getDrawable()) {
                             playerCardPlayed.setImageDrawable(null);
-                        } else if(opponentCardPlayed.getDrawable() == playerCardCenter.getDrawable()){
+                        } else if (opponentCardPlayed.getDrawable() == playerCardCenter.getDrawable()) {
                             opponentCardPlayed.setImageDrawable(null);
                         }
-                        playerCardCenter.setColorFilter(Color.argb(0,0,0,0));
+                        playerCardCenter.setColorFilter(Color.argb(0, 0, 0, 0));
                         isPlayerCardCenterFiltered = false;
                     }
                     return true;
-                }else if(event.getAction() == MotionEvent.ACTION_UP){
-                    if(isPlayerCardCenterFiltered){
-                        if(playerCardPlayed.getDrawable() != playerCardCenter.getDrawable()
-                                && opponentCardPlayed.getDrawable() != playerCardCenter.getDrawable()){
-                            if(playerCardPlayed.getDrawable() != playerCardLeft.getDrawable()
-                                    && playerCardPlayed.getDrawable() != playerCardRight.getDrawable()){
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (isPlayerCardCenterFiltered) {
+                        if (playerCardPlayed.getDrawable() != playerCardCenter.getDrawable()
+                                && opponentCardPlayed.getDrawable() != playerCardCenter.getDrawable()) {
+                            if (playerCardPlayed.getDrawable() != playerCardLeft.getDrawable()
+                                    && playerCardPlayed.getDrawable() != playerCardRight.getDrawable()) {
                                 playerCardPlayed.setImageDrawable(playerCardCenter.getDrawable());
-                            } else if(opponentCardPlayed.getDrawable() != playerCardLeft.getDrawable()
+                            } else if (opponentCardPlayed.getDrawable() != playerCardLeft.getDrawable()
                                     && opponentCardPlayed.getDrawable() != playerCardRight.getDrawable()) {
                                 opponentCardPlayed.setImageDrawable(playerCardCenter.getDrawable());
                             } else {
-                                playerCardCenter.setColorFilter(Color.argb(0,0,0,0));
+                                playerCardCenter.setColorFilter(Color.argb(0, 0, 0, 0));
                                 isPlayerCardCenterFiltered = false;
                             }
                         }
                     }
                     return true;
-                } else{
+                } else {
                     return false;
                 }
             }
@@ -206,22 +211,21 @@ public class MainActivity extends AppCompatActivity {
             private Rect rect;
 
             @Override
-            public boolean onTouch(View v, MotionEvent event){
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    if(playerCardPlayed.getDrawable() == playerCardLeft.getDrawable()){
-                        playerCardLeft.setColorFilter(Color.argb(0,0,0,0));
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if (playerCardPlayed.getDrawable() == playerCardLeft.getDrawable()) {
+                        playerCardLeft.setColorFilter(Color.argb(0, 0, 0, 0));
                         isPlayerCardLeftFiltered = false;
-                    } else if (playerCardPlayed.getDrawable() == playerCardRight.getDrawable()){
-                        playerCardRight.setColorFilter(Color.argb(0,0,0,0));
+                    } else if (playerCardPlayed.getDrawable() == playerCardRight.getDrawable()) {
+                        playerCardRight.setColorFilter(Color.argb(0, 0, 0, 0));
                         isPlayerCardRightFiltered = false;
-                    } else if (playerCardPlayed.getDrawable() == playerCardCenter.getDrawable()){
-                        playerCardCenter.setColorFilter(Color.argb(0,0,0,0));
+                    } else if (playerCardPlayed.getDrawable() == playerCardCenter.getDrawable()) {
+                        playerCardCenter.setColorFilter(Color.argb(0, 0, 0, 0));
                         isPlayerCardCenterFiltered = false;
                     }
                     playerCardPlayed.setImageDrawable(null);
                     return true;
-                }
-                else {
+                } else {
                     return false;
                 }
             }
@@ -231,22 +235,21 @@ public class MainActivity extends AppCompatActivity {
             private Rect rect;
 
             @Override
-            public boolean onTouch(View v, MotionEvent event){
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    if(opponentCardPlayed.getDrawable() == playerCardLeft.getDrawable()){
-                        playerCardLeft.setColorFilter(Color.argb(0,0,0,0));
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if (opponentCardPlayed.getDrawable() == playerCardLeft.getDrawable()) {
+                        playerCardLeft.setColorFilter(Color.argb(0, 0, 0, 0));
                         isPlayerCardLeftFiltered = false;
-                    } else if (opponentCardPlayed.getDrawable() == playerCardRight.getDrawable()){
-                        playerCardRight.setColorFilter(Color.argb(0,0,0,0));
+                    } else if (opponentCardPlayed.getDrawable() == playerCardRight.getDrawable()) {
+                        playerCardRight.setColorFilter(Color.argb(0, 0, 0, 0));
                         isPlayerCardRightFiltered = false;
-                    } else if (opponentCardPlayed.getDrawable() == playerCardCenter.getDrawable()){
-                        playerCardCenter.setColorFilter(Color.argb(0,0,0,0));
+                    } else if (opponentCardPlayed.getDrawable() == playerCardCenter.getDrawable()) {
+                        playerCardCenter.setColorFilter(Color.argb(0, 0, 0, 0));
                         isPlayerCardCenterFiltered = false;
                     }
                     opponentCardPlayed.setImageDrawable(null);
                     return true;
-                }
-                else {
+                } else {
                     return false;
                 }
             }
@@ -254,8 +257,8 @@ public class MainActivity extends AppCompatActivity {
 
         sendButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event){
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     chat.setText("Player: " + enterText.getText().toString() + "\n" + chat.getText());
                     enterText.setText("");
                     return true;

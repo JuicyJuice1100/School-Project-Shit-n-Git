@@ -1,0 +1,9 @@
+1. onCreate(), onStart(), onResume()
+2. onPause(), onStart(), onDestroy()
+3. onPause(), onSaveInstanceState(), onStop()
+4. onPause(), onSaveInstanceState(), onStop(), onDestroy(), onCreate(), onStart(), onRestoreInstanceState(), onResume()
+5. nothing
+6. nothing
+7. onPause()
+8. onPause(), onSaveInstanceState(), onStop()
+9. onCreate(), onStart(), onResume(), onPause(), onSaveInstanceState(), onStop()
