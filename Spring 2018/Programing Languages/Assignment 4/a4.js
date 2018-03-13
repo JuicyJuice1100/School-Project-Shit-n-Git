@@ -1,3 +1,4 @@
+// Justin Espiritu & Robert Freiberg
 var fp = require('./fp');
 var util = require('util');
 
@@ -130,7 +131,7 @@ var isInUnitSquare = function (x) { return curry5(isInRect)(1)(-1)(-1)(1)(x); };
 
 
 var makeCompositeMFRFunc = function (mf, ff, rf, acc) {
-    return 0;
+    return function(x){return fp.reduce(rf, fp.compose(fp.curry(fp.filter)(ff), fp.curry(fp.map)(mf))(x), acc)};
 };
 
 
