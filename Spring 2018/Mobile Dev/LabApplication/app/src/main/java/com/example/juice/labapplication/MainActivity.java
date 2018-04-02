@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText enterText;
     private ImageButton sendButton;
     private FragmentManager fragmentManager;
-    private FragmentTransaction fragmentTransaction;
 
 
     @Override
@@ -49,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
                 setContentView(R.layout.activity_portrait);
             }
             fragmentManager = getSupportFragmentManager();
-            fragmentTransaction = fragmentManager.beginTransaction();
     }
 
     @Override
@@ -275,6 +273,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     if(enterText.getText().toString().equalsIgnoreCase("math")){
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.ChatArea, new MathView());
                         fragmentTransaction.commit();
                         isMathWar = true;
