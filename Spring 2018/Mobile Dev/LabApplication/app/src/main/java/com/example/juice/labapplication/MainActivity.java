@@ -1,16 +1,17 @@
 package com.example.juice.labapplication;
 
+import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.content.Context;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import java.util.Random;
 import java.util.Stack;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,20 +31,30 @@ public class MainActivity extends AppCompatActivity {
     private boolean isPlayerCardLeftFiltered;
     private boolean isPlayerCardCenterFiltered;
     private boolean isPlayerCardRightFiltered;
+    private boolean isMathWar = false;
     private TextView chat;
     private EditText enterText;
     private ImageButton sendButton;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getResources().getConfiguration().orientation ==
-                Configuration.ORIENTATION_LANDSCAPE) {
-            setContentView(R.layout.activity_landscape);
-        } else {
-            setContentView(R.layout.activity_portrait);
-        }
+            if (getResources().getConfiguration().orientation ==
+                    Configuration.ORIENTATION_LANDSCAPE) {
+                setContentView(R.layout.activity_landscape);
+            } else {
+                setContentView(R.layout.activity_portrait);
+            }
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         playerCardLeft = findViewById(R.id.playerCardLeft);
@@ -78,12 +90,15 @@ public class MainActivity extends AppCompatActivity {
         playerCardRight.setImageResource(cards.getResourceId(randomStack.pop(), -1));
     }
 
+
+
+    @SuppressLint("ClickableViewAccessibility")
     public void getListeners() {
         playerCardLeft.setOnTouchListener(new View.OnTouchListener() {
             private Rect rect;
 
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN && !isMathWar) {
                     if (!isPlayerCardLeftFiltered) {
                         playerCardLeft.setColorFilter(Color.argb(80, 0, 0, 0));
                         rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
@@ -98,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                         isPlayerCardLeftFiltered = false;
                     }
                     return true;
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                } else if (event.getAction() == MotionEvent.ACTION_UP && !isMathWar) {
                     if (isPlayerCardLeftFiltered) {
                         if (playerCardPlayed.getDrawable() != playerCardLeft.getDrawable()
                                 && opponentCardPlayed.getDrawable() != playerCardLeft.getDrawable()) {
@@ -126,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN && !isMathWar) {
                     if (!isPlayerCardRightFiltered) {
                         playerCardRight.setColorFilter(Color.argb(80, 0, 0, 0));
                         rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
@@ -141,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                         isPlayerCardRightFiltered = false;
                     }
                     return true;
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                } else if (event.getAction() == MotionEvent.ACTION_UP && !isMathWar) {
                     if (isPlayerCardRightFiltered) {
                         if (playerCardPlayed.getDrawable() != playerCardRight.getDrawable()
                                 && opponentCardPlayed.getDrawable() != playerCardRight.getDrawable()) {
@@ -169,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN && !isMathWar) {
                     if (!isPlayerCardCenterFiltered) {
                         playerCardCenter.setColorFilter(Color.argb(80, 0, 0, 0));
                         rect = new Rect(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
@@ -184,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                         isPlayerCardCenterFiltered = false;
                     }
                     return true;
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                } else if (event.getAction() == MotionEvent.ACTION_UP && !isMathWar) {
                     if (isPlayerCardCenterFiltered) {
                         if (playerCardPlayed.getDrawable() != playerCardCenter.getDrawable()
                                 && opponentCardPlayed.getDrawable() != playerCardCenter.getDrawable()) {
@@ -212,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN && !isMathWar) {
                     if (playerCardPlayed.getDrawable() == playerCardLeft.getDrawable()) {
                         playerCardLeft.setColorFilter(Color.argb(0, 0, 0, 0));
                         isPlayerCardLeftFiltered = false;
@@ -236,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN && !isMathWar) {
                     if (opponentCardPlayed.getDrawable() == playerCardLeft.getDrawable()) {
                         playerCardLeft.setColorFilter(Color.argb(0, 0, 0, 0));
                         isPlayerCardLeftFiltered = false;
@@ -259,8 +274,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    chat.setText("Player: " + enterText.getText().toString() + "\n" + chat.getText());
-                    enterText.setText("");
+                    if(enterText.getText().toString().equalsIgnoreCase("math")){
+                        fragmentTransaction.replace(R.id.ChatArea, new MathView());
+                        fragmentTransaction.commit();
+                        isMathWar = true;
+                        chat.setText("");
+                    } else {
+                        chat.setText("Player: " + enterText.getText().toString() + "\n" + chat.getText());
+                        enterText.setText("");
+                    }
                     return true;
                 } else {
                     return false;
@@ -268,10 +290,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-/*    public int getDrawableId(Context context, String name){
-        return context.getResources().getIdentifier(name, "drawable", context.getPackageName());
-    }*/
-
-
 }
