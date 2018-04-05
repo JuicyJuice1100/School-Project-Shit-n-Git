@@ -116,13 +116,8 @@ var FactGen = function (fact) {
 // Implement the function that Y_in_JS can use to create a recursive
 // exponential function for a^n where n is a non-negative integer
 
-var EXP_gen = function (exp){
-    return function (f) {
-        return function (g){
-            return ((g == 0) ? 0 : (f * f + exp(g - 1)));
-        }
-    }
-}
+var EXP_gen = (exp) => (f) => (g) => Math.pow(f, g);
+
 
 ///////////////////////////////////////////////////////////////////
 //// All test cases you add must be below this comment.  Everything
