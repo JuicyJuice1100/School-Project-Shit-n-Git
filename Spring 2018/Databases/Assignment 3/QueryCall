@@ -1,5 +1,0 @@
-public class QueryCall{
-    public Query(int i, string parameters){
-        
-    }
-}
