@@ -1,3 +1,4 @@
+//Justin Espiritu & Robert Feiberg
 // LC.interpret will invoke the lambda-calculus interpreter
 // on a string containing a lambda-calclus expression
 var LC = require("./lambdacalculus.js");
@@ -116,8 +117,7 @@ var FactGen = function (fact) {
 // Implement the function that Y_in_JS can use to create a recursive
 // exponential function for a^n where n is a non-negative integer
 
-var EXP_gen = (exp) => (f) => (g) => Math.pow(f, g);
-
+var EXP_gen = (exp) => (f) => (g) => ((g == 0) ? 1 : (g == 1) ? f : (f * exp(f)(g-1))) ;
 
 ///////////////////////////////////////////////////////////////////
 //// All test cases you add must be below this comment.  Everything
