@@ -1,6 +1,7 @@
 package com.example.juice.labapplication;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -22,7 +23,6 @@ import java.util.Stack;
 
 
 public class MainActivity extends AppCompatActivity {
-
     private ImageView playerCardLeft;
     private ImageView playerCardCenter;
     private ImageView playerCardRight;
@@ -36,18 +36,21 @@ public class MainActivity extends AppCompatActivity {
     private EditText enterText;
     private ImageButton sendButton;
     private FragmentManager fragmentManager;
+    private Intent intent;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-            if (getResources().getConfiguration().orientation ==
-                    Configuration.ORIENTATION_LANDSCAPE) {
-                setContentView(R.layout.activity_landscape);
-            } else {
-                setContentView(R.layout.activity_portrait);
-            }
-            fragmentManager = getSupportFragmentManager();
+        if (getResources().getConfiguration().orientation ==
+                Configuration.ORIENTATION_LANDSCAPE) {
+            setContentView(R.layout.activity_landscape);
+        } else {
+            setContentView(R.layout.activity_portrait);
+        }
+        intent = new Intent(this, Login.class);
+        startActivity(intent);
+        fragmentManager = getSupportFragmentManager();
     }
 
     @Override
@@ -69,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         randomCards();
         getListeners();
     }
-
 
     public void randomCards() {
         Stack<Integer> randomStack = new Stack<>();
