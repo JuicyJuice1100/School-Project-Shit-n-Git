@@ -38,7 +38,7 @@ public class Login extends BaseActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     //will have to change this to go to database
-                    if(loginUsername.getText().toString().equals("JuicyJuice1100") && loginPassword.getText().toString().equals("password")){
+                    if(loginUsername.getText().toString().equals("user") && loginPassword.getText().toString().equals("password")){
                         getIntent().putExtra("username", loginUsername.getText().toString());
                         goToProfile();
                     } else {
