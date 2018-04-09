@@ -1,13 +1,13 @@
-package com.example.juice.nerdup;
+package com.example.juice.nerdupv000;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainPortraitLayout extends AppCompatActivity {
+public class Profile extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.la);
+        setContentView(R.layout.activity_profile);
     }
 }

@@ -1,0 +1,27 @@
+id,first name,middle names,last name,gender,address,phone,birth[date(place)],death[date(place)],adoption[date(place)],marriage[id--date(place);],divorce[id--date(place);],parent1,parent2,notes
+1,William,,Wells,m,123 main st oshkosh,,8/9/1901(oshkosh),4/5/1989(milwaukee),,2--4/1/1927(oshkosh),,,,veteran; farmer
+2,Lucy,,Lawrence,f,,,12/12/1909(oshkosh),7/7/1965(oshkosh),,1--4/1/1927(oshkosh),,,,some notes here
+3,Leroy,,Wells,m,,,1/2/1928(oshkosh),6/1/2010(oshkosh),,6--4/3/1951(oshkosh),,1,2,
+4,Tonya,,Evans,f,,920-111-2222,6/4/1934(oshkosh),,,7--7/2/1960(oshkosh),,1,2,
+5,Clyde ,,Wells,m,,,12/11/1937(oshkosh),,,8--3/9/1969(neenah),,1,2,teacher
+6,Anne ,,Allison,f,,,3/7/1931(de pere),,,3--4/3/1951(oshkosh),,,,
+7,Ross,,Evans,m,456 main st milwaukee,,5/17/1933(milwaukee),,,4--7/2/1960(oshkosh),,,,
+8,Nina,,Adkins,f,,,11/1/1941(neenah),,,5--3/9/1969(neenah),,,,some notes here
+9,Oliver,,Wells,m,,,5/5/1952(oshkosh),,,11--10/1/1973(milwaukee); 12--6/7/1989(milwaukee),11--4/1/1980(milwaukee),3,6,farmer
+10,Gerald,,Wells,m,,,6/8/1955(oshkosh),,,,,3,6,
+11,Emma,,Rhodes,f,,414-222-1111,5/2/1952,,,9--10/1/1973(milwaukee),9--4/1/1980(milwaukee),,,
+12,Melody,,Mccormick,f,,,8/9/1965(milwaukee),,,9--6/7/1989(milwaukee);,,,,
+13,Marion,,Wells,f,,,1/1/1974(milwaukee),11/1/2008 (Dallas TX),,,,9,11,some notes here
+14,Bruce,,Wells,m,Address goes here,,3/5/1978(milwaukee),,,26--6/1/2010(chicago),,9,11,
+15,William ,,Wells,m,,,7/7/1990(milwaukee),,,,,9,12,
+16,Marshall,,Wells,m,,,8/8/1985(new york),,,,,10,,
+17,Judy,,May,f,,,1/1/1970(neenah),,,18--2/2/1994(neenah),,5,8,some notes here
+18,Noah,,May,m,,,3/30/1972(neenah),,,17--2/2/1994(neenah),,,,
+19,Ronald,,Wells,m,,,2/8/1974(neenah),,,20--5/5/2009(sheboygan),,5,8,
+20,April,,Larson,f,,,6/30/1973(madison),,,19--5/5/2009(sheboygan),,,,some notes here
+21,Ryan,,Wells,m,,,6/1/2010(neenah),,,,,19,20,
+22,Victor,,May,m,,,1/1/1995(neenah),,,25--4/5/2015(green bay),,17,18,
+23,Byron,,May,m,,,4/18/2002(neenah),,,,,17,18,
+24,Edna,,May,f,,,5/20/2004(neenah),,,,,17,18,
+25,Lucille,,Webster,f,,123-456-7890,6/22/1997(green bay),,,22--4/5/2015(green bay),,,,
+26,Tonya,,Dexter,f,,,11/4/1980,,,14--6/1/2010(chicago),,,,
