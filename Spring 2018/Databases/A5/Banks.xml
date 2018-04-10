@@ -1,0 +1,60 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE BANKS SYSTEM "Banks.dtd">
+<BANKS>
+	<BRANCH bname = "OshkoshMain" city="Oshkosh">
+		<ASSETS>100000</ASSETS>
+		<DEPOSITS>
+			<DEPOSIT daccnum = "1" cname = "JaneDoe"><BALANCE>1000</BALANCE></DEPOSIT>
+			<DEPOSIT daccnum = "3" cname = "FredFlintstone"><BALANCE>40000</BALANCE></DEPOSIT>
+		</DEPOSITS>
+		<LOANS>
+			<LOAN Laccnum = "1" cname = "JaneDoe"><AMOUNT>500</AMOUNT></LOAN>
+			<LOAN Laccnum = "2" cname = "FredFlintstone"><AMOUNT>5000</AMOUNT></LOAN>
+			<LOAN Laccnum = "3" cname = "FredFlintstone"><AMOUNT>6000</AMOUNT></LOAN>
+		</LOANS>
+	</BRANCH>
+
+	<BRANCH bname = "Oshkosh20th" city="Oshkosh">
+		<ASSETS>200000</ASSETS>
+		<DEPOSITS>
+			<DEPOSIT daccnum = "2" cname = "JaneDoe"><BALANCE>2000</BALANCE></DEPOSIT>
+		</DEPOSITS>
+	</BRANCH>
+
+	<BRANCH bname = "Neenah" city="Neenah">
+		<ASSETS>400000</ASSETS>
+		<DEPOSITS>
+			<DEPOSIT daccnum = "4" cname = "FredFlintstone"><BALANCE>10000</BALANCE></DEPOSIT>
+		</DEPOSITS>
+	</BRANCH>
+
+	<BRANCH bname = "Menasha" city="Menasha">
+		<ASSETS>100000</ASSETS>
+	</BRANCH>
+
+	<BRANCH bname = "GrandChuteAppleton" city="Appleton">
+		<ASSETS>500000</ASSETS>
+		<DEPOSITS>
+			<DEPOSIT daccnum = "5" cname = "FredFlintstone"><BALANCE>50000</BALANCE></DEPOSIT>
+		</DEPOSITS>
+		<LOANS>
+			<LOAN Laccnum = "4" cname = "FredFlintstone"><AMOUNT>5000</AMOUNT></LOAN>
+		</LOANS>
+	</BRANCH>
+
+	<BRANCH bname = "CollegeAppleton" city="Appleton">
+		<ASSETS>1000000</ASSETS>
+		<DEPOSITS>
+			<DEPOSIT daccnum = "6" cname = "BillJones"><BALANCE>10000</BALANCE></DEPOSIT>
+		</DEPOSITS>
+		<LOANS>
+			<LOAN Laccnum = "5" cname = "ThelmaJones"><AMOUNT>5000</AMOUNT></LOAN>
+		</LOANS>
+	</BRANCH>
+
+	<CUSTOMER cname = "JaneDoe" addr = "123  main st" city = "Oshkosh"/>
+	<CUSTOMER cname = "FredFlintstone" addr = "Taylor Hall" city = "Oshkosh"/>
+	<CUSTOMER cname = "BillJones" addr = "456 commercial st" city = "Neenah"/>
+	<CUSTOMER cname = "HenryFord" addr = "789 new st" city = "Fond Du Lac"/>
+	<CUSTOMER cname = "ThelmaJones" addr = "456 commercial st" city = "Neenah"/>
+</BANKS>
