@@ -1,0 +1,2 @@
+We decided to simplify our database by only creating 3 tables that store all the data to make queries easier.  We decided to store more of the data in Person.
+Parent1 and parent2 in the person table are biological parents.  DateOfBirth and DateOfDeath are now in person to prevent duplicates.  
