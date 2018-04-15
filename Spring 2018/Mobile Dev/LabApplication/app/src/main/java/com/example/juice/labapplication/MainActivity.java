@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton sendButton;
     private FragmentManager fragmentManager;
     private Intent intent;
+    private LocalDatabase localDb;
 
 
     @Override
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         intent = new Intent(this, Login.class);
         startActivity(intent);
         fragmentManager = getSupportFragmentManager();
+        localDb = new LocalDatabase(this);
     }
 
     @Override
@@ -71,6 +73,12 @@ public class MainActivity extends AppCompatActivity {
         sendButton = findViewById(R.id.chatSendButton);
         randomCards();
         getListeners();
+    }
+
+    @Override
+    protected void onDestroy() {
+        localDb.close();
+        super.onDestroy();
     }
 
     public void randomCards() {
