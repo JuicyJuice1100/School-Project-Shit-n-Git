@@ -4,7 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,8 +26,9 @@ public class MathView extends Fragment {
     private EditText mathAnswer;
     private ImageButton mathSendButton;
     private ArrayList<String> equationArrayList;
-    private int equationNumber;
-    private int correctAnswers;
+    private int equationNumber = 0;
+    private int correctAnswers = 0;
+    private FragmentManager fragmentManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,13 +38,14 @@ public class MathView extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
-        correctAnswers = 0;
-        equationNumber = 0;
+/*        correctAnswers = 0;
+        equationNumber = 0;*/
         mathEquation = getView().findViewById(R.id.mathEquations);
         mathAnswer = getView().findViewById(R.id.mathAnswers);
         mathSendButton = getView().findViewById(R.id.mathSendButton);
         equationArrayList = new ArrayList<>();
         equationArrayList.add(randomMathEquation());
+        fragmentManager = getFragmentManager();
         setMathArea();
         getListeners();
     }
@@ -162,23 +164,26 @@ public class MathView extends Fragment {
         mathSendButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                if(mathAnswer.getText().toString().equals(Integer.toString((int)(eval(equationArrayList.get(equationNumber)))))){
-                    mathAnswer.setBackgroundColor(Color.argb(0,0,0,0));
-                    equationArrayList.set(equationNumber, equationArrayList.get(equationNumber) + " = " + (int)eval(equationArrayList.get(equationNumber)) + " \u2713");
-                    equationNumber ++;
-                    equationArrayList.add(randomMathEquation());
-                    correctAnswers ++;
-                    mathAnswer.setText("");
-                    setMathArea();
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if(mathAnswer.getText().toString().equalsIgnoreCase("table")){
+                        getFragmentManager().popBackStack();
+                    }
+                    else if(mathAnswer.getText().toString().equals(Integer.toString((int)(eval(equationArrayList.get(equationNumber)))))){
+                        mathAnswer.setBackgroundColor(Color.argb(0,0,0,0));
+                        equationArrayList.set(equationNumber, equationArrayList.get(equationNumber) + " = " + (int)eval(equationArrayList.get(equationNumber)) + " \u2713");
+                        equationNumber ++;
+                        equationArrayList.add(randomMathEquation());
+                        correctAnswers++;
+                        mathAnswer.setText("");
+                        setMathArea();
+                    } else {
+                        mathAnswer.setText("");
+                        mathAnswer.setBackgroundColor(Color.RED);
+                    }
+                    return true;
                 } else {
-                    mathAnswer.setText("");
-                    mathAnswer.setBackgroundColor(Color.RED);
+                    return false;
                 }
-                return true;
-            } else {
-                return false;
-            }
             }
         });
 }

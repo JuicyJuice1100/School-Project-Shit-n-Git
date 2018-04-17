@@ -2,7 +2,6 @@ package com.example.juice.labapplication;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -12,7 +11,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -43,27 +41,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getResources().getConfiguration().orientation ==
+        /*if (getResources().getConfiguration().orientation ==
                 Configuration.ORIENTATION_LANDSCAPE) {
             setContentView(R.layout.activity_landscape);
         } else {
             setContentView(R.layout.activity_portrait);
-        }
-        intent = new Intent(this, Login.class);
-        startActivity(intent);
-        fragmentManager = getSupportFragmentManager();
-        localDb = new LocalDatabase(this);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        playerCardLeft = findViewById(R.id.playerCardLeft);
-        playerCardCenter = findViewById(R.id.playerCardCenter);
-        playerCardRight = findViewById(R.id.playerCardRight);
-        playerCardPlayed = findViewById(R.id.playerCardPlayed);
+        }*/
+        setContentView(R.layout.activity_landscape);
         opponentCardPlayed = findViewById(R.id.opponentCardPlayed);
         isPlayerCardLeftFiltered = false;
         isPlayerCardRightFiltered = false;
@@ -71,8 +55,23 @@ public class MainActivity extends AppCompatActivity {
         chat = findViewById(R.id.chat);
         enterText = findViewById(R.id.enterText);
         sendButton = findViewById(R.id.chatSendButton);
+        fragmentManager = getSupportFragmentManager();
+        localDb = new LocalDatabase(this);
+        playerCardLeft = findViewById(R.id.playerCardLeft);
+        playerCardCenter = findViewById(R.id.playerCardCenter);
+        playerCardRight = findViewById(R.id.playerCardRight);
+        playerCardPlayed = findViewById(R.id.playerCardPlayed);
         randomCards();
         getListeners();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+/*        intent = new Intent(this, Login.class);
+        startActivity(intent);*/
+/*        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);*/
     }
 
     @Override
@@ -284,7 +283,8 @@ public class MainActivity extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     if(enterText.getText().toString().equalsIgnoreCase("math")){
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.ChatArea, new MathView());
+                        fragmentTransaction.replace(R.id.ChatArea, new MathView(), "app");
+                        fragmentTransaction.addToBackStack("app");
                         fragmentTransaction.commit();
                         isMathWar = true;
                         chat.setText("");
@@ -298,5 +298,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 }

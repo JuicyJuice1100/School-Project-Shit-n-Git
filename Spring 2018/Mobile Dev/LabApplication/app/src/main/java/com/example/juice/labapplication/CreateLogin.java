@@ -47,7 +47,7 @@ public class CreateLogin extends AppCompatActivity {
     }
 
     public boolean validUsername(){
-        if(createUsername.getText().toString().length() >= 4 && getAllUsernames().contains(createUsername.getText().toString())){
+        if(createUsername.getText().toString().length() >= 4 && getAllUsernames().size() == 0){
             return true;
         } else {
             if(createUsername.getText().toString().length() < 4){
@@ -78,11 +78,14 @@ public class CreateLogin extends AppCompatActivity {
                 LocalDatabaseContract.User.COLUMN_USERNAME
         };
 
+        String selection = LocalDatabaseContract.User.COLUMN_USERNAME + " = ?";
+        String[] selectionArgs = { createUsername.getText().toString() };
+
         Cursor cursor = db.query(
                 LocalDatabaseContract.User.TABLE_NAME,   // The table to query
                 projection,             // The array of columns to return (pass null to get all)
-                null,              // The columns for the WHERE clause
-                null,          // The values for the WHERE clause
+                selection,              // The columns for the WHERE clause
+                selectionArgs,          // The values for the WHERE clause
                 null,                   // don't group the rows
                 null,                   // don't filter by row groups
                 null              // The sort order

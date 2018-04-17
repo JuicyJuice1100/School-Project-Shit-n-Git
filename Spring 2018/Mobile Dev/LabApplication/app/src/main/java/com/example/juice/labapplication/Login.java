@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.provider.BaseColumns;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,17 +16,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 public class Login extends AppCompatActivity {
     private Button login;
     private EditText loginUsername, loginPassword;
     private TextView createLink;
     private LocalDatabase localDb;
+    private Intent intent;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
         localDb = new LocalDatabase(this);
+        intent = new Intent(this, MainActivity.class);
     }
 
     @Override
@@ -52,19 +54,18 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public List<String[]> selectUser(){
+    public List<String> selectUser(){
         SQLiteDatabase db = localDb.getReadableDatabase();
 
         // Define a projection that specifies which columns from the database
         //  you will actually use after this query.
         String[] projection = {
-                BaseColumns._ID,
                 LocalDatabaseContract.User.COLUMN_USERNAME,
                 LocalDatabaseContract.User.COLUMN_PASSWORD
         };
 
-        String selection = LocalDatabaseContract.User.COLUMN_USERNAME + " = ? AND " + LocalDatabaseContract.User.COLUMN_PASSWORD + "= ?";
-        String[] selectionArgs = { loginUsername.getText().toString(), loginPassword.getText().toString() };
+        String selection = LocalDatabaseContract.User.COLUMN_USERNAME + " = ?";
+        String[] selectionArgs = { loginUsername.getText().toString() };
 
         Cursor cursor = db.query(
                 LocalDatabaseContract.User.TABLE_NAME,   // The table to query
@@ -76,9 +77,9 @@ public class Login extends AppCompatActivity {
                 null              // The sort order
         );
 
-        List<String[]> data = new ArrayList<>();
+        List<String> data = new ArrayList<>();
         while(cursor.moveToNext()){
-            data.add(cursor.getColumnNames());
+            data.add(cursor.getString(1));
         };
 
         cursor.close();
@@ -91,16 +92,16 @@ public class Login extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if(selectUser().contains(loginUsername.getText().toString())  && selectUser().contains(loginPassword.getText().toString())){
-                        getIntent().putExtra("username", loginUsername.getText().toString());
-                        finish();
-                    } else {
-                        if(!selectUser().contains(loginUsername.getText().toString())){
-                            Toast.makeText(getApplicationContext(), "Username does not exist", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT).show();
-                        }
+                    if(selectUser().size() == 0){
+                        Toast.makeText(getApplicationContext(), "Username does not exist", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(selectUser().get(0).equals(loginPassword.getText().toString())){
+/*                        getIntent().putExtra("username", loginUsername.getText().toString());*/
+                        /*finish();*/
 
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_SHORT).show();
                     }
                     return true;
                 } else {
