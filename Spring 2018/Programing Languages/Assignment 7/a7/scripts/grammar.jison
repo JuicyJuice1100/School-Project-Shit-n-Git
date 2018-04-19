@@ -13,16 +13,9 @@ LETTER		      [a-zA-Z]
 "("                   		      { return 'LPAREN'; }
 ")"                   		      { return 'RPAREN'; }
 "+"                   		      { return 'PLUS'; }
-"subtract"                         { return 'SUBTRACT'; }
-"from"                              {return 'FROM'; }
-"sumlist"                           {return 'SUMLIST';}
-"-"                                 {return 'MINUS';}
-"/"                                 {return 'DIVIDE';}
-"%"                                 {return 'MOD';}
 "*"                   		      { return 'TIMES'; }
 "add1"                                { return 'ADD1'; }
 ","                   		      { return 'COMMA'; }
-"~"                               { return 'NEGATE';}
 "=>"                   		      { return 'THATRETURNS'; }
 "["                                   { return 'LBRACKET'; }
 "]"                                   { return 'RBRACKET'; }
@@ -98,27 +91,17 @@ prim1_app_exp
     ;
 
 prim2_app_exp
-/*    : prim2_op LPAREN exp COMMA exp RPAREN
-       { $$ = SLang.absyn.createPrim2AppExp($1,$3,$5); } */
-    : prim2_op exp FROM exp
-       {$$ = SLang.absyn.createPrim2AppExp("-", $4, $2); }
-    | LPAREN exp prim2_op exp RPAREN
-    {$$ = SLang.absyn.createPrim2AppExp($3, $2, $4); }
+    : prim2_op LPAREN exp COMMA exp RPAREN
+       { $$ = SLang.absyn.createPrim2AppExp($1,$3,$5); }
     ;
 
 prim1_op
     :  ADD1     { $$ = $1; }
-    |  SUMLIST  { $$ = $1; }
-    | NEGATE {$$ = $1;}
     ;
 
 prim2_op
     :  PLUS     { $$ = $1; }
     |  TIMES    { $$ = $1; }
-    |  DIVIDE {$$ = $1;}
-    |  MOD {$$ = $1;}
-    | SUBTRACT {$$ = $1;}
-    | MINUS {$$ = $1;}
     ;
 
 args
