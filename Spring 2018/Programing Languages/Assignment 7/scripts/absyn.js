@@ -160,6 +160,39 @@ function getListExpList(e) {
     }
 }
 
+function createIfElse(x, y, z){
+    return ["IfElse", x, y, z]
+}
+function isIfElse(e){
+    return e[0] === "IfElse";
+}
+function getIfElseArg1(e){
+    if(isIfElse(e)){
+        return e[1]
+    } else {
+        throw new Error ("Interpreter error: " + 
+                        "the argument of getIfElseArg1 is not a IfElseExp.")
+    }
+}
+
+function getIfElseArg2(e){
+    if(isIfElse(e)){
+        return e[2]
+    } else {
+        throw new Error ("Interpreter error: " + 
+                        "the argument of getIfElseArg2 is not a IfElseExp.")
+    }
+}
+
+function getIfElseArg3(e){
+    if(isIfElse(e)){
+        return e[3]
+    } else {
+        throw new Error ("Interpreter error: " + 
+                        "the argument of getIfElseArg3 is not a IfElseExp.")
+    }
+}
+
 exports.createProgram = createProgram;
 exports.isProgram = isProgram;
 exports.getProgramExp = getProgramExp;
@@ -189,6 +222,11 @@ exports.getPrim2AppExpArg2 = getPrim2AppExpArg2;
 exports.createListExp = createListExp;
 exports.isListExp = isListExp;
 exports.getListExpList = getListExpList;
+exports.createIfElse = createIfElse;
+exports.isIfElse = isIfElse;
+exports.getIfElseArg1 = getIfElseArg1;
+exports.getIfElseArg2 = getIfElseArg2;
+exports.getIfElseArg3 = getIfElseArg3;
 
 window.SLang.absyn = exports;
 }());

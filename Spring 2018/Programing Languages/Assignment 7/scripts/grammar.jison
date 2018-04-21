@@ -10,6 +10,10 @@ LETTER		      [a-zA-Z]
 
 \s+                                   { /* skip whitespace */ }
 "fn"				      { return 'FN'; }
+"hd"                                {return 'HD';}
+"tl"                                {return 'TL';}
+"::"                                {return 'CONS';}
+"isNull"                            {return 'ISNULL';}
 "("                   		      { return 'LPAREN'; }
 ")"                   		      { return 'RPAREN'; }
 "+"                   		      { return 'PLUS'; }
@@ -23,6 +27,9 @@ LETTER		      [a-zA-Z]
 "-"                                 {return 'MINUS';}
 "/"                                 {return 'DIVIDE';}
 "%"                                 {return 'MOD';}
+"if"                                {return 'IF';}
+"then"                              {return 'THEN';}
+"else"                              {return 'ELSE';}
 "*"                   		      { return 'TIMES'; }
 "add1"                                { return 'ADD1'; }
 ","                   		      { return 'COMMA'; }
@@ -54,6 +61,7 @@ exp
     | prim1_app_exp { $$ = $1; }
     | prim2_app_exp { $$ = $1; }
     | list_exp      { $$ = $1; }
+    | ifElse_exp    {$$ = $1;}
     ;
 
 var_exp
@@ -67,6 +75,10 @@ intlit_exp
 fn_exp
     : FN LPAREN formals RPAREN THATRETURNS exp
            { $$ = SLang.absyn.createFnExp($3,$6); }
+    ;
+ifElse_exp
+    : IF exp THEN exp ELSE exp
+            {$$ = SLang.absyn.createIfElse($2, $4, $6);}
     ;
 
 formals
@@ -111,10 +123,14 @@ prim2_app_exp
     ;
 
 prim1_op
-    :  ADD1     { $$ = $1; }
+    : HD {$$ = $1;}
+    | TL {$$ = $1;}
+    | ISNULL {$$ = $1;}
+    |  ADD1     { $$ = $1; }
     |  SUMLIST  { $$ = $1; }
     | NEGATE {$$ = $1;}
     | NOT {$$ = $1; }
+
     ;
 
 prim2_op
@@ -127,6 +143,7 @@ prim2_op
     | LESSTHAN {$$ = $1;}
     | GREATERTHAN {$$ = $1;}
     | EQUAL {$$ = $1; }
+    | CONS {$$ = $1; }
     ;
 
 args

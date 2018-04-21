@@ -39,6 +39,34 @@
 
     function applyPrimitive(prim, args) {
         switch (prim) {
+            case "hd":
+                typeCheckPrimitiveOp(prim, args, [E.isList]);
+                if(E.getListValue(args[0]).length > 0){
+                    return E.createNum(E.getListValue(args[0])[0]); 
+                } else {
+                    throw new Error ("hd can only be called on a non-empty list")
+                }
+                
+            case "tl":
+                typeCheckPrimitiveOp(prim, args, [E.isList]);
+                if(E.getListValue(args[0]).length > 0){
+                    let x = E.getListValue(args[0]);
+                    x.shift();
+                    return E.createList(x);
+                } else {
+                    throw new Error ("tl can only be called on a non-empty list")
+                }
+            case "isNull":
+                typeCheckPrimitiveOp(prim, args, [E.isList]);
+                return E.createBool(E.getListValue(args[0]).length === 0);
+            case "::":
+                let x = E.getListValue(args[1]);
+                x.unshift(E.getNumValue(args[0]));
+                typeCheckPrimitiveOp(prim, args, [E.isNum, E.isList]);
+                return E.createList(x);
+
+            /************************************** **/
+
             case "+":
                 typeCheckPrimitiveOp(prim, args, [E.isNum, E.isNum]);
                 return E.createNum(E.getNumValue(args[0]) + E.getNumValue(args[1]));
@@ -80,7 +108,6 @@
             case "not":
                 typeCheckPrimitiveOp(prim, args, [E.isBool]);
                 return E.createBool(!E.getBoolValue(args[0]));
-
         }
     }
 
@@ -112,7 +139,15 @@
             return applyPrimitive(A.getPrim2AppExpPrim(exp),
                 [evalExp(A.getPrim2AppExpArg1(exp), envir),
                 evalExp(A.getPrim2AppExpArg2(exp), envir)]);
-        } else {
+        } 
+        else if (A.isIfElse(exp)){
+            if(E.getBoolValue(evalExp(A.getIfElseArg1(exp), envir))){
+                return evalExp(A.getIfElseArg2(exp), envir);
+            } else {
+                return evalExp(A.getIfElseArg3(exp), envir);
+            }
+        }
+        else {
             throw "Error: Attempting to evaluate an invalid expression";
         }
     }
