@@ -32,9 +32,13 @@ LETTER		      [a-zA-Z]
 "else"                              {return 'ELSE';}
 "*"                   		      { return 'TIMES'; }
 "add1"                                { return 'ADD1'; }
+"let"                               {return 'LET';}
+"in"                                {return 'IN';}
+"end"                               {return 'END';}
 ","                   		      { return 'COMMA'; }
 "~"                               { return 'NEGATE';}
 "=>"                   		      { return 'THATRETURNS'; }
+"="                                 {return 'EQ'; }
 "["                                   { return 'LBRACKET'; }
 "]"                                   { return 'RBRACKET'; }
 <<EOF>>               		      { return 'EOF'; }
@@ -63,6 +67,20 @@ exp
     | list_exp      { $$ = $1; }
     | ifElse_exp    {$$ = $1;}
     ;
+/*    | let_exp       {$$ = $1;}
+    ;
+
+let_exp
+    : LET bindings IN exp END
+        {$$ = SLang.absyn.createAppExp(SLang.absyn.createFnExp($2[0], $4), $2[1]));}
+    ;
+
+bindings
+    : var_exp EQ exp
+        {$$ = [[$1],[$3]];}
+    | var_exp EQ exp bindings
+        {$$ = [[$1].push($4[0],[$3].push($4[1])]; }
+    ;*/
 
 var_exp
     : VAR  { $$ = SLang.absyn.createVarExp( $1 ); }

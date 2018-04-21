@@ -684,28 +684,36 @@ case 22: return 38;
 break;
 case 23: return 33; 
 break;
-case 24: return 25; 
+case 24:return 'LET';
 break;
-case 25: return 35;
+case 25:return 'IN';
 break;
-case 26: return 20; 
+case 26:return 'END';
 break;
-case 27: return 49; 
+case 27: return 25; 
 break;
-case 28: return 51; 
+case 28: return 35;
 break;
-case 29: return 5; 
+case 29: return 20; 
 break;
-case 30: return 14; 
+case 30:return 'EQ'; 
 break;
-case 31: return 15; 
+case 31: return 49; 
 break;
-case 32: return 'INVALID'; 
+case 32: return 51; 
+break;
+case 33: return 5; 
+break;
+case 34: return 14; 
+break;
+case 35: return 15; 
+break;
+case 36: return 'INVALID'; 
 break;
 }
 },
-rules: [/^(?:\s+)/,/^(?:fn\b)/,/^(?:hd\b)/,/^(?:tl\b)/,/^(?:::)/,/^(?:isNull\b)/,/^(?:\()/,/^(?:\))/,/^(?:\+)/,/^(?:subtract\b)/,/^(?:from\b)/,/^(?:sumlist\b)/,/^(?:===)/,/^(?:<)/,/^(?:>)/,/^(?:not\b)/,/^(?:-)/,/^(?:\/)/,/^(?:%)/,/^(?:if\b)/,/^(?:then\b)/,/^(?:else\b)/,/^(?:\*)/,/^(?:add1\b)/,/^(?:,)/,/^(?:~)/,/^(?:=>)/,/^(?:\[)/,/^(?:\])/,/^(?:$)/,/^(?:([a-zA-Z])(([a-zA-Z])|([0-9])|_)*)/,/^(?:([0-9])+)/,/^(?:.)/],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32],"inclusive":true}}
+rules: [/^(?:\s+)/,/^(?:fn\b)/,/^(?:hd\b)/,/^(?:tl\b)/,/^(?:::)/,/^(?:isNull\b)/,/^(?:\()/,/^(?:\))/,/^(?:\+)/,/^(?:subtract\b)/,/^(?:from\b)/,/^(?:sumlist\b)/,/^(?:===)/,/^(?:<)/,/^(?:>)/,/^(?:not\b)/,/^(?:-)/,/^(?:\/)/,/^(?:%)/,/^(?:if\b)/,/^(?:then\b)/,/^(?:else\b)/,/^(?:\*)/,/^(?:add1\b)/,/^(?:let\b)/,/^(?:in\b)/,/^(?:end\b)/,/^(?:,)/,/^(?:~)/,/^(?:=>)/,/^(?:=)/,/^(?:\[)/,/^(?:\])/,/^(?:$)/,/^(?:([a-zA-Z])(([a-zA-Z])|([0-9])|_)*)/,/^(?:([0-9])+)/,/^(?:.)/],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36],"inclusive":true}}
 });
 return lexer;
 })();
