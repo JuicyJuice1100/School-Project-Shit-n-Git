@@ -16,6 +16,10 @@ LETTER		      [a-zA-Z]
 "subtract"                         { return 'SUBTRACT'; }
 "from"                              {return 'FROM'; }
 "sumlist"                           {return 'SUMLIST';}
+"==="                               {return 'EQUAL';}
+"<"                                 {return 'LESSTHAN';}
+">"                                 {return 'GREATERTHAN';}
+"not"                               {return 'NOT';}
 "-"                                 {return 'MINUS';}
 "/"                                 {return 'DIVIDE';}
 "%"                                 {return 'MOD';}
@@ -98,7 +102,7 @@ prim1_app_exp
     ;
 
 prim2_app_exp
-/*    : prim2_op LPAREN exp COMMA exp RPAREN
+/*  : prim2_op LPAREN exp COMMA exp RPAREN
        { $$ = SLang.absyn.createPrim2AppExp($1,$3,$5); } */
     : prim2_op exp FROM exp
        {$$ = SLang.absyn.createPrim2AppExp("-", $4, $2); }
@@ -110,6 +114,7 @@ prim1_op
     :  ADD1     { $$ = $1; }
     |  SUMLIST  { $$ = $1; }
     | NEGATE {$$ = $1;}
+    | NOT {$$ = $1; }
     ;
 
 prim2_op
@@ -119,6 +124,9 @@ prim2_op
     |  MOD {$$ = $1;}
     | SUBTRACT {$$ = $1;}
     | MINUS {$$ = $1;}
+    | LESSTHAN {$$ = $1;}
+    | GREATERTHAN {$$ = $1;}
+    | EQUAL {$$ = $1; }
     ;
 
 args

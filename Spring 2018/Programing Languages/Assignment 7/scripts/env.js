@@ -37,6 +37,20 @@ function getListValue(value) {
 			"The argument of getListValue is not a List value.");
     }
 }
+function createBool(l){
+    return ["Bool", l];
+}
+function isBool(value){
+    return value[0] === "Bool";
+}
+function getBoolValue(value){
+    if(isBool(value)){
+        return value[1];
+    } else {
+        throw new Error("Interpreter error: " + 
+                "The argument of getBoolValue is not a Bool value.");
+    }
+}
 function createClo(params,body,env) {
     return ["Clo",params,body,env];
 }
@@ -154,6 +168,9 @@ exports.toString = toString;
 exports.createList = createList;
 exports.isList = isList;
 exports.getListValue = getListValue;
+exports.createBool = createBool;
+exports.isBool = isBool;
+exports.getBoolValue = getBoolValue;
 
 
 window.SLang.env = exports;
