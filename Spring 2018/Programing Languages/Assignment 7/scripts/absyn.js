@@ -1,3 +1,4 @@
+/* Justin Espiritu & Robert Freiberg*/
 /* global SLang : true */
 
 (function (){

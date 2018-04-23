@@ -1,3 +1,4 @@
+/* Justin Espiritu & Robert Freiberg*/
 /* description: Grammar for SLang 1 */
 
 /* lexical grammar */
@@ -66,21 +67,27 @@ exp
     | prim2_app_exp { $$ = $1; }
     | list_exp      { $$ = $1; }
     | ifElse_exp    {$$ = $1;}
-    ;
-/*    | let_exp       {$$ = $1;}
+    | let_exp       {$$ = $1;}
     ;
 
 let_exp
     : LET bindings IN exp END
-        {$$ = SLang.absyn.createAppExp(SLang.absyn.createFnExp($2[0], $4), $2[1]));}
+        {   
+            $2[1].unshift("args");
+            $$ = SLang.absyn.createAppExp(SLang.absyn.createFnExp($2[0], $4), $2[1]);
+        }
     ;
 
 bindings
     : var_exp EQ exp
-        {$$ = [[$1],[$3]];}
+        {$$ = [[$1[1]],[$3]];}
     | var_exp EQ exp bindings
-        {$$ = [[$1].push($4[0],[$3].push($4[1])]; }
-    ;*/
+        { 
+            $4[0].unshift($1[1]);
+            $4[1].unshift($3);
+            $$ = $4;
+        }
+    ;
 
 var_exp
     : VAR  { $$ = SLang.absyn.createVarExp( $1 ); }
@@ -94,6 +101,7 @@ fn_exp
     : FN LPAREN formals RPAREN THATRETURNS exp
            { $$ = SLang.absyn.createFnExp($3,$6); }
     ;
+
 ifElse_exp
     : IF exp THEN exp ELSE exp
             {$$ = SLang.absyn.createIfElse($2, $4, $6);}
