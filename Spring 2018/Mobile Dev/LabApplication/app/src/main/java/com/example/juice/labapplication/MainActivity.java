@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -36,17 +37,13 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private Intent intent;
     private LocalDatabase localDb;
+    private int playerCardLeftId, playerCardCenterId, playerCardRightId;
+    private TypedArray cards;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*if (getResources().getConfiguration().orientation ==
-                Configuration.ORIENTATION_LANDSCAPE) {
-            setContentView(R.layout.activity_landscape);
-        } else {
-            setContentView(R.layout.activity_portrait);
-        }*/
         setContentView(R.layout.activity_landscape);
         opponentCardPlayed = findViewById(R.id.opponentCardPlayed);
         isPlayerCardLeftFiltered = false;
@@ -61,8 +58,18 @@ public class MainActivity extends AppCompatActivity {
         playerCardCenter = findViewById(R.id.playerCardCenter);
         playerCardRight = findViewById(R.id.playerCardRight);
         playerCardPlayed = findViewById(R.id.playerCardPlayed);
-        randomCards();
+        cards = getResources().obtainTypedArray((R.array.cards));
         getListeners();
+        if(savedInstanceState == null) {
+            randomCards();
+        } else {
+            playerCardLeftId = savedInstanceState.getInt("playerCardLeftId");
+            playerCardCenterId = savedInstanceState.getInt("playerCardCenterId");
+            playerCardRightId = savedInstanceState.getInt("playerCardRightId");
+            playerCardLeft.setImageResource(cards.getResourceId(playerCardLeftId, -1));
+            playerCardCenter.setImageResource(cards.getResourceId(playerCardCenterId, -1));
+            playerCardRight.setImageResource(cards.getResourceId(playerCardRightId, -1));
+        }
     }
 
     @Override
@@ -80,10 +87,17 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle bundle){
+        super.onSaveInstanceState(bundle);
+        bundle.putInt("playerCardLeftId", playerCardLeftId);
+        bundle.putInt("playerCardCenterId", playerCardCenterId);
+        bundle.putInt("playerCardRightId", playerCardRightId);
+    }
+
     public void randomCards() {
         Stack<Integer> randomStack = new Stack<>();
         Random random = new Random();
-        TypedArray cards = getResources().obtainTypedArray((R.array.cards));
         int randomCard;
 
         for (int i = 0; i < 3; i++) {
@@ -92,8 +106,14 @@ public class MainActivity extends AppCompatActivity {
             } while (randomStack.contains(randomCard));
             randomStack.push(randomCard);
         }
+
+        playerCardLeftId = randomStack.peek();
+        int x = cards.getResourceId(playerCardLeftId, -1);
+        Log.i("important", x + "");
         playerCardLeft.setImageResource(cards.getResourceId(randomStack.pop(), -1));
+        playerCardCenterId = randomStack.peek();
         playerCardCenter.setImageResource(cards.getResourceId(randomStack.pop(), -1));
+        playerCardRightId = randomStack.peek();
         playerCardRight.setImageResource(cards.getResourceId(randomStack.pop(), -1));
     }
 

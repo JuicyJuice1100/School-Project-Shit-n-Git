@@ -43,11 +43,21 @@ public class MathView extends Fragment {
         mathEquation = getView().findViewById(R.id.mathEquations);
         mathAnswer = getView().findViewById(R.id.mathAnswers);
         mathSendButton = getView().findViewById(R.id.mathSendButton);
-        equationArrayList = new ArrayList<>();
-        equationArrayList.add(randomMathEquation());
         fragmentManager = getFragmentManager();
+        if(savedInstanceState == null){
+            equationArrayList = new ArrayList<>();
+            equationArrayList.add(randomMathEquation());
+        } else {
+            equationArrayList = savedInstanceState.getStringArrayList("equationArrayList");
+        }
         setMathArea();
         getListeners();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle bundle){
+        super.onSaveInstanceState(bundle);
+        bundle.putStringArrayList("equationArrayList", equationArrayList);
     }
 
     public void setMathArea(){
@@ -166,6 +176,7 @@ public class MathView extends Fragment {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     if(mathAnswer.getText().toString().equalsIgnoreCase("table")){
+
                         getFragmentManager().popBackStack();
                     }
                     else if(mathAnswer.getText().toString().equals(Integer.toString((int)(eval(equationArrayList.get(equationNumber)))))){

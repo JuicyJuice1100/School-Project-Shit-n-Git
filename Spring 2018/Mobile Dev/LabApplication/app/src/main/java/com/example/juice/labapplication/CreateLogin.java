@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CreateLogin extends AppCompatActivity {
     private Button create;
-    private EditText createUsername, createPassword;
+    private EditText createUsername, createPassword, checkPassword;
     private TextView loginLink;
     private LocalDatabase localDb;
 
@@ -36,6 +36,7 @@ public class CreateLogin extends AppCompatActivity {
         create = findViewById(R.id.createButton);
         createUsername = findViewById(R.id.create_username);
         createPassword = findViewById(R.id.create_password);
+        checkPassword = findViewById(R.id.check_password);
         loginLink = findViewById(R.id.loginLink);
         getListeners();
     }
@@ -61,7 +62,7 @@ public class CreateLogin extends AppCompatActivity {
     }
 
     public boolean validPassword(){
-        if(createPassword.getText().toString().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$")) {
+        if(createPassword.getText().toString().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$") && createPassword.getText().toString().equals(checkPassword.getText().toString())) {
             return true;
         } else{
             Toast.makeText(getApplicationContext(), "Password must be at least 6 character long, contains a capital letter, a lowercase letter and a number", Toast.LENGTH_LONG).show();
