@@ -1,0 +1,25 @@
+{
+	"cname":"JaneDoe",
+	"addr":"123  main st",
+	"city":"Oshkosh"
+}
+{
+	"cname":"FredFlintstone",
+	"addr":"Taylor Hall",
+	"city":"Oshkosh"
+}
+{
+	"cname":"BillJones",
+	"addr":"456 commercial st",
+	"city":"Neenah"
+}
+{
+	"cname":"HenryFord",
+	"addr":"789 new st",
+	"city":"Fond Du Lac"
+}
+{
+	"cname":"ThelmaJones",
+	"addr":"456 commercial st",
+	"city":"Neenah"
+}

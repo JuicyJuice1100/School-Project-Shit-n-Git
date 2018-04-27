@@ -1,0 +1,58 @@
+{
+	"bname":"OshkoshMain", 
+	"city":"Oshkosh", 
+	"assets":100000, 
+	"deposit":[
+			{"daccnum":"1","cname":"JaneDoe","balance":1000},
+			{"daccnum":"3","cname":"FredFlintstone","balance":40000}
+		], 
+	"loan":[
+			{"laccnum":"1","cname":"JaneDoe","amount":500},
+			{"laccnum":"2","cname":"FredFlintstone","amount":5000},
+			{"laccnum":"3","cname":"FredFlintstone","amount":6000}
+		]
+}
+{
+	"bname":"Oshkosh20th", 
+	"city":"Oshkosh", 
+	"assets":200000, 
+	"deposit":[
+			{"daccnum":"2","cname":"JaneDoe","balance":2000}
+			
+		]
+}
+{
+	"bname":"Neenah", 
+	"city":"Neenah", 
+	"assets":400000, 
+	"deposit":[
+			{"daccnum":"4","cname":"FredFlintstone","balance":10000}
+		]
+}
+{
+	"bname":"Menasha", 
+	"city":"Menasha", 
+	"assets":100000
+}
+{
+	"bname":"GrandChuteAppleton", 
+	"city":"Appleton", 
+	"assets":500000, 
+	"deposit":[
+			{"daccnum":"5","cname":"FredFlintstone","balance":50000}
+		], 
+	"loan":[
+			{"laccnum":"4","cname":"FredFlintstone","amount":5000}
+		]
+}
+{
+	"bname":"CollegeAppleton", 
+	"city":"Appleton", 
+	"assets":1000000, 
+	"deposit":[
+			{"daccnum":"6","cname":"BillJones","balance":10000}
+		], 
+	"loan":[
+			{"laccnum":"5","cname":"ThelmaJones","amount":5000}
+		]
+}
