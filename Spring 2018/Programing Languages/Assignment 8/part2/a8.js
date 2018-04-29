@@ -22,7 +22,7 @@ var seq = is.iterates(function (n) { return n % 3 === 0 ? n+2 : n+1; },1);
 // Your solution for problem 1 must appear between this and matching
 // end comment below
 
-// var findTwins = "To be completed";
+var findTwins = (n) => is.hd(n) + 2 === is.hd(is.tl(n)) ? is.cons([is.hd(n), is.hd(is.tl(n))], () => findTwins(is.tl(n))) : findTwins(is.tl(n));
 
 
 ////////// End of code for problem 1 ////////////////////
@@ -36,26 +36,35 @@ var seq = is.iterates(function (n) { return n % 3 === 0 ? n+2 : n+1; },1);
 
 
 // Part a
+const E = "east", S = "south", NE = "northEast", SW = "southWest";
 
-//var points2Dhelper = function ( /* To be completed */ ) {
-        
-    /* To be completed */ 
+var points2Dhelper = function(x, y, dir){
+    if(dir === E){
+        return is.cons([x, y], () => points2Dhelper(x + 1, y, SW));
+    } else if(dir === S){
+        return is.cons([x, y], () => points2Dhelper(x, y + 1, NE));
+    } else if (dir === SW){
+        return is.cons([x, y], (x - 1 === 0) ? () => points2Dhelper(x - 1, y + 1, S) : () => points2Dhelper(x - 1, y + 1, SW));
+    } else {
+        return is.cons([x, y], (y - 1 === 0) ? () => points2Dhelper(x + 1, y - 1, E) : () => points2Dhelper(x + 1, y - 1, NE));
+    }
+}
 
-//};
-
-//var points2D =     /* To be completed */ 
+var points2D = points2Dhelper(0, 0, E);
 
 // Part b
 
-// var triangle =  /* To be completed */ 
+var triangle = is.filter((x) => x[0] > x[1], points2D);
 
 // Part c
 
 // var isOutsideCircle = function (x,y,cx,cy,r) {
-    /* To be completed */ 
-//};
 
-// var hole = /* To be completed */
+// };
+
+var isOutsideCircle = (x, y, cx, cy, r) => x*x + y*y  > (cx + r) * (cx + r);
+
+var hole = is.filter((x) => isOutsideCircle(x[0], x[1] ,0 ,0 ,3), points2D);
 
 
 ////////// End of code for problem 2 ////////////////////
