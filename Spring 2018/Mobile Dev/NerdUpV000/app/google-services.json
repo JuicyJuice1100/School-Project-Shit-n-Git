@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1031593536172",
+    "firebase_url": "https://nerdupv000.firebaseio.com",
+    "project_id": "nerdupv000",
+    "storage_bucket": "nerdupv000.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031593536172:android:d9d03cd936ee54d4",
+        "android_client_info": {
+          "package_name": "com.example.juice.nerdupv000"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1031593536172-lhi2ar0rjpn61gc0q1ils9322lh6nv1j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.juice.nerdupv000",
+            "certificate_hash": "412f0033f308f01b3d116738746a3f2ab36b6baa"
+          }
+        },
+        {
+          "client_id": "1031593536172-vv16pf9lgov1ttvu5fau6hej9biehflc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPIH7EyLL8jUpdEl9Gz6c1wHrhWalpZO0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1031593536172-vv16pf9lgov1ttvu5fau6hej9biehflc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

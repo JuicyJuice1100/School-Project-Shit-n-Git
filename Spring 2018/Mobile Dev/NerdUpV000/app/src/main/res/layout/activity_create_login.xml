@@ -22,18 +22,26 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/create_username"
+            android:id="@+id/create_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
+            android:hint="Email"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/create_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/check_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Re-Enter Password"
             android:ems="10"
             android:inputType="textPassword" />
 

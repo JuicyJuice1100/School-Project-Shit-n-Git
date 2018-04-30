@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Profile"
+    tools:context=".EditProfile"
     tools:layout_editor_absoluteY="25dp">
 
     <android.support.v7.widget.Toolbar
@@ -48,7 +48,7 @@
                     android:layout_weight="1"
                     app:srcCompat="@mipmap/ic_launcher_round" />
 
-                <TextView
+                <EditText
                     android:id="@+id/quickInfo"
                     android:layout_width="65dp"
                     android:layout_height="match_parent"
@@ -56,7 +56,7 @@
                     android:text="Quick Info" />
             </LinearLayout>
 
-            <TextView
+            <EditText
                 android:id="@+id/bio"
                 android:layout_width="match_parent"
                 android:layout_height="115dp"
@@ -67,14 +67,14 @@
                 android:layout_height="73dp"
                 android:orientation="horizontal">
 
-                <TextView
+                <EditText
                     android:id="@+id/mains"
                     android:layout_width="65dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Mains" />
 
-                <TextView
+                <EditText
                     android:id="@+id/secondaries"
                     android:layout_width="65dp"
                     android:layout_height="match_parent"
@@ -82,50 +82,6 @@
                     android:text="Secondaries" />
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="85dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/notes"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Notes" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/editButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:srcCompat="@android:drawable/ic_menu_edit" />
-
-                <ImageButton
-                    android:id="@+id/uploadButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:srcCompat="@android:drawable/ic_menu_upload" />
-
-                <ImageButton
-                    android:id="@+id/downloadButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:srcCompat="@android:drawable/stat_sys_download" />
-            </LinearLayout>
-
         </LinearLayout>
 
     </ScrollView>

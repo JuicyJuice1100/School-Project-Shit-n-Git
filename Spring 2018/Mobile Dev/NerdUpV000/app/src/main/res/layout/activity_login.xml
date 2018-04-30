@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="334dp"
-        android:layout_height="212dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
@@ -22,12 +22,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/login_username"
+            android:id="@+id/login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/login_password"
@@ -43,12 +43,17 @@
             android:layout_height="wrap_content"
             android:text="Login" />
 
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <TextView
             android:id="@+id/createLink"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="No account yet? Click Here" />
-
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

@@ -5,9 +5,13 @@
         android:id="@+id/search"
         android:icon="@drawable/ic_search_white_24px"
         android:title="@string/search"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
     <item android:id="@+id/edit"
         android:title="@string/editProfile"
         android:icon="@drawable/ic_mode_edit_white_24px"
+        app:showAsAction="always"/>
+    <item android:id="@+id/logout"
+        android:title="Logout"
+        android:icon="@drawable/ic_person_outline_white_24px"
         app:showAsAction="always"/>
 </menu>

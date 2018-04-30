@@ -1,5 +1,6 @@
 package com.example.juice.nerdupv000;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -12,15 +13,28 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.IOException;
+import java.util.List;
+
 public class CreateLogin extends BaseActivity {
     private Button create;
-    private EditText createUsername, createPassword;
+    private EditText createEmail, createPassword, checkPassword;
     private TextView loginLink;
+    private FirebaseAuth auth;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_login);
+        auth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -28,20 +42,28 @@ public class CreateLogin extends BaseActivity {
         super.onStart();
 
         create = findViewById(R.id.createButton);
-        createUsername = findViewById(R.id.create_username);
+        createEmail = findViewById(R.id.create_email);
         createPassword = findViewById(R.id.create_password);
+        checkPassword = findViewById(R.id.check_password);
         loginLink = findViewById(R.id.loginLink);
         getListeners();
     }
 
-    public boolean validUsername(){
-        if(createUsername.getText().toString().length() >= 4){
-            return true;
-        } else {
-            Toast.makeText(getApplicationContext(), "Username must be at least 4 characters long", Toast.LENGTH_LONG).show();
-            return false;
+    public void createUser(String username, String password){
+        auth.createUserWithEmailAndPassword(username, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()) {
+                            FirebaseUser user = auth.getCurrentUser();
+                            Toast.makeText(getApplicationContext(), "Account Created", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Unable to create account please check email.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
         }
-    }
 
     public boolean validPassword(){
         if(createPassword.getText().toString().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$")) {
@@ -52,14 +74,26 @@ public class CreateLogin extends BaseActivity {
         return false;
     }
 
+    public boolean passwordsMatch(){
+        if(createPassword.getText().toString().equals(checkPassword.getText().toString())){
+            return true;
+        } else {
+            Toast.makeText(getApplicationContext(), "Passwords don't match", Toast.LENGTH_LONG).show();
+        }
+        return false;
+    }
+
     public void getListeners(){
         create.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if(validUsername() && validPassword()){
-                        Toast.makeText(getApplicationContext(), "Account Created", Toast.LENGTH_SHORT).show();
-                        goToLogin();
+                    if(validPassword() && passwordsMatch()){
+                        try{
+                            createUser(createEmail.getText().toString(), createPassword.getText().toString());
+                        } catch(Exception e){
+                            Toast.makeText(getApplicationContext(), "Error with database. Unable to create account.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                     return true;
                 } else {
@@ -74,8 +108,7 @@ public class CreateLogin extends BaseActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event){
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    //have to implement passing data to database
-                    goToLogin();
+                    finish();
                     return true;
                 } else {
                     return false;
