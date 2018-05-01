@@ -1,5 +1,6 @@
 package com.example.juice.nerdupv000;
 
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
@@ -12,13 +13,25 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Profile extends BaseActivity {
     private ImageButton editNotes, uploadNotes, downloadNotes;
-    FirebaseAuth database;
+    private ImageView profilePic;
+    private TextView username;
+    private FirebaseAuth database;
+    private String name, email;
+    private Uri photoUrl;
+    private boolean isGoogleSignIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +40,8 @@ public class Profile extends BaseActivity {
 
         Toolbar toolbar = findViewById(R.id.profileToolbar);
         setSupportActionBar(toolbar);
+        database = FirebaseAuth.getInstance();
+        isGoogleSignIn = getIntent().getBooleanExtra("isGoogleSignIn", false);
     }
 
     @Override
@@ -35,7 +50,10 @@ public class Profile extends BaseActivity {
         editNotes = findViewById(R.id.editButton);
         uploadNotes = findViewById(R.id.uploadButton);
         downloadNotes = findViewById(R.id.downloadButton);
+        username = findViewById(R.id.username);
+        profilePic = findViewById(R.id.profilePic);
         getListeners();
+        setData();
     }
 
     @Override
@@ -51,7 +69,7 @@ public class Profile extends BaseActivity {
         if(id == R.id.search){
             Log.i("actionBar", "search");
         } else if (id == R.id.edit){
-            gotToEditProfile();
+            goToEditProfile();
         } else if (id == R.id.logout){
             FirebaseAuth.getInstance().signOut();
             goToLogin();
@@ -59,12 +77,32 @@ public class Profile extends BaseActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-/*    public void showPopupSearch(View v) {
-        PopupMenu popup = new PopupMenu(this, v);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.search, popup.getMenu());
-        popup.show();
-    }*/
+
+
+    public void setData() {
+        if (isGoogleSignIn) {
+            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+            if (acct != null) {
+                name = acct.getDisplayName();
+                email = acct.getEmail();
+                photoUrl = acct.getPhotoUrl();
+            }
+        }else {
+            FirebaseUser user = database.getCurrentUser();
+            if (user != null) {
+                name = user.getDisplayName();
+                email = user.getEmail();
+                photoUrl = user.getPhotoUrl();
+            }
+        }
+        username.setText(name);
+        Glide.with(this)
+                .load(photoUrl)
+                .apply(new RequestOptions()
+                    .circleCrop())
+                .into(profilePic);
+    }
+
 
     public void getListeners(){
         editNotes.setOnTouchListener(new View.OnTouchListener() {

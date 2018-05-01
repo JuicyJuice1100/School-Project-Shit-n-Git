@@ -42,6 +42,7 @@ public class Login extends BaseActivity {
     private TextView createLink;
     private FirebaseAuth auth;
     private GoogleSignInClient googleSignInClient;
+    private boolean isGoogleSignIn;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -53,7 +54,6 @@ public class Login extends BaseActivity {
     @Override
     public void onStart(){
         super.onStart();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         login = findViewById(R.id.loginButton);
         loginEmail = findViewById(R.id.login_email);
@@ -70,6 +70,13 @@ public class Login extends BaseActivity {
         googleSignInClient = GoogleSignIn.getClient(this, gso);
     }
 
+    @Override
+    public void goToProfile(){
+        Intent intent = new Intent(this, Profile.class);
+        intent.putExtra("isGoogleSignIn", isGoogleSignIn);
+        startActivity(intent);
+    }
+
     public void checkUser(String email, String password){
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -80,7 +87,12 @@ public class Login extends BaseActivity {
                             FirebaseUser user = auth.getCurrentUser();
                             Toast.makeText(getApplicationContext(), "Login successful.",
                                     Toast.LENGTH_SHORT).show();
-                            goToProfile();
+                            String username = user.getDisplayName();
+                            isGoogleSignIn = false;
+                            if(username == null)
+                                goToNewUser();
+                            else
+                                goToProfile();
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
@@ -117,7 +129,9 @@ public class Login extends BaseActivity {
             Toast.makeText(getApplicationContext(), "Login successful.",
                     Toast.LENGTH_SHORT).show();
             // Signed in successfully, show authenticated UI.
+            isGoogleSignIn = true;
             goToProfile();
+            finish();
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.

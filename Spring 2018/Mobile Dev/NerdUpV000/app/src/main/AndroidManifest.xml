@@ -26,7 +26,8 @@
                         android:resource="@xml/searchable"/>
         </activity>
         -->
-        <activity android:name=".EditProfile"></activity>
+        <activity android:name=".EditProfile" />
+        <activity android:name=".NewUser"></activity>
     </application>
 
 </manifest>

@@ -27,8 +27,13 @@ public class BaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void gotToEditProfile(){
+    public void goToEditProfile(){
         Intent intent = new Intent(this, EditProfile.class);
+        startActivity(intent);
+    }
+
+    public void goToNewUser(){
+        Intent intent = new Intent(this, NewUser.class);
         startActivity(intent);
     }
 }

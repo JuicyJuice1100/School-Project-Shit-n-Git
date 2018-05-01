@@ -36,6 +36,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="50sp"
+                android:maxLines="1"
+                android:textAlignment="center"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="158dp"
@@ -46,7 +55,7 @@
                     android:layout_width="65dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    app:srcCompat="@mipmap/ic_launcher_round" />
+                    android:scaleType="fitXY" />
 
                 <TextView
                     android:id="@+id/quickInfo"
