@@ -27,7 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class Profile extends BaseActivity {
     private ImageButton editNotes, uploadNotes, downloadNotes;
     private ImageView profilePic;
-    private TextView username;
+    private TextView username, quickInfo, bio, mains, secondaries, notes;
     private FirebaseAuth database;
     private String name, email;
     private Uri photoUrl;
@@ -52,6 +52,11 @@ public class Profile extends BaseActivity {
         downloadNotes = findViewById(R.id.downloadButton);
         username = findViewById(R.id.username);
         profilePic = findViewById(R.id.profilePic);
+        quickInfo = findViewById(R.id.quickInfo);
+        bio = findViewById(R.id.bio);
+        mains = findViewById(R.id.mains);
+        secondaries = findViewById(R.id.secondaries);
+        notes = findViewById(R.id.notes);
         getListeners();
         setData();
     }
