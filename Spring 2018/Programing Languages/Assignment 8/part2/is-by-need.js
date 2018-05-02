@@ -30,7 +30,12 @@ var is = {};
        @return {sequence} the infinite sequence that follows the first element
     */
     var tl = function (seq) {
-        return thaw(seq[1]);
+        let i = 1
+        while(Number.isFinite(seq[i])){
+            // console.log("loop: " + seq[i])
+            i++;
+        }
+        return thaw(seq[i]);
     };
 
     /** get a sequence of successive integers from a specified starting
@@ -51,12 +56,20 @@ var is = {};
        @return {array} an array with the first n evaluated members of the sequence
     */
     var take = function (seq, n) {
-        if (n === 0)
-            return [];
+        if (n === 1){
+            return seq.filter(item => Number.isFinite(item))
+        }
         else {
-            var result = take(tl(seq), n - 1);
-            result.unshift(hd(seq));
-            return result;
+            // var result = take(tl(seq), n - 1);
+            // result.unshift(hd(seq));
+            // return result;
+            let result = tl(seq);
+            // console.log("seq: "+ seq)
+            // console.log("result: "+ result)
+            seq.pop();
+            seq.push(result[0])
+            seq.push(result[1])
+            return take(seq, n-1);
         }
     };
 
