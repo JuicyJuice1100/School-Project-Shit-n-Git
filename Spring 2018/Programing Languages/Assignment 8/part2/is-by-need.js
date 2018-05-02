@@ -55,9 +55,9 @@ var is = {};
        @param  {integer} n - the number of items from seq to evaluate
        @return {array} an array with the first n evaluated members of the sequence
     */
-    var take = function (seq, n) {
-        if (n === 1){
-            return seq.filter(item => Number.isFinite(item))
+    var take = function (seq, n) { 
+        if (n === 0){
+            // return seq.filter(item => Number.isFinite(item))
         }
         else {
             // var result = take(tl(seq), n - 1);
