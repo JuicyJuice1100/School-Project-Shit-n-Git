@@ -10,8 +10,12 @@
         android:title="@string/editProfile"
         android:icon="@drawable/ic_mode_edit_white_24px"
         app:showAsAction="always"/>
+    <item android:id="@+id/settings"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_settings_white_24px"
+        app:showAsAction="always"/>
     <item android:id="@+id/logout"
-        android:title="Logout"
+        android:title="@string/logout"
         android:icon="@drawable/ic_person_outline_white_24px"
         app:showAsAction="always"/>
 </menu>

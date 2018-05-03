@@ -54,6 +54,7 @@ public class NewUser extends BaseActivity {
                                             Toast.makeText(getApplicationContext(), "Updated profile",
                                                     Toast.LENGTH_SHORT).show();
                                             goToProfile();
+                                            finish();
                                         } else {
                                             Toast.makeText(getApplicationContext(), "Error updating profile.  Please try again.",
                                                     Toast.LENGTH_SHORT).show();

@@ -6,6 +6,9 @@ import android.os.Bundle;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -49,13 +52,13 @@ public class CreateLogin extends BaseActivity {
         getListeners();
     }
 
+
     public void createUser(String username, String password){
         auth.createUserWithEmailAndPassword(username, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
-                            FirebaseUser user = auth.getCurrentUser();
                             Toast.makeText(getApplicationContext(), "Account Created", Toast.LENGTH_SHORT).show();
                             finish();
                         } else {

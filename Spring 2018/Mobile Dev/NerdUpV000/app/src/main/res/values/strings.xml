@@ -3,4 +3,23 @@
     <string name="search">Search</string>
     <string name="settings">Settings</string>
     <string name="editProfile">Edit</string>
+    <string name="logout">Logout</string>
+    <string name="uploadPic">Upload Picture</string>
+    <string name="takePic">Take Picture</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="accountCreateLink">No account yet? Click Here</string>
+    <string name="accountLoginLink">Already have an account? Click Here</string>
+    <string name="passwordMatch">Retype Password</string>
+    <string name="username">Username</string>
+    <string name="update">Update</string>
+    <string name="createAccount">Create Account</string>
+    <string name="bio">Bio</string>
+    <string name="quickInfo">Quick Info</string>
+    <string name="mains">Mains</string>
+    <string name="secondaries">Secondaries</string>
+    <string name="notes">Notes</string>
 </resources>

@@ -87,9 +87,8 @@ public class Login extends BaseActivity {
                             FirebaseUser user = auth.getCurrentUser();
                             Toast.makeText(getApplicationContext(), "Login successful.",
                                     Toast.LENGTH_SHORT).show();
-                            String username = user.getDisplayName();
                             isGoogleSignIn = false;
-                            if(username == null)
+                            if(user.getDisplayName() == null)
                                 goToNewUser();
                             else
                                 goToProfile();

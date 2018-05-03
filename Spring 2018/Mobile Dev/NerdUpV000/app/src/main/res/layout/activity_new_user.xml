@@ -26,13 +26,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Enter Username"
+            android:hint="@string/username"
             android:inputType="textEmailAddress" />
 
         <Button
             android:id="@+id/setUserButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Update" />
+            android:text="@string/update" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

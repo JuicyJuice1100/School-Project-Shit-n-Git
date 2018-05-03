@@ -1,19 +1,15 @@
 package com.example.juice.nerdupv000;
 
-import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.PopupMenu;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,10 +26,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Profile extends BaseActivity {
-    private ImageButton editNotes, uploadNotes, downloadNotes;
+public class EditProfileGoogle extends BaseActivity {
+
     private ImageView profilePic;
-    private TextView username, quickInfo, bio, mains, secondaries, notes;
+    private TextView username, quickInfo, bio, mains, secondaries;
     private FirebaseAuth auth;
     private DatabaseReference database;
     private ValueEventListener profileListener;
@@ -44,34 +40,32 @@ public class Profile extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_edit_profile_google);
 
         Toolbar toolbar = findViewById(R.id.profileToolbar);
         setSupportActionBar(toolbar);
-        auth = FirebaseAuth.getInstance();
+
         isGoogleSignIn = getIntent().getBooleanExtra("isGoogleSignIn", false);
+        auth = FirebaseAuth.getInstance();
     }
 
     @Override
     protected void onStart(){
         super.onStart();
-        editNotes = findViewById(R.id.editButton);
-        uploadNotes = findViewById(R.id.uploadButton);
-        downloadNotes = findViewById(R.id.downloadButton);
         username = findViewById(R.id.username);
         profilePic = findViewById(R.id.profilePic);
         quickInfo = findViewById(R.id.quickInfo);
         bio = findViewById(R.id.bio);
         mains = findViewById(R.id.mains);
         secondaries = findViewById(R.id.secondaries);
-        notes = findViewById(R.id.notes);
         getListeners();
         getData();
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.profile, menu);
+        getMenuInflater().inflate(R.menu.editprofile, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -79,35 +73,13 @@ public class Profile extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
 
-        if(id == R.id.search){
-            Log.i("actionBar", "search");
-        } else if (id == R.id.edit){
-            if(isGoogleSignIn)
-                goToEditProfileGoogle();
-            else
-                goToEditProfile();
-        } else if (id == R.id.settings){
-            Log.i("actionBar", "settings");
-        } else if (id == R.id.logout){
-            FirebaseAuth.getInstance().signOut();
-            goToLogin();
+        if(id == R.id.confirm){
+            Log.i("actionBar", "confirm");
+            finish();
+        } else if (id == R.id.cancel){
             finish();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void goToEditProfileGoogle(){
-        Intent intent = new Intent(this, EditProfileGoogle.class);
-        intent.putExtra("isGoogleSignIn", isGoogleSignIn);
-        startActivity(intent);
-    }
-
-    @Override
-    public void goToEditProfile(){
-        Intent intent = new Intent(this, EditProfile.class);
-        intent.putExtra("isGoogleSignIn", isGoogleSignIn);
-        startActivity(intent);
     }
 
     @Override
@@ -119,7 +91,7 @@ public class Profile extends BaseActivity {
         }
     }
 
-    public void getData() {
+    public void getData(){
         if (isGoogleSignIn) {
             GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
             if (acct != null) {
@@ -142,6 +114,7 @@ public class Profile extends BaseActivity {
             }
         }
         username.setText(name);
+
         if(photoUrl != null){
             Glide.with(this)
                     .load(photoUrl)
@@ -166,14 +139,12 @@ public class Profile extends BaseActivity {
                         mains.setText(userProfile.mains);
                     if(userProfile.secondaries != null)
                         secondaries.setText(userProfile.secondaries);
-                    if(userProfile.notes != null)
-                        notes.setText(userProfile.notes);
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(Profile.this, "Unable to retrieve profile data.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditProfileGoogle.this, "Unable to retrieve profile data.", Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -183,43 +154,7 @@ public class Profile extends BaseActivity {
     }
 
     public void getListeners(){
-        editNotes.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
-
-        uploadNotes.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event){
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
-
-        downloadNotes.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event){
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
-
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
-
 
     }
+
 }

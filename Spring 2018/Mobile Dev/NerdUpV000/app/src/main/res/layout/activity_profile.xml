@@ -13,7 +13,6 @@
         android:layout_height="55dp"
         android:layout_marginBottom="8dp"
         android:background="@color/colorPrimaryDark"
-        android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +39,6 @@
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:textSize="50sp"
                 android:maxLines="1"
                 android:textAlignment="center"/>
@@ -55,13 +53,14 @@
                     android:id="@+id/profilePic"
                     android:layout_width="65dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_portrait_white_24px"/>
                 <TextView
                     android:id="@+id/quickInfo"
                     android:layout_width="65dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Quick Info" />
+                    android:text="@string/quickInfo"
+                    android:layout_weight="1"/>
             </LinearLayout>
 
             <TextView
@@ -69,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:minHeight="115dp"
-                android:text="Bio" />
+                android:text="@string/bio" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -82,14 +81,14 @@
                     android:layout_width="65dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Mains" />
+                    android:text="@string/mains" />
 
                 <TextView
                     android:id="@+id/secondaries"
                     android:layout_width="65dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Secondaries" />
+                    android:text="@string/secondaries" />
 
             </LinearLayout>
 
@@ -104,7 +103,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Notes" />
+                    android:text="@string/notes" />
 
             </LinearLayout>
 

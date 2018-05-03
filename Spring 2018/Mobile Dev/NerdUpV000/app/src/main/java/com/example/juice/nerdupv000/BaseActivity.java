@@ -36,4 +36,17 @@ public class BaseActivity extends AppCompatActivity {
         Intent intent = new Intent(this, NewUser.class);
         startActivity(intent);
     }
+
+    public void goToEditProfileGoogle(){
+        Intent intent = new Intent(this, EditProfileGoogle.class);
+        startActivity(intent);
+    }
+
+    static String encodeUserEmail(String userEmail) {
+        return userEmail.replace(".", ",");
+    }
+
+    static String decodeUserEmail(String userEmail) {
+        return userEmail.replace(",", ".");
+    }
 }
