@@ -107,13 +107,13 @@
 
             </LinearLayout>
 
-            <LinearLayout
+<!--            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal">-->
 
-                <ImageButton
+<!--                <ImageButton
                     android:id="@+id/editButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -125,15 +125,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    app:srcCompat="@android:drawable/ic_menu_upload" />
+                    app:srcCompat="@android:drawable/ic_menu_upload" />-->
 
-                <ImageButton
+<!--                <ImageButton
                     android:id="@+id/downloadButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:srcCompat="@android:drawable/stat_sys_download" />
-            </LinearLayout>
+                    app:srcCompat="@android:drawable/stat_sys_download" />-->
+<!--            </LinearLayout>-->
 
         </LinearLayout>
 

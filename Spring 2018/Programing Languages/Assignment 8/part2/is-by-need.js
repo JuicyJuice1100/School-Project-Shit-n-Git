@@ -30,9 +30,8 @@ var is = {};
        @return {sequence} the infinite sequence that follows the first element
     */
     var tl = function (seq) {
-        let i = 1
+        let i = 0
         while(Number.isFinite(seq[i])){
-            // console.log("loop: " + seq[i])
             i++;
         }
         return thaw(seq[i]);
@@ -56,20 +55,28 @@ var is = {};
        @return {array} an array with the first n evaluated members of the sequence
     */
     var take = function (seq, n) { 
-        if (n === 0){
-            // return seq.filter(item => Number.isFinite(item))
-        }
-        else {
-            // var result = take(tl(seq), n - 1);
-            // result.unshift(hd(seq));
-            // return result;
-            let result = tl(seq);
-            // console.log("seq: "+ seq)
-            // console.log("result: "+ result)
+        // if (n === 0){
+        //     return seq.filter(item => Number.isFinite(item));
+        // } else {
+        //     // // var result = take(tl(seq), n - 1)
+        //     // var temp = seq;
+        //     // var result = tl(seq);
+        //     // seq.pop();
+        //     // seq.push(result[0])
+        //     // seq.push(result[1])
+        //     var result = take(tl(seq), n - 1);
+        //     result.unshift(hd(seq));
+        //     // return seq.slice(0, n);
+        // }
+        if(n < seq.length){
+            return seq.slice(0, n)
+        } else {
+            take(seq, n - 1);
+            var result = tl(seq);
             seq.pop();
             seq.push(result[0])
             seq.push(result[1])
-            return take(seq, n-1);
+            return seq.slice(0, n);
         }
     };
 

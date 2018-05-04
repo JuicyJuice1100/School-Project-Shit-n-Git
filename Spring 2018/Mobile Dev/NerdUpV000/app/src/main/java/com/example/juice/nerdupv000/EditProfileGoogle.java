@@ -25,15 +25,22 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class EditProfileGoogle extends BaseActivity {
 
     private ImageView profilePic;
     private TextView username, quickInfo, bio, mains, secondaries;
     private FirebaseAuth auth;
-    private DatabaseReference database;
+    private DatabaseReference databaseReference, userProfileReference;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
     private ValueEventListener profileListener;
-    private String name, email;
+    private String name, email, notes;
     private Uri photoUrl;
     private boolean isGoogleSignIn;
 
@@ -47,21 +54,21 @@ public class EditProfileGoogle extends BaseActivity {
 
         isGoogleSignIn = getIntent().getBooleanExtra("isGoogleSignIn", false);
         auth = FirebaseAuth.getInstance();
-    }
+        notes = getIntent().getStringExtra("notes");
 
-    @Override
-    protected void onStart(){
-        super.onStart();
         username = findViewById(R.id.username);
         profilePic = findViewById(R.id.profilePic);
         quickInfo = findViewById(R.id.quickInfo);
         bio = findViewById(R.id.bio);
         mains = findViewById(R.id.mains);
         secondaries = findViewById(R.id.secondaries);
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
         getListeners();
         getData();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -74,7 +81,7 @@ public class EditProfileGoogle extends BaseActivity {
         int id = item.getItemId();
 
         if(id == R.id.confirm){
-            Log.i("actionBar", "confirm");
+            updateProfile();
             finish();
         } else if (id == R.id.cancel){
             finish();
@@ -82,12 +89,26 @@ public class EditProfileGoogle extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void updateProfile(){
+        userProfileReference = FirebaseDatabase.getInstance().getReference().child("userProfiles");
+        UserProfile userProfile = new UserProfile(bio.getText().toString(), quickInfo.getText().toString(),
+                mains.getText().toString(), secondaries.getText().toString(), notes);
+        Map<String, Object> profileValues = userProfile.toMap();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/" + encodeUserEmail(email) + "/", profileValues);
+
+        userProfileReference.updateChildren(childUpdates);
+
+        Toast.makeText(EditProfileGoogle.this, "Updated Profile", Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     public void onStop(){
         super.onStop();
 
         if(profileListener != null){
-            database.removeEventListener(profileListener);
+            databaseReference.removeEventListener(profileListener);
         }
     }
 
@@ -123,7 +144,7 @@ public class EditProfileGoogle extends BaseActivity {
                     .into(profilePic);
         }
 
-        database = FirebaseDatabase.getInstance().getReference().child("userProfiles").child(encodeUserEmail(email));
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("userProfiles").child(encodeUserEmail(email));
 
         ValueEventListener dataListener = new ValueEventListener() {
             @Override
@@ -148,7 +169,7 @@ public class EditProfileGoogle extends BaseActivity {
             }
         };
 
-        database.addListenerForSingleValueEvent(dataListener);
+        databaseReference.addListenerForSingleValueEvent(dataListener);
 
         profileListener = dataListener;
     }

@@ -31,7 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Profile extends BaseActivity {
-    private ImageButton editNotes, uploadNotes, downloadNotes;
+/*    private ImageButton editNotes, uploadNotes, downloadNotes;*/
     private ImageView profilePic;
     private TextView username, quickInfo, bio, mains, secondaries, notes;
     private FirebaseAuth auth;
@@ -55,9 +55,9 @@ public class Profile extends BaseActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        editNotes = findViewById(R.id.editButton);
+/*        editNotes = findViewById(R.id.editButton);
         uploadNotes = findViewById(R.id.uploadButton);
-        downloadNotes = findViewById(R.id.downloadButton);
+        downloadNotes = findViewById(R.id.downloadButton);*/
         username = findViewById(R.id.username);
         profilePic = findViewById(R.id.profilePic);
         quickInfo = findViewById(R.id.quickInfo);
@@ -100,6 +100,7 @@ public class Profile extends BaseActivity {
     public void goToEditProfileGoogle(){
         Intent intent = new Intent(this, EditProfileGoogle.class);
         intent.putExtra("isGoogleSignIn", isGoogleSignIn);
+        intent.putExtra("notes", notes.getText().toString());
         startActivity(intent);
     }
 
@@ -107,6 +108,7 @@ public class Profile extends BaseActivity {
     public void goToEditProfile(){
         Intent intent = new Intent(this, EditProfile.class);
         intent.putExtra("isGoogleSignIn", isGoogleSignIn);
+        intent.putExtra("notes", notes.getText().toString());
         startActivity(intent);
     }
 
@@ -168,6 +170,7 @@ public class Profile extends BaseActivity {
                         secondaries.setText(userProfile.secondaries);
                     if(userProfile.notes != null)
                         notes.setText(userProfile.notes);
+                    getData();
                 }
             }
 
@@ -177,13 +180,13 @@ public class Profile extends BaseActivity {
             }
         };
 
-        database.addListenerForSingleValueEvent(dataListener);
+        database.addValueEventListener(dataListener);
 
         profileListener = dataListener;
     }
 
     public void getListeners(){
-        editNotes.setOnTouchListener(new View.OnTouchListener() {
+/*        editNotes.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -206,9 +209,9 @@ public class Profile extends BaseActivity {
                     return false;
                 }
             }
-        });
+        });*/
 
-        downloadNotes.setOnTouchListener(new View.OnTouchListener() {
+/*        downloadNotes.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event){
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
@@ -218,7 +221,7 @@ public class Profile extends BaseActivity {
                     return false;
                 }
             }
-        });
+        });*/
 
 
     }
