@@ -1,6 +1,11 @@
 package com.example.juice.nerdupv000;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.hardware.camera2.CameraCaptureSession;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.menu.MenuBuilder;
@@ -28,7 +33,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.ArrayList;
+
 public class EditProfile extends BaseActivity implements PopupMenu.OnMenuItemClickListener {
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_GALLERY = 0;
+
     private ImageView profilePic;
     private TextView username, quickInfo, bio, mains, secondaries;
     private FirebaseAuth auth;
@@ -38,29 +50,51 @@ public class EditProfile extends BaseActivity implements PopupMenu.OnMenuItemCli
     private Uri photoUrl;
     private boolean isGoogleSignIn;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_edit_profile);
 
         Toolbar toolbar = findViewById(R.id.profileToolbar);
         setSupportActionBar(toolbar);
 
-        isGoogleSignIn = getIntent().getBooleanExtra("isGoogleSignIn", false);
-        auth = FirebaseAuth.getInstance();
-    }
 
-    @Override
-    protected void onStart(){
-        super.onStart();
+        auth = FirebaseAuth.getInstance();
+
         username = findViewById(R.id.username);
         profilePic = findViewById(R.id.profilePic);
         quickInfo = findViewById(R.id.quickInfo);
         bio = findViewById(R.id.bio);
         mains = findViewById(R.id.mains);
         secondaries = findViewById(R.id.secondaries);
+
+
         getListeners();
         getData();
+        if(savedInstanceState == null){
+            isGoogleSignIn = getIntent().getBooleanExtra("isGoogleSignIn", false);
+
+        } else {
+            isGoogleSignIn = savedInstanceState.getBoolean("isGoogleSignIn");
+            bio.setText(savedInstanceState.getString("bio"));
+            quickInfo.setText(savedInstanceState.getString("quickInfo"));
+            mains.setText(savedInstanceState.getString("mains"));
+            secondaries.setText(savedInstanceState.getString("secondaries"));
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle bundle){
+        profilePic.buildDrawingCache();
+        bundle.putString("bio", bio.getText().toString());
+        bundle.putString("quickInfo", quickInfo.getText().toString());
+        bundle.putString("mains", quickInfo.getText().toString());
+        bundle.putString("secondaries", quickInfo.getText().toString());
+        bundle.putBoolean("isGoogleSignIn", isGoogleSignIn);
+        super.onSaveInstanceState(bundle);
     }
 
     @Override
@@ -74,7 +108,7 @@ public class EditProfile extends BaseActivity implements PopupMenu.OnMenuItemCli
         int id = item.getItemId();
 
         if(id == R.id.confirm){
-            Log.i("actionBar", "confirm");
+
             finish();
         } else if (id == R.id.cancel){
             finish();
@@ -95,13 +129,59 @@ public class EditProfile extends BaseActivity implements PopupMenu.OnMenuItemCli
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.uploadpic:
-                Log.i("menu", "upload picture");
+                getImageFromAlbum();
                 return true;
             case R.id.takepic:
-                Log.i("menu", "take picture");
+                dispatchTakePictureIntent();
                 return true;
             default:
                 return false;
+        }
+    }
+
+    private void getImageFromAlbum(){
+        try{
+            Intent i = new Intent(Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, REQUEST_GALLERY);
+        }catch(Exception exp){
+            Log.i("Error",exp.toString());
+        }
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            Glide.with(this)
+                    .load(imageBitmap)
+                    .apply(new RequestOptions()
+                            .circleCrop())
+                    .into(profilePic);
+        } else if (requestCode ==  REQUEST_GALLERY && resultCode == RESULT_OK){
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                Glide.with(this)
+                        .load(selectedImage)
+                        .apply(new RequestOptions()
+                                .circleCrop())
+                        .into(profilePic);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
