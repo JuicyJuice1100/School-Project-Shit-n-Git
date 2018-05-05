@@ -91,25 +91,32 @@ public class EditProfile extends BaseActivity implements PopupMenu.OnMenuItemCli
 
 
         getListeners();
-        getData();
+
         if(savedInstanceState == null){
             isGoogleSignIn = getIntent().getBooleanExtra("isGoogleSignIn", false);
+            getData();
         } else {
             isGoogleSignIn = savedInstanceState.getBoolean("isGoogleSignIn");
-            bio.setText(savedInstanceState.getString("bio"));
+            FirebaseUser user = auth.getCurrentUser();
+            photoUrl = user.getPhotoUrl();
+            Glide.with(getApplicationContext())
+                    .load(photoUrl)
+                    .apply(new RequestOptions()
+                            .circleCrop())
+                    .into(profilePic);
+/*            bio.setText(savedInstanceState.getString("bio"));
             quickInfo.setText(savedInstanceState.getString("quickInfo"));
             mains.setText(savedInstanceState.getString("mains"));
-            secondaries.setText(savedInstanceState.getString("secondaries"));
+            secondaries.setText(savedInstanceState.getString("secondaries"));*/
         }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle bundle){
-        profilePic.buildDrawingCache();
-        bundle.putString("bio", bio.getText().toString());
+        /*bundle.putString("bio", bio.getText().toString());
         bundle.putString("quickInfo", quickInfo.getText().toString());
         bundle.putString("mains", quickInfo.getText().toString());
-        bundle.putString("secondaries", quickInfo.getText().toString());
+        bundle.putString("secondaries", quickInfo.getText().toString());*/
         bundle.putBoolean("isGoogleSignIn", isGoogleSignIn);
         super.onSaveInstanceState(bundle);
     }
@@ -295,7 +302,7 @@ public class EditProfile extends BaseActivity implements PopupMenu.OnMenuItemCli
         username.setText(name);
 
         if(photoUrl != null){
-            Glide.with(this)
+            Glide.with(getApplicationContext())
                     .load(photoUrl)
                     .apply(new RequestOptions()
                             .circleCrop())

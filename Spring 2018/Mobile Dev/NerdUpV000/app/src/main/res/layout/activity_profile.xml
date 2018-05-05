@@ -7,113 +7,223 @@
     tools:context=".Profile"
     tools:layout_editor_absoluteY="25dp">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/profileToolbar"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimaryDark"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileToolbar">
-
-        <LinearLayout
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/profileToolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="55dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-            <TextView
-                android:id="@+id/username"
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileToolbar">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="50sp"
-                android:maxLines="1"
-                android:textAlignment="center"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="158dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/profilePic"
-                    android:layout_width="65dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_portrait_white_24px"/>
-                <TextView
-                    android:id="@+id/quickInfo"
-                    android:layout_width="65dp"
-                    android:layout_height="match_parent"
-                    android:text="@string/quickInfo"
-                    android:layout_weight="1"/>
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/bio"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:minHeight="115dp"
-                android:text="@string/bio" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:minHeight="73dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/mains"
-                    android:layout_width="65dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/mains" />
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:textAlignment="center"
+                    android:textSize="50sp" />
 
-                <TextView
-                    android:id="@+id/secondaries"
-                    android:layout_width="65dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/secondaries" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="158dp"
+                    android:orientation="horizontal">
 
-            </LinearLayout>
+                    <ImageView
+                        android:id="@+id/profilePic"
+                        android:layout_width="65dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_portrait_white_24px" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="85dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="65dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/notes"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:labelFor="@id/quickInfo"
+                            android:text="@string/quickInfo"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorAccent" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/colorAccent" />
+
+                        <TextView
+                            android:id="@+id/quickInfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:labelFor="@id/bio"
+                        android:text="@string/bio"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorAccent" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorAccent" />
+
+                    <TextView
+                        android:id="@+id/bio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="115dp"
+                        android:text="@string/bio" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/notes" />
+                    android:minHeight="73dp"
+                    android:orientation="horizontal">
 
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="65dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-<!--            <LinearLayout
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:labelFor="@id/mains"
+                            android:text="@string/mains"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorAccent" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/colorAccent" />
+
+                        <TextView
+                            android:id="@+id/mains"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/mains" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorAccent" />
+
+                    <LinearLayout
+                        android:layout_width="65dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:labelFor="@id/secondaries"
+                            android:text="@string/secondaries"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorAccent" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/colorAccent" />
+
+                        <TextView
+                            android:id="@+id/secondaries"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/secondaries" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:labelFor="@id/notes"
+                            android:text="@string/notes"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorAccent" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/colorAccent" />
+
+                        <TextView
+                            android:id="@+id/notes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="65dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal">-->
 
-<!--                <ImageButton
+                <!--                <ImageButton
                     android:id="@+id/editButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -127,15 +237,17 @@
                     android:layout_weight="1"
                     app:srcCompat="@android:drawable/ic_menu_upload" />-->
 
-<!--                <ImageButton
+                <!--                <ImageButton
                     android:id="@+id/downloadButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     app:srcCompat="@android:drawable/stat_sys_download" />-->
-<!--            </LinearLayout>-->
+                <!--            </LinearLayout>-->
 
-        </LinearLayout>
+            </LinearLayout>
 
-    </ScrollView>
+        </ScrollView>
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

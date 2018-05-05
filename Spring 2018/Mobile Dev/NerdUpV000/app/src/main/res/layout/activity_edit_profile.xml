@@ -7,122 +7,133 @@
     tools:context=".EditProfile"
     tools:layout_editor_absoluteY="25dp">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/profileToolbar"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimaryDark"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileToolbar">
-
-        <LinearLayout
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/profileToolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="55dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorPrimaryDark"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/floatUsername"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent">
-                <EditText
-                    android:id="@+id/username"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="50sp"
-                    android:maxLines="1"
-                    android:layout_weight="1"
-                    android:hint="@string/username"
-                    android:textAlignment="center"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="158dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/profilePic"
-                    android:layout_width="65dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_add_a_photo_white_24px" />
-
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/floatQuickInfo"
-                    android:layout_height="wrap_content"
-                    android:layout_width="65dp"
-                    android:layout_weight="1">
-                    <EditText
-                        android:id="@+id/quickInfo"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/quickInfo"/>
-                </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/floatBio"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent">
-                <EditText
-                    android:id="@+id/bio"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:minHeight="115dp"
-                    android:hint="@string/bio"/>
-            </android.support.design.widget.TextInputLayout>
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileToolbar">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:minHeight="73dp"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/floatMains"
-                    android:layout_height="wrap_content"
-                    android:layout_width="65dp"
-                    android:layout_weight="1">
+                    android:id="@+id/floatUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
                     <EditText
-                        android:id="@+id/mains"
+                        android:id="@+id/username"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="@string/mains"/>
+                        android:layout_weight="1"
+                        android:hint="@string/username"
+                        android:maxLines="1"
+                        android:textAlignment="center"
+                        android:textSize="50sp" />
                 </android.support.design.widget.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="158dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/profilePic"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_add_a_photo_white_24px" />
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/floatQuickInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/quickInfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/quickInfo" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/floatSecondaries"
-                    android:layout_height="wrap_content"
-                    android:layout_width="65dp"
-                    android:layout_weight="1">
+                    android:id="@+id/floatBio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
                     <EditText
-                        android:id="@+id/secondaries"
+                        android:id="@+id/bio"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="@string/secondaries"/>
+                        android:hint="@string/bio"
+                        android:minHeight="115dp" />
                 </android.support.design.widget.TextInputLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:minHeight="73dp"
+                    android:orientation="horizontal">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/floatMains"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/mains"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/mains" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/floatSecondaries"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/secondaries"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/secondaries" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
-    </ScrollView>
+        </ScrollView>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

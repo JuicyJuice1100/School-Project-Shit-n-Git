@@ -49,15 +49,7 @@ public class Profile extends BaseActivity {
         Toolbar toolbar = findViewById(R.id.profileToolbar);
         setSupportActionBar(toolbar);
         auth = FirebaseAuth.getInstance();
-        isGoogleSignIn = getIntent().getBooleanExtra("isGoogleSignIn", false);
-    }
 
-    @Override
-    protected void onStart(){
-        super.onStart();
-/*        editNotes = findViewById(R.id.editButton);
-        uploadNotes = findViewById(R.id.uploadButton);
-        downloadNotes = findViewById(R.id.downloadButton);*/
         username = findViewById(R.id.username);
         profilePic = findViewById(R.id.profilePic);
         quickInfo = findViewById(R.id.quickInfo);
@@ -65,13 +57,38 @@ public class Profile extends BaseActivity {
         mains = findViewById(R.id.mains);
         secondaries = findViewById(R.id.secondaries);
         notes = findViewById(R.id.notes);
+
+
+        if(savedInstanceState == null)
+            isGoogleSignIn = getIntent().getBooleanExtra("isGoogleSignIn", false);
+        else
+            isGoogleSignIn = savedInstanceState.getBoolean("isGoogleSignIn", false);
+
+
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+
         getListeners();
         getData();
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle bundle){
+        bundle.putBoolean("isGoogleSignIn", isGoogleSignIn);
+        super.onSaveInstanceState(bundle);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.profile, menu);
+        if(isGoogleSignIn)
+            getMenuInflater().inflate(R.menu.googleprofile, menu);
+        else
+            getMenuInflater().inflate(R.menu.profile, menu);
+/*        if(isGoogleSignIn)
+            menu.removeItem(R.id.settings);*/
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -87,7 +104,7 @@ public class Profile extends BaseActivity {
             else
                 goToEditProfile();
         } else if (id == R.id.settings){
-            Log.i("actionBar", "settings");
+                goToSettings();
         } else if (id == R.id.logout){
             FirebaseAuth.getInstance().signOut();
             goToLogin();
@@ -113,8 +130,23 @@ public class Profile extends BaseActivity {
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        getData();
+    }
+
+    @Override
     public void onStop(){
         super.onStop();
+
+        if(profileListener != null){
+            database.removeEventListener(profileListener);
+        }
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
 
         if(profileListener != null){
             database.removeEventListener(profileListener);
@@ -132,7 +164,7 @@ public class Profile extends BaseActivity {
                 if(acct.getPhotoUrl() != null)
                     photoUrl = acct.getPhotoUrl();
             }
-        }else {
+        } else {
             FirebaseUser user = auth.getCurrentUser();
             if (user != null) {
                 if(user.getDisplayName() != null)
@@ -144,8 +176,9 @@ public class Profile extends BaseActivity {
             }
         }
         username.setText(name);
+
         if(photoUrl != null){
-            Glide.with(this)
+            Glide.with(getApplicationContext())
                     .load(photoUrl)
                     .apply(new RequestOptions()
                             .circleCrop())
@@ -180,7 +213,7 @@ public class Profile extends BaseActivity {
             }
         };
 
-        database.addValueEventListener(dataListener);
+        database.addListenerForSingleValueEvent(dataListener);
 
         profileListener = dataListener;
     }

@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.juice.nerdupv000">
 
-    <uses-feature android:name="android.hardware.camera"
-        android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -31,7 +32,8 @@
         -->
         <activity android:name=".EditProfile" />
         <activity android:name=".NewUser" />
-        <activity android:name=".EditProfileGoogle"/>
+        <activity android:name=".EditProfileGoogle" />
+        <activity android:name=".Settings"></activity>
     </application>
 
 </manifest>

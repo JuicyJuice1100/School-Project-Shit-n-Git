@@ -42,6 +42,11 @@ public class BaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToSettings(){
+        Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
+    }
+
     static String encodeUserEmail(String userEmail) {
         return userEmail.replace(".", ",");
     }

@@ -22,4 +22,10 @@
     <string name="mains">Mains</string>
     <string name="secondaries">Secondaries</string>
     <string name="notes">Notes</string>
+    <string name="editEmail">Change Email</string>
+    <string name="editPassword">Change Password</string>
+    <string name="deleteAccount">Delete Account</string>
+    <string name="currentPassword">Current Password</string>
+    <string name="newEmail">New Email</string>
+    <string name="newPassword">New Password</string>
 </resources>
