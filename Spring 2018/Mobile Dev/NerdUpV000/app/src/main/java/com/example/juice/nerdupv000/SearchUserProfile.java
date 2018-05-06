@@ -84,8 +84,8 @@ public class SearchUserProfile extends BaseActivity {
                 adapter.clear();
                 for(DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()){
                     String suggestion = suggestionSnapshot.child("username").getValue(String.class);
-                    Log.d("autocomplete", suggestion);
-                    adapter.add(suggestion);
+                    if(suggestion != FirebaseAuth.getInstance().getCurrentUser().getDisplayName())
+                        adapter.add(suggestion);
                 }
             }
 

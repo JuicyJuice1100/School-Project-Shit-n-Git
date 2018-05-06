@@ -1,15 +1,8 @@
 package com.example.juice.nerdupv000;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.List;
 
 public class BaseActivity extends AppCompatActivity {
     public void goToCreateLogin(){
@@ -55,13 +48,5 @@ public class BaseActivity extends AppCompatActivity {
     public void goToSearchUserProfile(){
         Intent intent = new Intent(this, SearchUserProfile.class);
         startActivity(intent);
-    }
-
-    static String encodeUserEmail(String userEmail) {
-        return userEmail.replace(".", ",");
-    }
-
-    static String decodeUserEmail(String userEmail) {
-        return userEmail.replace(",", ".");
     }
 }

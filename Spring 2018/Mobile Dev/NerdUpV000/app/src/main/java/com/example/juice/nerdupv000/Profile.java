@@ -73,7 +73,6 @@ public class Profile extends BaseActivity {
     protected void onStart(){
         super.onStart();
 
-        getListeners();
         getData();
     }
 
@@ -217,46 +216,5 @@ public class Profile extends BaseActivity {
         database.addListenerForSingleValueEvent(dataListener);
 
         profileListener = dataListener;
-    }
-
-    public void getListeners(){
-/*        editNotes.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
-
-        uploadNotes.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event){
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });*/
-
-/*        downloadNotes.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event){
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
-
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });*/
-
-
     }
 }

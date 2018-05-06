@@ -4,14 +4,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.hardware.camera2.CameraCaptureSession;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.MenuBuilder;
-import android.support.v7.view.menu.MenuPopupHelper;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -25,8 +22,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -41,11 +36,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -97,27 +92,42 @@ public class EditProfile extends BaseActivity implements PopupMenu.OnMenuItemCli
             getData();
         } else {
             isGoogleSignIn = savedInstanceState.getBoolean("isGoogleSignIn");
-            FirebaseUser user = auth.getCurrentUser();
-            photoUrl = user.getPhotoUrl();
-            Glide.with(getApplicationContext())
-                    .load(photoUrl)
-                    .apply(new RequestOptions()
-                            .circleCrop())
-                    .into(profilePic);
-/*            bio.setText(savedInstanceState.getString("bio"));
-            quickInfo.setText(savedInstanceState.getString("quickInfo"));
-            mains.setText(savedInstanceState.getString("mains"));
-            secondaries.setText(savedInstanceState.getString("secondaries"));*/
+            name = savedInstanceState.getString("name");
+            email = savedInstanceState.getString("email");
+            notes = savedInstanceState.getString("notes");
+            if(savedInstanceState.getByteArray("profilePic") != null){
+                Glide.with(getApplicationContext())
+                        .load(savedInstanceState.getByteArray("profilePic"))
+                        .apply(new RequestOptions()
+                                .circleCrop())
+                        .into(profilePic);
+            } else {
+                FirebaseUser user = auth.getCurrentUser();
+                photoUrl = user.getPhotoUrl();
+                Glide.with(getApplicationContext())
+                        .load(photoUrl)
+                        .apply(new RequestOptions()
+                                .circleCrop())
+                        .into(profilePic);
+                if(profilePic.getDrawable() == null){
+                    profilePic.setImageDrawable(getDrawable(R.drawable.ic_add_a_photo_white_24px));
+                }
+            }
         }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle bundle){
-        /*bundle.putString("bio", bio.getText().toString());
-        bundle.putString("quickInfo", quickInfo.getText().toString());
-        bundle.putString("mains", quickInfo.getText().toString());
-        bundle.putString("secondaries", quickInfo.getText().toString());*/
+        if(!checkProfilePic()){
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            Bitmap bitmap = ((BitmapDrawable) profilePic.getDrawable()).getBitmap();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output);
+            bundle.putByteArray("profilePic", output.toByteArray());
+        }
         bundle.putBoolean("isGoogleSignIn", isGoogleSignIn);
+        bundle.putString("name", name);
+        bundle.putString("email", email);
+        bundle.putString("notes", notes);
         super.onSaveInstanceState(bundle);
     }
 
@@ -132,13 +142,22 @@ public class EditProfile extends BaseActivity implements PopupMenu.OnMenuItemCli
         int id = item.getItemId();
 
         if(id == R.id.confirm){
-            uploadPicture();
+            if(!checkProfilePic())
+                uploadPicture();
             updateProfile();
             updateAuth();
         } else if (id == R.id.cancel){
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean checkProfilePic(){
+        Drawable addPic = getDrawable(R.drawable.ic_add_a_photo_white_24px);
+        Drawable currentPic = profilePic.getDrawable();
+        Bitmap addPicBitmap = Bitmap.createBitmap(addPic.getIntrinsicWidth(), addPic.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap currentPicBitmap = Bitmap.createBitmap(currentPic.getIntrinsicWidth(), currentPic.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        return addPicBitmap.getByteCount() == currentPicBitmap.getByteCount();
     }
 
     public void updateProfile(){
@@ -150,9 +169,20 @@ public class EditProfile extends BaseActivity implements PopupMenu.OnMenuItemCli
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/" + name + "/", profileValues);
 
-        userProfileReference.updateChildren(childUpdates);
+        userProfileReference.updateChildren(childUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                updateAuth();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i("upload", "Error updating profile");
+                Toast.makeText(EditProfile.this, "Error updating profile.  Please Try again.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        Toast.makeText(EditProfile.this, "Updated Profile", Toast.LENGTH_SHORT).show();
+
     }
 
     public void uploadPicture(){
@@ -160,42 +190,81 @@ public class EditProfile extends BaseActivity implements PopupMenu.OnMenuItemCli
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         Bitmap bitmap = ((BitmapDrawable) profilePic.getDrawable()).getBitmap();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output);
-        profilePicRef.putBytes(output.toByteArray());
+        profilePicRef.putBytes(output.toByteArray()).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                updateProfile();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i("upload", "Error uploading picture");
+                Toast.makeText(EditProfile.this, "Error updating profile.  Please Try again.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void updateAuth(){
         StorageReference profilePicRef = storageReference.child("profilePictures/"+name);
         final FirebaseUser user = auth.getCurrentUser();
-        profilePicRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                        .setDisplayName(username.getText().toString())
-                        .setPhotoUri(uri)
-                        .build();
-                user.updateProfile(profileUpdates)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
-                                    finish();
+        if(!checkProfilePic()){
+            profilePicRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(username.getText().toString())
+                            .setPhotoUri(uri)
+                            .build();
+                    user.updateProfile(profileUpdates)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(EditProfile.this, "Updated Profile", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                    else {
+                                        Log.i("upload", "Error updating auth");
+                                        Toast.makeText(EditProfile.this, "Error updating profile.  Please Try again.", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                                else {
-                                    Log.i("upload", "Error updating auth");
-                                    Toast.makeText(EditProfile.this, "Error updating Username and Picture.  Please Try again.", Toast.LENGTH_SHORT).show();
+                            });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.i("upload", "unable to get url");
+                }
+            });
+        } else {
+            profilePicRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(username.getText().toString())
+                            .build();
+                    user.updateProfile(profileUpdates)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(EditProfile.this, "Updated Profile", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                    else {
+                                        Log.i("upload", "Error updating auth");
+                                        Toast.makeText(EditProfile.this, "Error updating profile.  Please Try again.", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.i("upload", "unable to get url");
-            }
-        });
-        /*Uri picUri = profilePicRef.getDownloadUrl().getResult();*/
-
-
+                            });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.i("upload", "unable to get url");
+                }
+            });
+        }
     }
 
     public void showMenu(View v) {
@@ -277,27 +346,16 @@ public class EditProfile extends BaseActivity implements PopupMenu.OnMenuItemCli
     }
 
     public void getData(){
-        /*if (isGoogleSignIn) {
-            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-            if (acct != null) {
-                if(acct.getDisplayName() != null)
-                    name = acct.getDisplayName();
-                if(acct.getEmail() != null)
-                    email = acct.getEmail();
-                if(acct.getPhotoUrl() != null)
-                    photoUrl = acct.getPhotoUrl();
-            }
-        }else {*/
-            FirebaseUser user = auth.getCurrentUser();
-            if (user != null) {
-                if(user.getDisplayName() != null)
-                    name = user.getDisplayName();
-                if(user.getEmail() != null)
-                    email = user.getEmail();
-                if(user.getPhotoUrl() != null)
-                    photoUrl = user.getPhotoUrl();
-            }
-        /*}*/
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null) {
+            if(user.getDisplayName() != null)
+                name = user.getDisplayName();
+            if(user.getEmail() != null)
+                email = user.getEmail();
+            if(user.getPhotoUrl() != null)
+                photoUrl = user.getPhotoUrl();
+        }
+
         username.setText(name);
 
         if(photoUrl != null){
