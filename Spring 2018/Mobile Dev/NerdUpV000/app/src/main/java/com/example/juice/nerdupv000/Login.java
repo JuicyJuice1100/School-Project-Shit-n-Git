@@ -39,7 +39,7 @@ public class Login extends BaseActivity {
     private Button login;
     private SignInButton googleSignIn;
     private EditText loginEmail, loginPassword;
-    private TextView createLink;
+    private TextView createLink, forgotPassword;
     private FirebaseAuth auth;
     private GoogleSignInClient googleSignInClient;
     private boolean isGoogleSignIn;
@@ -59,6 +59,7 @@ public class Login extends BaseActivity {
         loginEmail = findViewById(R.id.login_email);
         loginPassword = findViewById(R.id.login_password);
         createLink = findViewById(R.id.createLink);
+        forgotPassword = findViewById(R.id.forgotPassword);
         googleSignIn = findViewById(R.id.sign_in_button);
         googleSignIn.setSize(SignInButton.SIZE_WIDE);
         getListeners();
@@ -161,6 +162,19 @@ public class Login extends BaseActivity {
             public boolean onTouch(View v, MotionEvent event){
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     goToCreateLogin();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        forgotPassword.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event){
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    goToResetPassword();
                     return true;
                 } else {
                     return false;

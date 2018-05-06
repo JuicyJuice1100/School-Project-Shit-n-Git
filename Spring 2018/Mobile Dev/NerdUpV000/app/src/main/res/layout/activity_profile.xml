@@ -15,7 +15,7 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/profileToolbar"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="@dimen/toolBarHeight"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimaryDark"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
@@ -110,8 +110,7 @@
                         android:id="@+id/bio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="115dp"
-                        android:text="@string/bio" />
+                        android:minHeight="115dp" />
 
                 </LinearLayout>
 
@@ -144,8 +143,7 @@
                         <TextView
                             android:id="@+id/mains"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/mains" />
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
@@ -176,8 +174,7 @@
                         <TextView
                             android:id="@+id/secondaries"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/secondaries" />
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
@@ -216,33 +213,6 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
-                <!--            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">-->
-
-                <!--                <ImageButton
-                    android:id="@+id/editButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:srcCompat="@android:drawable/ic_menu_edit" />
-
-                <ImageButton
-                    android:id="@+id/uploadButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:srcCompat="@android:drawable/ic_menu_upload" />-->
-
-                <!--                <ImageButton
-                    android:id="@+id/downloadButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@android:drawable/stat_sys_download" />-->
-                <!--            </LinearLayout>-->
 
             </LinearLayout>
 

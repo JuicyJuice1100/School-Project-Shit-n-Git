@@ -15,7 +15,7 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/profileToolbar"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="@dimen/toolBarHeight"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimaryDark"
             android:elevation="4dp"
@@ -54,7 +54,8 @@
                         android:hint="@string/username"
                         android:maxLines="1"
                         android:textAlignment="center"
-                        android:textSize="50sp" />
+                        android:textSize="50sp"
+                        android:imeOptions="flagNoExtractUi"/>
                 </android.support.design.widget.TextInputLayout>
 
                 <LinearLayout
@@ -81,7 +82,8 @@
                             android:id="@+id/quickInfo"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:hint="@string/quickInfo" />
+                            android:hint="@string/quickInfo"
+                            android:imeOptions="flagNoExtractUi"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
@@ -95,7 +97,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/bio"
-                        android:minHeight="115dp" />
+                        android:minHeight="115dp"
+                        android:imeOptions="flagNoExtractUi"/>
                 </android.support.design.widget.TextInputLayout>
 
                 <LinearLayout
@@ -114,7 +117,8 @@
                             android:id="@+id/mains"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:hint="@string/mains" />
+                            android:hint="@string/mains"
+                            android:imeOptions="flagNoExtractUi"/>
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
@@ -127,7 +131,8 @@
                             android:id="@+id/secondaries"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:hint="@string/secondaries" />
+                            android:hint="@string/secondaries"
+                            android:imeOptions="flagNoExtractUi"/>
                     </android.support.design.widget.TextInputLayout>
 
                 </LinearLayout>

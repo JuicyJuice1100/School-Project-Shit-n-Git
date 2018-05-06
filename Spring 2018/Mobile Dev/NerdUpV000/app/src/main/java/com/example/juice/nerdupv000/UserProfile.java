@@ -8,15 +8,16 @@ import java.util.Map;
 
 @IgnoreExtraProperties
 public class UserProfile {
-    public String bio, quickInfo, mains, secondaries, notes;
+    public String username, bio, quickInfo, mains, secondaries, notes;
 
 
     public UserProfile(){
 
     }
 
-    public UserProfile(String bio, String quickInfo, String mains,
+    public UserProfile(String username, String bio, String quickInfo, String mains,
                 String secondaries, String notes){
+        this.username = username;
         this.bio = bio;
         this.quickInfo = quickInfo;
         this.mains = mains;
@@ -27,6 +28,7 @@ public class UserProfile {
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
+        result.put("username", username);
         result.put("bio", bio);
         result.put("quickInfo", quickInfo);
         result.put("mains", mains);

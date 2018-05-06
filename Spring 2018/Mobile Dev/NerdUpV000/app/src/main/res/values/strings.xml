@@ -28,4 +28,12 @@
     <string name="currentPassword">Current Password</string>
     <string name="newEmail">New Email</string>
     <string name="newPassword">New Password</string>
+    <string name="title_activity_password_reset">PasswordReset</string>
+    <string name="sendEmail">Send Email</string>
+    <string name="forgotPassword">Forgot Password? Click Here</string>
+    <string name="currentEmail">Current Email</string>
+    <string name="searchHint">Start Typing Username...</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

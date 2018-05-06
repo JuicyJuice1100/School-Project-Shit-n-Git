@@ -97,7 +97,7 @@ public class Profile extends BaseActivity {
         int id = item.getItemId();
 
         if(id == R.id.search){
-            Log.i("actionBar", "search");
+            goToSearchUserProfile();
         } else if (id == R.id.edit){
             if(isGoogleSignIn)
                 goToEditProfileGoogle();
@@ -185,7 +185,7 @@ public class Profile extends BaseActivity {
                     .into(profilePic);
         }
 
-        database = FirebaseDatabase.getInstance().getReference().child("userProfiles").child(encodeUserEmail(email));
+        database = FirebaseDatabase.getInstance().getReference().child("userProfiles").child(name);
 
         ValueEventListener dataListener = new ValueEventListener() {
             @Override

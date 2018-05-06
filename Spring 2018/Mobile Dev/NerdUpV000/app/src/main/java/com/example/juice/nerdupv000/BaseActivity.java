@@ -47,6 +47,16 @@ public class BaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToResetPassword(){
+        Intent intent = new Intent(this, PasswordReset.class);
+        startActivity(intent);
+    }
+
+    public void goToSearchUserProfile(){
+        Intent intent = new Intent(this, SearchUserProfile.class);
+        startActivity(intent);
+    }
+
     static String encodeUserEmail(String userEmail) {
         return userEmail.replace(".", ",");
     }

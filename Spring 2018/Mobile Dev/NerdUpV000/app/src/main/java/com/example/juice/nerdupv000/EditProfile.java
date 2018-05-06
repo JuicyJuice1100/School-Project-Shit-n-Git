@@ -143,12 +143,12 @@ public class EditProfile extends BaseActivity implements PopupMenu.OnMenuItemCli
 
     public void updateProfile(){
         userProfileReference = FirebaseDatabase.getInstance().getReference().child("userProfiles");
-        UserProfile userProfile = new UserProfile(bio.getText().toString(), quickInfo.getText().toString(),
+        UserProfile userProfile = new UserProfile(username.getText().toString() ,bio.getText().toString(), quickInfo.getText().toString(),
                 mains.getText().toString(), secondaries.getText().toString(), notes);
         Map<String, Object> profileValues = userProfile.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/" + encodeUserEmail(email) + "/", profileValues);
+        childUpdates.put("/" + name + "/", profileValues);
 
         userProfileReference.updateChildren(childUpdates);
 
@@ -156,7 +156,7 @@ public class EditProfile extends BaseActivity implements PopupMenu.OnMenuItemCli
     }
 
     public void uploadPicture(){
-        StorageReference profilePicRef = storageReference.child("profilePictures/"+email);
+        StorageReference profilePicRef = storageReference.child("profilePictures/"+name);
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         Bitmap bitmap = ((BitmapDrawable) profilePic.getDrawable()).getBitmap();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output);
@@ -164,7 +164,7 @@ public class EditProfile extends BaseActivity implements PopupMenu.OnMenuItemCli
     }
 
     public void updateAuth(){
-        StorageReference profilePicRef = storageReference.child("profilePictures/"+email);
+        StorageReference profilePicRef = storageReference.child("profilePictures/"+name);
         final FirebaseUser user = auth.getCurrentUser();
         profilePicRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -308,7 +308,7 @@ public class EditProfile extends BaseActivity implements PopupMenu.OnMenuItemCli
                             .circleCrop())
                     .into(profilePic);
         }
-        userProfileReference = FirebaseDatabase.getInstance().getReference().child("userProfiles").child(encodeUserEmail(email));
+        userProfileReference = FirebaseDatabase.getInstance().getReference().child("userProfiles").child(name);
 
         ValueEventListener dataListener = new ValueEventListener() {
             @Override

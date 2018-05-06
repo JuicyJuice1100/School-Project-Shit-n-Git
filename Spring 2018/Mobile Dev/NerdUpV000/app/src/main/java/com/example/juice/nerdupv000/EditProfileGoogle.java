@@ -91,12 +91,12 @@ public class EditProfileGoogle extends BaseActivity {
 
     public void updateProfile(){
         userProfileReference = FirebaseDatabase.getInstance().getReference().child("userProfiles");
-        UserProfile userProfile = new UserProfile(bio.getText().toString(), quickInfo.getText().toString(),
+        UserProfile userProfile = new UserProfile(username.getText().toString(), bio.getText().toString(), quickInfo.getText().toString(),
                 mains.getText().toString(), secondaries.getText().toString(), notes);
         Map<String, Object> profileValues = userProfile.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/" + encodeUserEmail(email) + "/", profileValues);
+        childUpdates.put("/" + name+ "/", profileValues);
 
         userProfileReference.updateChildren(childUpdates);
 
@@ -144,7 +144,7 @@ public class EditProfileGoogle extends BaseActivity {
                     .into(profilePic);
         }
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("userProfiles").child(encodeUserEmail(email));
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("userProfiles").child(name);
 
         ValueEventListener dataListener = new ValueEventListener() {
             @Override

@@ -13,18 +13,40 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/floatCurrentEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="Are you sure you want to delete your account?"
-            android:textSize="25sp"/>
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/currentEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/currentEmail"
+                android:imeOptions="flagNoExtractUi"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/floatCurrentPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/currentPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/currentPassword"
+                android:inputType="textPassword"
+                android:imeOptions="flagNoExtractUi"/>
+        </android.support.design.widget.TextInputLayout>
 
         <Button
+            android:id="@+id/deleteButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/warning"
-            android:text="@string/deleteAccount" />
+            android:text="@string/deleteAccount"
+            android:imeOptions="flagNoExtractUi"/>
 
     </LinearLayout>
 

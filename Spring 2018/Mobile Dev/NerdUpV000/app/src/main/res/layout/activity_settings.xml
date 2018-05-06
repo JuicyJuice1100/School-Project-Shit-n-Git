@@ -15,7 +15,7 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/settingsToolbar"
             android:layout_width="match_parent"
-            android:layout_height="62dp"
+            android:layout_height="@dimen/toolBarHeight"
             android:background="@color/colorPrimaryDark"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:layout_constraintBottom_toTopOf="@+id/buttons"
@@ -29,10 +29,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:weightSum="3"
             app:layout_constraintTop_toBottomOf="@id/settingsToolbar">
 
             <Button
+                android:id = "@+id/editEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -41,6 +41,7 @@
                 android:textColor="@color/colorAccent" />
 
             <Button
+                android:id = "@+id/editPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -49,6 +50,7 @@
                 android:textColor="@color/colorAccent" />
 
             <Button
+                android:id = "@+id/deleteAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
