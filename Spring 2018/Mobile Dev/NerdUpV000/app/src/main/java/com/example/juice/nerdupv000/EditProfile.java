@@ -191,7 +191,6 @@ public class EditProfile extends BaseActivity implements PopupMenu.OnMenuItemCli
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.i("upload", "unable to get url");
-                Toast.makeText(EditProfile.this, "Error connecting to database.", Toast.LENGTH_SHORT).show();
             }
         });
         /*Uri picUri = profilePicRef.getDownloadUrl().getResult();*/
