@@ -1,5 +1,7 @@
 package com.example.juice.nerdupv000;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -28,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -81,12 +84,21 @@ public class EditProfileGoogle extends BaseActivity {
         int id = item.getItemId();
 
         if(id == R.id.confirm){
+            uploadPicture();
             updateProfile();
             finish();
         } else if (id == R.id.cancel){
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void uploadPicture(){
+        StorageReference profilePicRef = storageReference.child("profilePictures/"+name);
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        Bitmap bitmap = ((BitmapDrawable) profilePic.getDrawable()).getBitmap();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output);
+        profilePicRef.putBytes(output.toByteArray());
     }
 
     public void updateProfile(){

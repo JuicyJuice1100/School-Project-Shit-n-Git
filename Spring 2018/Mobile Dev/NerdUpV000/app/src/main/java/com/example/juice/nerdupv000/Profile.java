@@ -29,6 +29,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class Profile extends BaseActivity {
 /*    private ImageButton editNotes, uploadNotes, downloadNotes;*/
@@ -203,7 +205,6 @@ public class Profile extends BaseActivity {
                         secondaries.setText(userProfile.secondaries);
                     if(userProfile.notes != null)
                         notes.setText(userProfile.notes);
-                    getData();
                 }
             }
 
