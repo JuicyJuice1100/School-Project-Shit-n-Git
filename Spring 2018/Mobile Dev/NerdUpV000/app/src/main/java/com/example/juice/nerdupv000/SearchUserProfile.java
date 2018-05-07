@@ -17,6 +17,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +32,7 @@ public class SearchUserProfile extends BaseActivity {
     private DatabaseReference databaseReference;
     private FragmentManager fragmentManager;
     private Fragment playerProfile;
+    private boolean isGoogleSignIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,18 @@ public class SearchUserProfile extends BaseActivity {
 
         setAutoComplete();
         getListeners();
+
+        if(savedInstanceState == null){
+            isGoogleSignIn = getIntent().getBooleanExtra("isGoogleSignIn", false);
+        } else {
+            isGoogleSignIn = savedInstanceState.getBoolean("isGoogleSignIn");
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle bundle){
+        bundle.putBoolean("isGoogleSignIn", isGoogleSignIn);
+        super.onSaveInstanceState(bundle);
     }
 
     @Override
@@ -84,8 +99,14 @@ public class SearchUserProfile extends BaseActivity {
                 adapter.clear();
                 for(DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()){
                     String suggestion = suggestionSnapshot.child("username").getValue(String.class);
-                    if(suggestion != FirebaseAuth.getInstance().getCurrentUser().getDisplayName())
-                        adapter.add(suggestion);
+                    if(isGoogleSignIn){
+                        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+                        if(!suggestion.equals(acct.getDisplayName()))
+                            adapter.add(suggestion);
+                    } else {
+                        if (!suggestion.equals(FirebaseAuth.getInstance().getCurrentUser().getDisplayName()))
+                            adapter.add(suggestion);
+                    }
                 }
             }
 

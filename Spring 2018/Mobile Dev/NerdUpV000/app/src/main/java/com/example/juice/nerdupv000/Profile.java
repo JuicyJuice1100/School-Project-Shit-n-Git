@@ -115,6 +115,13 @@ public class Profile extends BaseActivity {
     }
 
     @Override
+    public void goToSearchUserProfile(){
+        Intent intent = new Intent(this, SearchUserProfile.class);
+        intent.putExtra("isGoogleSignIn", isGoogleSignIn);
+        startActivity(intent);
+    }
+
+    @Override
     public void goToEditProfileGoogle(){
         Intent intent = new Intent(this, EditProfileGoogle.class);
         intent.putExtra("isGoogleSignIn", isGoogleSignIn);

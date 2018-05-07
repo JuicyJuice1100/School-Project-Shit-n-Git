@@ -1,10 +1,14 @@
 NerdUp 
 
-README 5/6/2018
+README 5/7/2018
 
 This app is a simple app are for competetive gamers.  The main point of this app is it will allow users to look up other users profiles to read, edit, and create notes on other users.
 Users will be able to create their own profile and look at notes on themselves but are unable to edit notes on themselves, that would defeat the purpose of this app.  This will allow
 users to look up notes that other have put, let others look at the notes they have taken, and look at notes that people have put on them.
+
+Notes:
+- Google sign in users cannot edit their username or profile picture
+- to change profile picture while in edit just click on your profile picture
 
 Features:
 - Can log in using google sign in
