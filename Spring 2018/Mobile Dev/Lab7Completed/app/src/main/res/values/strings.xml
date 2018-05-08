@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Lab 7</string>
+    <string name="edit_message">Enter a value!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="registering">Registering</string>
+    <string name="login">Login</string>
+</resources>
