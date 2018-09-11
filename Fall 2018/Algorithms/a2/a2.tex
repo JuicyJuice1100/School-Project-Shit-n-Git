@@ -1,0 +1,218 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath,amssymb,latexsym,enumitem,comment,color,ifthen}
+
+\setlength{\oddsidemargin}{-0.5in}
+\setlength{\evensidemargin}{-0.5in}
+\setlength{\textwidth}{7.5in}
+\setlength{\topmargin}{0in}
+\setlength{\textheight}{8.5in}
+
+\newcommand{\qed}{\hfill$\square$}
+\newcommand{\assignNum}{2}
+\newcommand{\numPoints}{45}
+\newcommand{\dueDate}{Monday 9/17/2018}
+\newcommand{\pbStatement}[2]{
+  \colorbox{yellow}{\parbox[t]{0.93\textwidth}
+        {\bf (#1 \ifthenelse{#1 > 1}{points}{point})
+ #2}}}
+\newcommand{\fillIn}[1]{\fbox{\parbox[t]{0.93\textwidth}{\it #1}}}
+\newcommand{\header}{
+\noindent{\textit{CS 321 - Algorithms - Fall 2018\hfill \yourName}}
+\begin{center}
+  \textbf{\Large Assignment \assignNum}\\\colorbox{red}{\Large\bf
+     \textcolor{white}{Due BEFORE 8:00AM on  \dueDate}}\\
+  On time /  20\% off / no credit\\\textbf{Total points: \numPoints}
+  \bigskip
+
+  \hrule\medskip You are allowed to work with a partner on this
+  assignment. If you decide to form a pair, make sure to include
+  both names above, but submit only one file to D2L.
+  \medskip \hrule \end{center}
+
+\medskip
+This assignment will test your knowledge of asymptotic notation.  You
+must write up your solutions to this assignment IN THIS FILE using
+\LaTeX\ by filling in all of the boxes below. If your submitted
+\texttt{.tex} file does not compile, then you will receive 0 points.
+
+All of the proofs that you write for this and subsequent assignments should be
+{\bf as detailed as possible}.  You must write EACH step on its own line so that
+it is very easy to see how each step follows directly from the previous step.
+Furthermore, be sure to explain/justify each step in your proof. For example,
+state that you added 5 to each side, that you simplified a fraction, etc. Do NOT
+skip a bunch of algebraic steps in your proofs. For example, do not simply say
+$\frac{k(k+1)}{2} + (k + 1) = \frac{(k+1)(k+2)}{2}$. It is a true statement, but
+it is not trivial. It is not obvious that the left hand side equals the right
+hand side. If you are unsure whether a step is needed or not, ask me first
+before omitting it. Use the symbol $\square$ (i.e., \texttt{$\backslash$qed} in
+your \texttt{.tex} file) to denote the end of each proof.
+
+Here is an example of proper justification of algebraic steps and
+formatting of a sequence
+of equations:
+\begin{align*}
+  \frac{k(k+1)}{2} + (k + 1) & = \frac{k(k+1)}{2} + \frac{2(k + 1)}{2}
+                                       & \mathrm{unified\ denominators}\\
+                             & = \frac{k(k+1)+2(k+1)}{2}
+                                       & \mathrm{added\ fractions}\\
+                             & = \frac{(k+1)(k+2)}{2}
+                             & \mathrm{factored\ out\ common\ factor}\\
+\end{align*}\vspace*{-10mm}
+
+Note how this list of equations is aligned vertically into three columns around
+the equal signs and with the justifications on the right. This is the REQUIRED
+format for your submissions whenever applicable.
+
+You should NOT add any \LaTeX\ packages to your \texttt{.tex} file.
+
+\medskip
+\textbf{Submission procedure:}
+\begin{enumerate}[itemsep=-2mm]
+
+\item Complete this file, called \texttt{a\assignNum .tex}, with your full name
+and answers typed up below.
+
+\item Compile this file to produce a file called \texttt{a\assignNum .pdf}. Make
+sure that this file compiles properly and that its contents and appearance meet
+the requirements described in this handout.
+
+\item Create a directory called \texttt{a\assignNum} and copy exactly two files
+into this directory, namely:\vspace*{-4mm}
+
+  \begin{itemize}[itemsep=-1mm]
+
+  \item \texttt{a\assignNum .tex} (this file with all of your answers and
+  name(s) added)
+
+  \item \texttt{a\assignNum .pdf} (the compiled version of the file above)
+  \end{itemize}
+
+\item Zip up this directory to yield a file called \texttt{a\assignNum .zip}
+
+\item Submit this zip file to the D2L dropbox for A\assignNum\  before the
+deadline above.
+
+\item Submit a single-sided, hard copy of your \texttt{a\assignNum .pdf} file
+BEFORE the beginning of class on the due date above.
+\end{enumerate}
+}
+
+%************************************
+% No need to modify anything above this line
+% but DO fill this in!
+
+\newcommand{\yourName}{\fbox{Your name(s) go here}}
+
+%************************************g
+
+\begin{document}
+\header
+\textbf{Problem statements}
+\begin{enumerate}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \item                            % Problem 1
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     \pbStatement{5}{Prove $10\cdot\log_2 N^{100} = O(\log_{16}
+     N)$. Your proof MUST use the definition on slide 2-4. For
+     full credit, your proof must use the smallest possible value for $N_0$.}
+
+   {\bf Proof:}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \fillIn{Your proof goes here} % replace this line with your proof
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \item                            % Problem 2
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     \pbStatement{10}{Prove that $12N^2 - 36N + 24 = \Theta(N^2)$. Your proof
+     MUST use:
+     \begin{enumerate}
+       \item the definition of the $\Theta(.)$ notation on slide 2-8 (and
+       thus also those on slides 2-4 and 2-6), and
+       \item  the constants defined at the bottom of page 46 in our text.
+     \end{enumerate}
+   }
+
+   {\bf Proof:}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \fillIn{Your proof goes here} % replace this line with your proof
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \item                            % Problem 3
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     \pbStatement{10}{Prove or disprove $3^N=\Theta(N!)$. For full credit,
+     your proof MUST use the definition on slide 2-8 or its negation. In other
+     words, you must specify the required constant(s).}
+
+   {\bf Proof:}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \fillIn{Your proof goes here} % replace this line with your proof
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \item                            % Problem 4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \pbStatement{10}{Prove or disprove $15^{\log_2 N}=o(N^4)$. For full credit,
+   your proof MUST use the formal definition on slide 3-5 or its negation. In
+   other words, you must specify the required constant(s).}
+
+ {\bf Proof:}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fillIn{Your proof goes here} % replace this line with your proof
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \item                            % Problem 5
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \pbStatement{10}{Given a list of functions, your goal is to order them
+    according to their rate of growth, from smallest to largest. For example,
+    if given the following functions:
+
+    \centerline{$N^2 \hfill 10N \hfill N^2-5N+12 \hfill N \hfill
+    N\log N \hfill 2^N$}
+
+    the correct answer would be the following table:\medskip
+
+\begin{minipage}{\linewidth}
+  \center
+  \[
+    \begin{array}{|c|c|}\hline
+      N       & 10N        \\\hline
+      N\log N &            \\\hline
+      N^2     & N^2-5N+12  \\\hline
+      2^N     &            \\\hline
+    \end{array}
+  \]
+\end{minipage}\medskip
+
+    in which all functions in a given row are big-theta of each other and
+    little-o of all functions in the following row (if any). The left-to-right
+    order within each row is not significant.
+    \bigskip
+
+    For this problem, $\log$s are base 2 unless otherwise specified. You must
+    build an  appropriately sized table that shows the correct ordering of the
+    following 12 functions:\medskip
+
+    \centerline{\hfill $N\sqrt{N} \hfill \log\log N \hfill 3^N \hfill
+    N^{0.01}\log_3 N \hfill    N\log N \hfill 3^{2N}$ \hfill}
+
+    \centerline{ \hfill  $N^{\frac{N}{\log_3 N}}  \hfill N^3 \hfill
+        \sqrt{N^22^{\log\log^2 N}} \hfill 3^{N\log N^3} \hfill
+        N^{\frac{3}{\log_3 N}} \hfill 3^{N+2}$ \hfill}
+  }
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \fillIn{Your table goes here}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{enumerate}
+\end{document}

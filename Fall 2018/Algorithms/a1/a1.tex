@@ -1,0 +1,355 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath,amssymb,latexsym,enumitem,qtree,comment,color,ifthen}
+
+\setlength{\oddsidemargin}{-0.5in}
+\setlength{\evensidemargin}{-0.5in}
+\setlength{\textwidth}{7.5in}
+\setlength{\topmargin}{0in}
+\setlength{\textheight}{8.5in}
+
+\newcommand{\qed}{\hfill$\square$}
+\newcommand{\assignNum}{1}
+\newcommand{\dueDate}{Monday 9/10/2018}
+\newcommand{\pbStatement}[2]{
+  \colorbox{yellow}{\parbox[t]{0.93\textwidth}
+        {\bf (#1 \ifthenelse{#1 > 1}{points}{point})
+ #2}}}
+\newcommand{\fillIn}[1]{\fbox{\parbox[t]{0.93\textwidth}{\it #1}}}
+\newcommand{\header}{
+\noindent{\textit{CS 321 - Algorithms - Fall 2018\hfill \yourName}}
+\begin{center}
+  \textbf{\Large Assignment \assignNum}\\\colorbox{red}{\Large\bf
+     \textcolor{white}{Due BEFORE 8:00AM on  \dueDate}}\\
+  On time /  20\% off / no credit\\\textbf{Total points: 85}
+  \bigskip
+
+  \hrule\medskip This is an {\bf individual} assignment. You must work alone and
+  submit your own work.\medskip \hrule \end{center}
+
+\medskip
+This assignment will test your knowledge from CS 212 and CS 271.  You
+must write up your solutions to this assignment IN THIS FILE using
+LaTeX by filling in all of the boxes below. If your submitted
+\texttt{.tex} file does not compile, then you will receive 0 points.
+
+All of the proofs that you write for this and subsequent assignments should be
+{\bf as detailed as possible}.  You must write EACH step on its own line so that
+it is very easy to see how each step follows directly from the previous step.
+Furthermore, be sure to explain/justify each step in your proof. For example,
+state that you added 5 to each side, that you simplified a fraction, etc. Do NOT
+skip a bunch of algebraic steps in your proofs. For example, do not simply say
+$\frac{k(k+1)}{2} + (k + 1) = \frac{(k+1)(k+2)}{2}$. It is a true statement, but
+it is not trivial. It is not obvious that the left hand side equals the right
+hand side. If you are unsure whether a step is needed or not, ask me first
+before omitting it. Use the symbol $\square$ (i.e., \texttt{$\backslash$qed} in
+your \texttt{.tex} file) to denote the end of each proof.
+
+Here is an example of proper justification of algebraic steps and
+formatting of a sequence
+of equations:
+\begin{align*}
+  \frac{k(k+1)}{2} + (k + 1) & = \frac{k(k+1)}{2} + \frac{2(k + 1)}{2}
+                                       & \mathrm{unified\ denominators}\\
+                             & = \frac{k(k+1)+2(k+1)}{2}
+                                       & \mathrm{added\ fractions}\\
+                             & = \frac{(k+1)(k+2)}{2}
+                             & \mathrm{factored\ out\ common\ factor}\\
+\end{align*}\vspace*{-10mm}
+
+Note how this list of equations is aligned vertically into three columns around
+the equal signs and with the justifications on the right. This is the REQUIRED
+format for your submissions whenever applicable.
+
+You should NOT add any LaTeX packages to your \texttt{.tex} file. Note that I
+included the \texttt{qtree} package and included its documentation in the
+handout. You must use this package to produce your trees for problem~7.
+
+\medskip
+\textbf{Submission procedure:}
+\begin{enumerate}[itemsep=-2mm]
+
+\item Complete this file, called \texttt{a1.tex}, with your full name and
+answers typed up below.
+\item Compile this file to produce a file called \texttt{a1.pdf}. Make
+  sure that this file compiles properly and that its contents and
+  appearance meet the requirements described in this handout.
+\item Create a directory called \texttt{a1} and copy exactly two files into this
+directory, namely:\vspace*{-4mm}
+  \begin{itemize}[itemsep=-1mm]
+  \item \texttt{a1.tex} (this file with all of your answers added)
+  \item \texttt{a1.pdf} (the compiled version of the file above)
+  \end{itemize}
+\item Zip up this directory to yield a file called \texttt{a1.zip}
+\item Submit this zip file to the D2L dropbox for A1 before the deadline above.
+\item Submit a single-sided, hard copy of your \texttt{a1.pdf} file BEFORE the
+beginning of class on the due date above. \end{enumerate}
+
+}
+
+%************************************
+% No need to modify anything above this line
+% but DO fill this in!
+
+\newcommand{\yourName}{\fbox{Your name goes here}}
+
+%************************************g
+
+\begin{document}
+\header
+\textbf{Problem statements}
+\begin{enumerate}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \item                            % Problem 1
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \pbStatement{10}{Write a direct proof of the following statement:\\
+   \centerline{for all $n \in \mathbb{N}$, if $n$ is odd, then $n^3$ is odd}}
+
+   {\bf Direct proof:}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \fillIn{Your proof goes here} % replace this line with your proof
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \item                            % Problem 2
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \pbStatement{10}{State and disprove the contrapositive of the
+      following statement:
+
+  \centerline{for all $m, n \in \mathbb{N}$, if $mn < 361$, then $m < 19$ and
+  $n < 19$}}
+
+  {\bf Contrapositive:}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \fillIn{Write the contrapositive here} % replace this line with your statement
+
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  {\bf Proof:}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \fillIn{Your proof goes here}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \item                            % Problem 3
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+     \pbStatement{10}{Write a proof by contradiction of the following statement:
+
+       \centerline{for all $m, n, p \in \mathbb{N}$, if $m^2 + n^2 = p^2$, then
+       at least one of $m$ and $n$ is even}}
+
+     {\bf Proof by contradiction:}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \fillIn{Your proof goes here}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \item                            % Problem 4
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \pbStatement{10}{Prove by induction that $P(n)$ holds for $n\geq 2$, where
+  $P(n)$ is:
+
+    \[
+    \prod_{i=2}^{n} \left(1 - \frac{1}{i^2}\right) =  \frac{n+1}{2n}
+    \]
+  }
+
+  {\bf Proof:}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \fbox{\textit{Your proof goes here}}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \item                            % Problem 5
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \pbStatement{10}{
+  If $F_n$ is defined as follows:
+  \[ F_n = \begin{cases}
+    1 & n = 1 \\
+    1 & n = 2 \\
+    F_{n-1} + F_{n-2} & n\geq 3
+   \end{cases}
+  \]
+
+  prove by induction that $P(n)$ holds for $n\geq 1$, where $P(n)$ is:
+
+  \[
+  \sum_{i=1}^{n} F^2_i =  F_n \cdot F_{n+1}
+  \]
+  }
+
+  {\bf Proof:}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \fbox{\textit{Your proof goes here}}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \item                            % Problem 6
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \pbStatement{10}{ Let $S$ be the subset of
+    $\mathbb{Z}\times\mathbb{Z}$ defined recursively/inductively by
+    the following rules:
+    \begin{description}
+    \item [$R_0$:] $(0,0)$ is in $S$
+    \item [$R_1$:] If $(a,b)$ is in $S$, then $(a,b+1)$ is also in $S$
+    \item [$R_2$:] If $(a,b)$ is in $S$, then $(a+1,b+1)$ is also in $S$
+    \item [$R_3$:] If $(a,b)$ is in $S$, then $(a+2,b+1)$ is also in $S$
+    \item [$R_4$:] $S$ only contains elements that are generated from
+      rules $R_0$ through $R_3$ above
+    \end{description}
+
+  Prove, using structural induction, that $\forall (a,b) \in S$,  $a\leq 2b$.
+  }
+
+  {\bf Proof:}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \fillIn{Your proof goes here}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \item                            % Problem 7
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \pbStatement{10}{Insert the following elements, in this order, into an AVL
+  tree: 5, 20, 2, 7, 13, 4, 22 to be able to answer the following questions.}
+
+    \pbStatement{7}{[Part a] Show the tree after each insertion. For each step,
+    if a rotation is needed, you must show the tree both before and after the
+    rotation. In all other steps, only one tree must be included.}
+
+
+ \begin{itemize}
+   \item Insert 5:
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \fillIn{Your tree (or trees) goes here}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   \item Insert 20:
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \fillIn{Your tree (or trees) goes here}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   \item Insert 2:
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \fillIn{Your tree (or trees) goes here}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   \item Insert 7:
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \fillIn{Your tree (or trees) goes here}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   \item Insert 13:
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \fillIn{Your tree (or trees) goes here}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   \item Insert 4:
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \fillIn{Your tree (or trees) goes here}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   \item Insert 22:
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \fillIn{Your tree (or trees) goes here}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{itemize}
+
+\pbStatement{1}{[Part b] What is the depth of node 4 in the final tree?}
+
+The depth of node 4 is :
+
+\fillIn{your answer goes here}
+
+\pbStatement{1}{[Part c] Write down, on one line, all of the node
+     values in the preorder traversal of this tree.}
+
+Preorder traversal:
+
+\fillIn{your answer goes here}
+
+\pbStatement{1}{[Part d] Write down, on one line, all of the node
+  values in the postorder traversal of this tree.}
+
+Postorder traversal:
+
+\fillIn{your answer goes here}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   \item                            % Problem 8
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pbStatement{5}{Insert the following elements, in this order, into a
+  max heap:
+
+  5, 20, 2, 7, 13, 4, 22
+
+  Show all of the intermediate steps,
+  i.e., show the heap after each element is inserted, by filling in the
+  following table, in which each row represents the 1-indexed heap array
+  after an additional insertion.}
+
+\fillIn{Write down your complete answer in the following table making sure that
+  empty array locations remain empty cells in the table.}
+
+\begin{tabular}{l|c|c|c|c|c|c|c|}
+          & 1  & 2  & 3  & 4  & 5  & 6  & 7  \\ \hline
+insert 5  &    &    &    &    &    &    &    \\ \hline
+insert 20 &    &    &    &    &    &    &    \\ \hline
+insert 2  &    &    &    &    &    &    &    \\ \hline
+insert 7  &    &    &    &    &    &    &    \\ \hline
+insert 13 &    &    &    &    &    &    &    \\ \hline
+insert 4  &    &    &    &    &    &    &    \\ \hline
+insert 22 &    &    &    &    &    &    &    \\ \hline
+\end{tabular}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \item                            % Problem 9
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pbStatement{5}{Let $G = (V,E,w)$ be an undirected graph, with vertex set $V =
+\{1, 2, 3, 4, 5, 6,$ $7 \}$, edge set $E = \{(1, 2), (1, 4), (1, 6), (2, 3), (2,
+4), (3,4), (3, 5), (4,5), (4, 6), (4, 7), (5, 7), (6, 7)\}$ and weight function
+$w : E \rightarrow \mathbb{N}$, such that $w(1, 4) = 6$, $w(1, 6) = 8$, $w(2, 1)
+= 1$, $w(2, 3) = 4$, $w(2, 4) = 5$, $w(3, 4) = 5$, $w(3, 5) = 2$, $w(4, 5) = 9$,
+$w(4, 6) = 6$, $w(4, 7) = 6$, $w(5, 7) = 3$, and $w(6, 7) = 7$. What is the
+total edge weight of a minimal spanning tree of $G$? }
+
+\fillIn{Your answer goes here}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \item                            % Problem 10
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%e%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pbStatement{5}{Let $G = (V,E)$ be a DIRECTED graph, where $V$ and
+  $E$ are from the previous problem and the direction of the edges is
+  given by the order of the vertices in the weight function in the
+  previous problem (e.g., $w(2,1)$ means that the edge between
+  vertices 1 and 2 is directed from 2 to 1).  Does $G$ have a
+  topological ordering? If so, provide such an ordering.  If not,
+  explain why not.  }
+
+\fillIn{Your answer goes here}
+
+\end{enumerate}
+\end{document}
